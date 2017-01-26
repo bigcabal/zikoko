@@ -1,0 +1,25 @@
+<%- partial('./partials/header.ejs') %>
+
+<h1>Homepage</h1>
+
+<h2>Posts</h2>
+<ul>
+  <% posts.forEach(function(post) { %>
+  <li><a href="/post/<%= post.id %>"><%= post.title %></a></li>
+  <% }) %>
+</ul>
+
+<h2>Users</h2>
+<ul>
+  <% users.forEach(function(user) { %>
+  <li><%= user.username %></li>
+  <% }) %>
+</ul>
+
+
+<h2>Categories</h2>
+<ul>
+  <% categories.forEach(function(category) { %>
+  <li><%= category.name %></li>
+  <% }) %>
+</ul>
