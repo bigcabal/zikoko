@@ -1,5 +1,5 @@
 /**
- * APIService
+ * AuthService
  *
  * @description :: Server-side logic for managing posts
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
@@ -11,19 +11,19 @@ const config = {
   host: 'formation-api.herokuapp.com',
   path: '/api',
   headers: {
-    'Authorization': sails.config.authorization.foo
+    'Authorization': process.env.API_AUTHORIZATION || 'Basic dGltaUBoZWxsb3dvcmxkLm5nOnVsdGltYXRlcHJvZHVjdGlvbnBhc3N3b3Jk'
   }
 }
 
 module.exports = {
 
-  get: function (path) {
+  createUser: function (newUser) {
     return new Promise(function (resolve, reject) {
       let options = {
         host: config.host,
         port: 443,
-        path: `${config.path}${path}`,
-        method: 'GET',
+        path: `${config.path}/register`,
+        method: 'POST',
         headers: config.headers
       }
       let newRequest = https.request(options, function (response) {
@@ -33,16 +33,15 @@ module.exports = {
           body += data;
         });
         response.on('end', function () {
-          body = JSON.parse(body);
           resolve(body);
         });
       });
       newRequest.on('error', (e) => {
-        console.error(e);
+        console.error("error: ", e);
         reject(e);
       });
+      newRequest.write( JSON.stringify(newUser) );
       newRequest.end();
-
     })
 
 

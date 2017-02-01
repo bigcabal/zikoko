@@ -1,10 +1,15 @@
 <h1>Sign Up</h1>
 
-<form action="/sign-up" method="post">
-  <input type="text" placeholder="Email Address"><br>
-  <input type="password" placeholder="Password"><br>
-  <input type="password" placeholder="Confirm Password"><br>
-  <button>Sign Up</button>
+<% if (locals.error) { %>
+  Error: <%= locals.error %>
+<%  } %>
+
+
+<form action="/register" method="post">
+  <input type="text" name="email" placeholder="Email Address" value="ireoluwa@test.com"><br>
+  <input type="password" name="password" placeholder="Password" value="password"><br>
+  <input type="password" name="password_confirmation" placeholder="Confirm Password" value="password"><br>
+  <button type="submit">Sign Up</button>
 </form>
 
-<a href="/signin">Sign In</a>
+<a href="/login">Sign In</a>

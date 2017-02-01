@@ -11,8 +11,10 @@ module.exports = {
 
     let data = {}
 
+
     APIService.get('/posts')
       .then((posts) => {
+        console.log(posts);
         return data.posts = posts;
       })
       .then(() => {
@@ -29,6 +31,9 @@ module.exports = {
       })
       .then(() => {
         res.view('homepage', data);
+      })
+      .catch((err) => {
+        console.log("error", err)
       })
 
   }

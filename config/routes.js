@@ -59,14 +59,14 @@ module.exports.routes = {
     action: 'index'
   },
 
-
-  'get /signin': {
+  'get /login': {
     view: 'sign-in'
   },
 
-  'get /signup': {
+  'get /register': {
     view: 'sign-up'
-  }
+  },
+  'post /register': 'AuthController.register'
 
 
 };
