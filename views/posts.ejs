@@ -1,0 +1,12 @@
+<%- partial('./partials/header.ejs') %>
+
+<h1>Posts Feed: <%= feed %></h1>
+
+<%- partial('./partials/posts-list.ejs') %>
+
+<h2>Categories</h2>
+<ul>
+  <% categories.forEach(function(category) { %>
+  <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+  <% }) %>
+</ul>

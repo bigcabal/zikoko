@@ -1,0 +1,9 @@
+<h2>Posts</h2>
+<ul>
+  <% posts.forEach(function(post) { %>
+  <li>
+    <a href="/post/<%= post.id %>"><%= post.title %></a>
+    (<a href="/user/<%= post.author.id %>">@<%= post.author.username %></a>)
+  </li>
+  <% }) %>
+</ul>

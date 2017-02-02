@@ -44,31 +44,25 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'get /': {
-    controller: 'HomeController',
-    action: 'index'
-  },
+  'get /': 'PostsController.index',
+  'get /category/:category_id': 'PostsController.category',
+  'get /search': 'PostsController.index',
 
-  'get /new': {
-    controller: 'HomeController',
-    action: 'index'
-  },
+  'get /new': { view: 'new-post' },
+  'get /post/:id': 'PostsController.single',
+  'get /post/:id/amp': 'PostsController.amp',
+  'get /feed/instant-articles': 'PostsController.instant_articles',
 
-  'get /post/:id': {
-    controller: 'PostController',
-    action: 'index'
-  },
+  'get /user/:id': 'UserController.posts',
+  'get /user/:id/likes': 'UserController.likes',
 
-  'get /user/:id': {
-    controller: 'UserController',
-    action: 'index'
-  },
+  'get /me': 'UserController.posts', // @todo Redirect to user/current_user_id
+  'get /me/profile': 'UserController.posts',
+  'get /me/password': 'UserController.posts',
 
   'get /login': { view: 'sign-in' },
   'post /login': 'AuthController.login',
-
   'get /register': { view: 'sign-up' },
   'post /register': 'AuthController.register'
-
 
 };
