@@ -48,7 +48,7 @@ module.exports.routes = {
   'get /category/:category_id': 'PostsController.category',
   'get /search': 'PostsController.index',
 
-  'get /new': { view: 'new-post' },
+  'get /new': { view: 'new' },
   'get /post/:id': 'PostsController.single',
   'get /post/:id/amp': 'PostsController.amp',
   'get /feed/instant-articles': 'PostsController.instant_articles',
@@ -57,8 +57,8 @@ module.exports.routes = {
   'get /user/:id/likes': 'UserController.likes',
 
   'get /me': 'UserController.posts', // @todo Redirect to user/current_user_id
-  'get /me/profile': 'UserController.posts',
-  'get /me/password': 'UserController.posts',
+  'get /me/profile': { view: 'me-profile' },
+  'get /me/password': { view: 'me-password' },
 
   'get /login': { view: 'sign-in' },
   'post /login': 'AuthController.login',

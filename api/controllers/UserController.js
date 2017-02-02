@@ -47,6 +47,12 @@ module.exports = {
 
 function getHighestRole(roles) {
   const ROLES = ['admin', 'editor', 'registered'];
+  const PUBLIC_ROLE_NAMES = {
+    'admin': 'Staff Writer',
+    'editor': 'Staff Writer',
+    'registered': 'User'
+  }
+
   let lowestIndex = ROLES.length - 1;
   roles.forEach(role => {
     if (role.active) {
@@ -55,8 +61,7 @@ function getHighestRole(roles) {
     }
   });
 
-  let highestRole = ROLES[lowestIndex];
-  highestRole = highestRole.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  let highestRole = PUBLIC_ROLE_NAMES[ROLES[lowestIndex]];
   return highestRole;
 }
 

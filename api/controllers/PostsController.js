@@ -52,7 +52,7 @@ module.exports = {
     const postId = req.params.id;
     let data = {}
 
-    APIService.get(`/posts/${postId}?populate=[author,categories]`)
+    APIService.get(`/posts/${postId}`)
       .then((post) => {
         console.log(post);
         return data.post = post;
