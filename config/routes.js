@@ -49,6 +49,11 @@ module.exports.routes = {
     action: 'index'
   },
 
+  'get /new': {
+    controller: 'HomeController',
+    action: 'index'
+  },
+
   'get /post/:id': {
     controller: 'PostController',
     action: 'index'
@@ -59,13 +64,10 @@ module.exports.routes = {
     action: 'index'
   },
 
-  'get /login': {
-    view: 'sign-in'
-  },
+  'get /login': { view: 'sign-in' },
+  'post /login': 'AuthController.login',
 
-  'get /register': {
-    view: 'sign-up'
-  },
+  'get /register': { view: 'sign-up' },
   'post /register': 'AuthController.register'
 
 

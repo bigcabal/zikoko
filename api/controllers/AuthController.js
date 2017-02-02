@@ -7,6 +7,29 @@
 
 module.exports = {
 
+  login: function(req, res) {
+
+    // @todo (Timi) Session tingz
+
+    const user = {
+      identifier: req.body.identifier,
+      password: req.body.password
+    };
+    const authorization = new Buffer(`${user.identifier}:${user.password}`).toString('base64');
+
+    AuthService.signIn(user)
+      .then((signedInUser) => {
+        if ( !signedInUser ) return Promise.reject();
+        console.log("SUCCESS", authorization);
+        res.redirect('/new');
+      })
+      .catch(() => {
+        console.log("errrorrrr");
+        res.redirect('/login');
+      })
+
+  },
+
   register: function(req, res) {
 
     function setupUser(roles) {
@@ -22,6 +45,7 @@ module.exports = {
 
     function handleSuccess() {
       // @todo Login user and redirect them to edit profile page or new post page
+      // @todo (Timi) Session tingz
       res.redirect('/login');
     }
 

@@ -45,6 +45,35 @@ module.exports = {
     })
 
 
+  },
+
+  signIn: function(login) {
+    return new Promise(function (resolve, reject) {
+      let options = {
+        host: config.host,
+        port: 443,
+        path: `${config.path}/auth/local`,
+        method: 'POST',
+        headers: config.headers
+      }
+      let newRequest = https.request(options, function (response) {
+        let body = '';
+        response.on('data', function (data) {
+          data = data.toString();
+          body += data;
+        });
+        response.on('end', function () {
+          resolve(body);
+        });
+      });
+      newRequest.on('error', (e) => {
+        console.error("error: ", e);
+        reject(e);
+      });
+      newRequest.write( JSON.stringify(login) );
+      newRequest.end();
+    })
+
   }
 
 };
