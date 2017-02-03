@@ -1,3 +1,42 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
-<h1>New Post</h1>
+<div class="zkk-site-wrap">
+  <div class="zkk-main zkk-main--full-width">
+
+    <div class="form-page card">
+      <div class="form-page__inner">
+
+        <div class="form-page__heading">
+          <h2 class="form-page__title">New Post</h2>
+          <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
+        </div>
+
+        <form class="form form-page__form form--no-label">
+          <div class="form__group">
+            <div class="form__drag-and-drop">
+              <div class="form__drag-and-drop-icon">
+                <i class="ion-upload"></i>
+              </div>
+              <p class="form__drag-and-drop-text">Select or Drop image here</p>
+            </div>
+          </div>
+
+          <div class="form__group">
+            <textarea class="form__field" rows="3" placeholder="Description"></textarea>
+          </div>
+
+          <div class="form__group">
+            <input class="form__field" placeholder="Tags, e.g #tag #tagtwo" />
+          </div>
+
+          <div class="form__action">
+            <button class="button button--md button--full-width" type="submit">
+              <span class="button__text">Upload Post</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -57,13 +57,13 @@ module.exports.routes = {
   'get /user/:id': 'UserController.posts',
   'get /user/:id/likes': 'UserController.likes',
 
-  'get /me': 'UserController.posts', // @todo Redirect to user/current_user_id
   'get /me/profile': { view: 'me-profile' },
   'get /me/password': { view: 'me-password' },
 
   'get /login': { view: 'sign-in' },
   'post /login': 'AuthController.login',
   'get /register': { view: 'sign-up' },
-  'post /register': 'AuthController.register'
+  'post /register': 'AuthController.register',
+  'get /reset-password': { view: 'reset-password' }
 
 };

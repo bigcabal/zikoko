@@ -1,3 +1,49 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
-<h1>Edit Profile</h1>
+<div class="zkk-site-wrap u-flex u-center-align">
+
+  <div class="zkk-main">
+
+    <div class="profile-edit card">
+      <div class="profile__tabs">
+        <a href="/me/profile" class="profile__tab  profile__tab--active">
+          Edit Profile
+        </a>
+        <a href="/me/password" class="profile__tab">
+          Change Password
+        </a>
+      </div>
+
+      <form class="profile-edit__form form">
+        <div class="form__group u-flex">
+          <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAXdAAAAJDdkNTcwYzE0LTUyMGMtNDZlYi04MWY0LTdiNTE1NzMxNmI5NQ.jpg" class="profile__img">
+          <div>
+            <input type="file" name="">
+            <p class="form__hint">PNG, JPG or GIF with size 2MB or less</p>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label class="form__label">Username</label>
+          <input class="form__field" />
+        </div>
+
+        <div class="form__group">
+          <label class="form__label">Email Address</label>
+          <input class="form__field" />
+        </div>
+
+        <div class="form__group">
+          <label class="form__label">Phone Number</label>
+          <input class="form__field" />
+        </div>
+
+        <div class="form__action">
+          <button class="button button--form button--md">Update Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- partial('./partials/sidebar.ejs') %>
+</div>
