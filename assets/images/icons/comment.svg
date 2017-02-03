@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.8">
+        <g id="Home-5" transform="translate(-175.000000, -1683.000000)" stroke="#000000" stroke-width="2">
+            <g id="Post" transform="translate(-10.000000, 992.000000)">
+                <g id="Group-2" transform="translate(10.000000, 663.000000)">
+                    <path d="M200.521633,53.8112878 L195.785957,52.1731609 C195.309411,52.0093482 194.773296,52.0391324 194.326535,52.2922974 C192.256538,53.4092021 189.829132,53.9453164 187.252805,53.6623672 C181.72785,53.0369005 177.290015,48.5543898 176.739009,43.0294346 C175.979514,35.5238351 182.174612,29.2542768 189.635535,29.8648514 C195.071138,30.3116133 199.583433,34.4962828 200.43228,39.8723174 C200.834366,42.3890759 200.417388,44.80159 199.449404,46.8715867 C199.255807,47.2736724 199.196239,47.7353263 199.330268,48.1671961 L200.849258,53.5134465 C200.893934,53.7070434 200.700337,53.870856 200.521633,53.8112878 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

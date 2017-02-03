@@ -1,12 +1,17 @@
 <%- partial('./partials/header.ejs') %>
 
-<h1>Posts Feed: <%= feed %></h1>
+<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align">
+  <div class="zkk-main">
+    <h1>Posts Feed: <%= feed %></h1>
+    <ul>
+      <li><a href="/">Everything</a></li>
+      <% categories.forEach(function(category) { %>
+      <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+      <% }) %>
+    </ul>
+    <%- partial('./partials/posts-list.ejs') %>
+  </div>
+  <%- partial('./partials/sidebar.ejs') %>
+</div>
 
-<%- partial('./partials/posts-list.ejs') %>
-
-<h2>Categories</h2>
-<ul>
-  <% categories.forEach(function(category) { %>
-  <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
-  <% }) %>
-</ul>
+<%- partial('./partials/footer.ejs') %>

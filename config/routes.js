@@ -46,7 +46,8 @@ module.exports.routes = {
 
   'get /': 'PostsController.index',
   'get /category/:category_id': 'PostsController.category',
-  'get /search': 'PostsController.index',
+
+  'get /search': 'PostsController.search',
 
   'get /new': { view: 'new' },
   'get /post/:id': 'PostsController.single',
