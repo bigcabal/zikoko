@@ -9,7 +9,7 @@ var https = require('https');
 
 const config = {
   headers: {
-    'Authorization': `Basic ${new Buffer(`${sails.config.authorization.identifier}:${sails.config.authorization.password}`).toString('base64')}`
+    'Authorization': `Basic ${new Buffer(`${ process.env.AUTH_IDENTIFIER || sails.config.authorization.identifier }:${ process.env.AUTH_PASSWORD || sails.config.authorization.password }`).toString('base64')}`
   }
 }
 

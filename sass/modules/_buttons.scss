@@ -1,0 +1,104 @@
+.button{
+	padding: 0 15px;
+	height: 36px;
+	line-height: 36px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	border: none;
+	background-color: $color-purple;
+	color: white;
+	display: inline-flex;
+	text-align: center;
+	font-size: 1.5rem;
+	font-family: $alternate-font;
+
+	&--clear{
+		background-color: transparent;
+		color: inherit;
+	}
+
+	&--no-pad{
+		padding: 0;
+	}
+
+	&--md{
+		font-size: 1.5rem;
+		height: 48px;
+		line-height: 48px;
+		padding: 0 30px;
+	}
+
+	&--full-width{
+		width: 100%;
+	}
+
+	&--icon-left, &--icon-right{
+		justify-content: space-between;
+		padding: 0;
+	}
+
+	&--social-signup{
+		flex-grow: 1;
+		width: 49%;
+		text-align: center;
+		font-size: 1.5rem;
+		height: 48px;
+		line-height: 48px;
+		position: relative;
+	}
+
+	&--facebook{
+		background-color: $color-facebook-blue;
+	}
+
+	&--google{
+		background-color: $color-google-red;
+	}
+
+	&--twitter{
+		background-color: $color-twitter-blue;
+	}
+
+	&__icon{
+		height: 36px;
+		font-size: 2.1rem;
+		width: 36px;
+		background-color: rgba(0,0,0,0.1);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		.button--icon-left &{
+			left: -2px;
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+
+		.button--icon-right &{
+			right: -2px;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+
+		.button--md &{
+			width: 48px;
+			height: 48px;
+		}
+	}
+
+	&__text{
+
+		margin: 0 auto;
+		
+		.button--icon-left &, .button--icon-right &{
+			margin: 0 15px;
+		}
+
+		.button--full-width &{
+			margin: 0 auto;
+		}
+	}
+}
+
+

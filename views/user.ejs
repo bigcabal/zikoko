@@ -1,8 +1,10 @@
-<%- partial('./partials/header.ejs') %>
+<%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
 <header>
   <h1>User: @<%= user.username %></h1>
   <p><%= user.role %></p>
 </header>
 
-<%- partial('./partials/posts-list.ejs') %>
+<% posts.forEach(function(post) { %>
+<%- partial('./post/excerpt.ejs', { post: post }) %>
+<% }) %>

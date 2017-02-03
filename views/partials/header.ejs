@@ -1,22 +1,20 @@
-<header class="zkk-header zkk-header--with-mobile-feed-filter">
-  <div class="container container--full u-flex u-space-between u-vertical-align">
+<header class="zkk-header <% if (includeFeedFilter) { %>zkk-header--with-mobile-feed-filter<% } %>">
+  <div class="container u-flex u-space-between u-vertical-align">
     <a href="/" class="zkk-logo">
       <h1 class="sr-only">Zikoko</h1>
-      <img src="images/logo.svg" class="zkk-logo__img zkk-logo__img--desktop">
-      <img src="images/logo_icon.svg" class="zkk-logo__img zkk-logo__img--mobile">
+      <img src="/images/logo_icon.svg" class="zkk-logo__img" alt="">
     </a>
+
+    <% if (includeFeedFilter) { %>
     <div class="feed-filter">
       <a href="#" class="feed-filter__dropdown">
-        Everything
+        <%= feed %>
         <span class="feed-filter__caret-down"></span>
         <ul class="feed-filter__dropdown-list">
-          <li class="feed-filter__dropdown-item">Everything</li>
-          <li class="feed-filter__dropdown-item">Videos</li>
-          <li class="feed-filter__dropdown-item">Memes</li>
-          <li class="feed-filter__dropdown-item">Listicles</li>
-          <li class="feed-filter__dropdown-item">Gist</li>
-          <li class="feed-filter__dropdown-item">Quizzes</li>
-          <li class="feed-filter__dropdown-item">People</li>
+          <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
+          <% categories.forEach(function(category) { %>
+          <li class="feed-filter__dropdown-item"><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+          <% }) %>
         </ul>
       </a>
       <div class="feed-filter__tabs u-inline-block">
@@ -24,6 +22,8 @@
         <a href="#" class="feed-filter__tab">Latest</a>
       </div>
     </div>
+    <% } %>
+
     <nav>
       <ul class="zkk-nav" role="navigation">
         <li class="zkk-nav__item zkk-nav__item--text-md">
@@ -31,10 +31,10 @@
             <i class="ion-android-search"></i>
           </a>
         </li>
-        <li class="zkk-nav__item zkk-nav__item--desktop">
+        <li class="zkk-nav__item zkk-nav__item--desktop zkk-nav__item--pad-sm">
           <a href="/login">Login</a>
         </li>
-        <li class="zkk-nav__item zkk-nav__item--desktop">
+        <li class="zkk-nav__item zkk-nav__item--desktop zkk-nav__item--pad-sm">
           <a href="/register">Create Account</a>
         </li>
         <!-- <li class="zkk-nav__item zkk-nav__item--pad-sm zkk-nav__dropdown">
@@ -42,8 +42,8 @@
                 <img src="http://www.aceshowbiz.com/images/photo/lil_uzi_vert.jpg" class="zkk-nav__profile-img">
             </a>
             <ul class="zkk-nav__dropdown-list">
-                <li class="zkk-nav__dropdown-item">Profile</li>
-                <li class="zkk-nav__dropdown-item">Logout</li>
+              <li class="zkk-nav__dropdown-item"><a href="/login">Login</a></li>
+              <li class="zkk-nav__dropdown-item"><a href="/Register">Sign up</a></li>
             </ul>
         </li> -->
         <li class="zkk-nav__item zkk-nav__item--mobile zkk-nav__item--text-md zkk-nav__dropdown">
@@ -51,34 +51,31 @@
             <i class="ion-person"></i>
           </a>
           <ul class="zkk-nav__dropdown-list">
-            <li class="zkk-nav__dropdown-item">Login</li>
-            <li class="zkk-nav__dropdown-item">Sign up</li>
+            <li class="zkk-nav__dropdown-item"><a href="/login">Login</a></li>
+            <li class="zkk-nav__dropdown-item"><a href="/Register">Sign up</a></li>
           </ul>
         </li>
         <li class="zkk-nav__item zkk-nav__item--pad-sm">
           <a href="/new" class="button button--icon-right">
             <span class="button__text">Upload</span>
-            <span class="button__icon">
-                 <i class="ion-upload"></i>
-             </span>
+            <span class="button__icon"><i class="ion-upload"></i></span>
           </a>
         </li>
       </ul>
     </nav>
   </div>
 
+  <% if (includeFeedFilter) { %>
+  <div class="feed-filter__divider"></div>
   <div class="feed-filter feed-filter--mobile">
     <a href="#" class="feed-filter__dropdown">
-      Everything
+      <%= feed %>
       <span class="feed-filter__caret-down"></span>
       <ul class="feed-filter__dropdown-list">
-        <li class="feed-filter__dropdown-item">Everything</li>
-        <li class="feed-filter__dropdown-item">Videos</li>
-        <li class="feed-filter__dropdown-item">Memes</li>
-        <li class="feed-filter__dropdown-item">Listicles</li>
-        <li class="feed-filter__dropdown-item">Gist</li>
-        <li class="feed-filter__dropdown-item">Quizzes</li>
-        <li class="feed-filter__dropdown-item">People</li>
+        <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
+        <% categories.forEach(function(category) { %>
+        <li class="feed-filter__dropdown-item"><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+        <% }) %>
       </ul>
     </a>
     <div class="feed-filter__tabs u-inline-block">
@@ -86,6 +83,8 @@
       <a href="#" class="feed-filter__tab">Latest</a>
     </div>
   </div>
+  <% } %>
+
 </header>
 
 <div class="search-header">
@@ -93,15 +92,10 @@
     <a href="#" tabindex="-1" class="search-header__close toggle--close-search">
       <i class="ion-ios-close-empty"></i>
     </a>
-    <form class="form search-header-form">
-      <input type="" class="form__field search-header__field" placeholder="Search" tabindex="-1">
+    <form action="search" method="get" class="form search-header-form">
+      <input type="text" name="term" class="form__field search-header__field" placeholder="Search" tabindex="-1">
     </form>
   </div>
 </div>
 
 <div class="page-overlay"></div>
-
-<form action="/search" method="get">
-  <input type="text" name="term" placeholder="Search term">
-  <button type="submit">Search</button>
-</form>

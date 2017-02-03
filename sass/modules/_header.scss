@@ -1,0 +1,147 @@
+.zkk-header {
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .15);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    font-size: 1.5rem;
+    height: 54px;
+    z-index: 2;
+    font-family: $alternate-font;
+    flex-wrap: wrap;
+    flex-direction: row;
+    &--with-mobile-feed-filter {
+        @include screen(med-small) {
+            height: 100px;
+            box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.08);
+        }
+    }
+}
+
+.zkk-logo {
+    &__img {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+        object-position: left;
+        margin: 10px 0 6px;
+    }
+    &__img--mobile {
+        display: none;
+        @include screen(med) {
+            display: inline-block;
+        }
+    }
+    &__img--desktop {
+        @include screen(med) {
+            display: none;
+        }
+    }
+}
+
+.zkk-nav {
+    display: inline-flex;
+    align-items: center;
+    &__profile-img {
+        height: 36px;
+        width: 36px;
+        object-position: center;
+        object-fit: cover;
+        border-radius: 3px;
+        margin-bottom: -3px;
+    }
+    &__item {
+        display: inline-block;
+        padding: 0 20px;
+        text-align: center;
+        position: relative;
+        &--pad-sm {
+            padding: 0 15px;
+            margin: 0;
+        }
+        &--text-md {
+            font-size: 2.1rem;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
+        &--mobile {
+            display: none;
+            @include screen(tiny) {
+                display: inline-block;
+            }
+        }
+        &--desktop {
+            @include screen(tiny) {
+                display: none;
+            }
+        }
+    }
+    &__dropdown-list {
+        background-color: #f9f9fc;
+        min-width: 120px;
+        width: auto;
+        position: absolute;
+        display: block;
+        top: 26px;
+        left: -12px;
+        border-radius: 3px;
+        padding: 0 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 3;
+        @include transition(.3s);
+        .zkk-nav__dropdown--opened & {
+            opacity: 1;
+            pointer-events: auto;
+            top: 38px;
+        }
+    }
+    &__dropdown-item {
+        padding: 0 10px;
+        display: block;
+        width: auto;
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #f2f2f2;
+        color: $color-grey;
+        font-size: 1.4rem;
+        text-align: left;
+        @include transition(.3s);
+        &:hover {
+            color: $color-black;
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+
+.search-header {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    height: 100px;
+    background-color: white;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    opacity: 0;
+    @include transition(.5s);
+    &__close {
+        position: absolute;
+        right: 0;
+        top: 10px;
+        font-size: 3.6rem;
+        cursor: pointer;
+        @include screen(med) {
+            right: 15px;
+        }
+    }
+    &--is-opened {
+        top: 0;
+        opacity: 1;
+    }
+}

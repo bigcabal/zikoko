@@ -4,8 +4,6 @@ document.querySelector('.toggle--open-search').addEventListener('click', functio
 	document.querySelector('.search-header').classList.add('search-header--is-opened');
   document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
   document.querySelector('.search-header__field').focus();
-
-  console.log("clicked");
   return false;
 });
 
@@ -29,7 +27,8 @@ function closeSearchHeader(){
 
 // Feed Filter
 document.querySelector('.feed-filter__dropdown').addEventListener('click', function(e) {
-  console.log("clicked");
+  e.preventDefault();
+  console.log("clicked feed filter dropdown");
   e.target.classList.toggle('feed-filter__dropdown--opened');
   return false;
 })

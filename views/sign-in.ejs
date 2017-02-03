@@ -1,9 +1,42 @@
-<h1>Sign In</h1>
+<header class="zkk-header">
+  <div class="container u-flex u-center-align u-vertical-align">
+    <a href="/" class="zkk-logo">
+      <h1 class="sr-only">Zikoko</h1>
+      <img src="/images/logo.svg" class="zkk-logo__img">
+    </a>
+  </div>
+</header>
 
-<form action="/login" method="post">
-  <input type="text" name="identifier" placeholder="Email Address" value="ireoluwa@test.com"><br>
-  <input type="password" name="password" placeholder="Password" value="password"><br>
-  <button type="submit">Sign In</button>
-</form>
+<div class="zkk-site-wrap u-flex u-center-align">
+  <div class="zkk-main zkk-main--full-width">
+    <div class="form-page card">
 
-<a href="/register">Create an account</a>
+      <div class="form-page__inner">
+        <div class="form-page__heading">
+          <h2 class="form-page__title">Welcome back!</h2>
+          <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
+        </div>
+
+        <form action="/login" method="post" class="form form-page__form form--no-label">
+          <div class="form__group">
+            <input type="email" name="identifier" class="form__field" placeholder="Email Address" />
+          </div>
+          <div class="form__group">
+            <input type="password" name="password"  class="form__field" placeholder="Password"/>
+          </div>
+          <div class="form__action">
+            <button class="button button--md button--full-width" type="submit">
+              <span class="button__text">Sign In</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="form-page__footer">
+          <p>Don't have an account yet? <a href="/register" class="form-page__link">Create account</a></p><br>
+          <p>Forgot your password?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

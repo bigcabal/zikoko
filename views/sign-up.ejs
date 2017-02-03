@@ -1,15 +1,64 @@
-<h1>Sign Up</h1>
+<header class="zkk-header">
+  <div class="container u-flex u-center-align u-vertical-align">
+    <a href="/" class="zkk-logo">
+      <h1 class="sr-only">Zikoko</h1>
+      <img src="/images/logo.svg" class="zkk-logo__img">
+    </a>
+  </div>
+</header>
 
-<% if (locals.error) { %>
-  Error: <%= locals.error %>
-<%  } %>
+<div class="zkk-site-wrap u-flex u-center-align">
+  <div class="zkk-main zkk-main--full-width">
+    <div class="form-page card">
+
+      <div class="form-page__inner">
+        <div class="form-page__heading">
+          <h2 class="form-page__title">Join the Community.</h2>
+          <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
+        </div>
 
 
-<form action="/register" method="post">
-  <input type="text" name="email" placeholder="Email Address" value="ireoluwa@test.com"><br>
-  <input type="password" name="password" placeholder="Password" value="password"><br>
-  <input type="password" name="password_confirmation" placeholder="Confirm Password" value="password"><br>
-  <button type="submit">Sign Up</button>
-</form>
+        <form action="/register" method="post" class="form form-page__form form--no-label">
+          <div class="form__group">
+            <input type="email" name="email" class="form__field" placeholder="Email Address" />
+          </div>
+          <div class="form__group">
+            <input type="password" name="password"  class="form__field" placeholder="Password"/>
+          </div>
+          <div class="form__group">
+            <input  type="password" name="password_confirmation" class="form__field" placeholder="Confirm Password" />
+          </div>
+          <div class="form__action">
+            <button class="button button--md button--full-width" type="submit">
+              <span class="button__text">Create Account</span>
+            </button>
+          </div>
+        </form>
 
-<a href="/login">Sign In</a>
+        <div class="form-page__footer">
+          <!--
+          <div class="form-page__footer-divider">
+            Or Create Account using
+          </div>
+          <div class="form-page__button-bar">
+            <div class="form-page__button-bar-left">
+              <a href="#" class="button button--md button--full-width button--icon-left button--facebook">
+                <span class="button__icon"><i class="ion-social-facebook"></i></span>
+                <span class="button__text">Facebook</span>
+              </a>
+            </div>
+            <div class="form-page__button-bar-right">
+              <a href="#" class="button button--md button--full-width button--icon-right button--google">
+                <span class="button__text">Google</span>
+                <span class="button__icon"><i class="ion-social-googleplus"></i></span>
+              </a>
+            </div>
+          </div>
+          -->
+
+          <p>Already have an account ? <a href="/login" class="form-page__link">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

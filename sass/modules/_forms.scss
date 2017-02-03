@@ -1,0 +1,84 @@
+.form{
+
+	&__field{
+		display: block;
+		width: 100%;
+		border-radius: 3px;
+		outline: none;
+		border: 1px solid $color-grey-light;
+		font-size: 1.5rem;
+		padding: 12px 15px;
+		transition: border-color .3s;
+		font-family: $alternate-font;
+
+		&--sm{
+			font-size: 1.4rem;
+			padding: 8px 10px;
+		}
+
+		&:focus{
+			border-color: $color-purple;
+		}
+
+		.search-header-form &{
+			border: none;
+			border-radius: 0;
+			border-bottom: 2px solid $color-black;
+			font-size: 2.8rem;
+			padding-top: 40px;
+			padding-bottom: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+
+	&__drag-and-drop{
+		height: 250px;
+		border: 1px solid $color-grey-light;
+		background-color: #f9f9fc;
+		text-align: center;
+		font-family: $alternate-font;
+		cursor: pointer;
+		padding: 30px;
+		border-radius: 3px;
+	}
+
+	&__drag-and-drop-icon{
+		font-size: 8rem;
+		margin-top: 30px;
+		margin-bottom: 15px;
+		color: $color-grey-light;
+	}
+
+	&__drag-and-drop-text{
+		font-size: 1.4rem;
+		color: $color-grey-mid;
+	}
+
+	&__group{
+		margin-bottom: 30px;
+
+		.form--no-label &{
+			margin-bottom: 15px; 
+		}
+
+		.form--spacing-sm &{
+			margin-bottom: 10px; 
+		}
+	}
+
+	&__hint{
+		margin-top: 15px;
+		color: $color-grey-mid;
+		font-size: 1.4rem;
+	}
+
+	&__label{
+		color: $color-grey-mid;
+		display: block;
+		margin-bottom: 5px;
+		font-size: 1.4rem;
+	}
+}
+
+

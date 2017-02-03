@@ -1,0 +1,181 @@
+
+body, html{
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    background-color: #f9f9fc;
+}
+
+.zkk-site-wrap{
+	padding-top: 80px;
+	background-color: #f9f9fc;
+	z-index: 1;
+	position: relative;
+	min-height: 100%;
+
+	&--white{
+		background-color: white;
+	}
+
+	&--with-mobile-feed-filter{
+		@include screen(med-small){
+			padding-top: 120px;
+		}
+	}
+}
+
+.zkk-main{
+	width: 600px;
+	margin-right: 25px;
+
+	@include screen(med){
+		margin: 0 auto;
+	}
+
+	@include screen(small){
+		width: 100%;
+	}
+
+	&--full-width{
+		width: 100%;
+		max-width: 925px;
+		margin: 0 auto;
+		margin-top: -30px;
+		margin-bottom: 60px;
+
+		@include screen(med){
+			margin-top: -30px;
+		}
+	}
+}
+
+.card{
+	background-color: white;
+	border: 1px solid #eaeaea;
+	border-radius: 3px;
+	position: relative;
+
+	.zkk-site-wrap--white &{
+		box-shadow: none;
+	}
+}
+
+.form-page{
+	padding: 60px 0 60px;
+	font-size: 1.4rem;
+	font-family: $alternate-font;
+	// min-height: 80vh;
+
+	&--padding-top-lg{
+		padding: 100px 0 120px;
+	}
+
+	&__inner{
+		width: 100%;
+		max-width: 400px;
+		margin: 0 auto;
+		
+		@include screen(med){
+			padding: 0 30px;
+		}
+		
+	}
+
+	&__heading{
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	&__title{
+		font-size: 2.4rem;
+		font-weight: bold;
+		margin-bottom: 5px;
+		font-family: $regular-font;
+	}
+
+	&__subtitle{
+		color: $color-grey-mid;
+		line-height: 1.5;
+		font-family: $alternate-font;
+	}
+
+	&__form{
+		margin-bottom: 45px;
+	}
+
+	&__footer{
+		text-align: center;
+		color: $color-grey-mid;
+	}
+
+	&__footer-divider{
+		margin-bottom: 15px;
+	}
+
+	&__button-bar{
+		display: flex;
+		margin-bottom: 45px;
+	}
+
+	&__button-bar-left{
+		width: 50%;
+		padding-right: 5px
+	}
+
+	&__button-bar-right{
+		width: 50%;
+		padding-left: 5px;
+	}
+
+	&__link{
+		font-weight: bold;
+		color: $color-purple;
+	}
+}
+
+.page-overlay{
+	position: fixed;
+	z-index: 2;
+	background-color: rgba(0,0,0,0.85);
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+	opacity: 0;
+	@include transition(.5s);
+
+	&--is-visible{
+		pointer-events: auto;
+		@include transition(.5s);
+		opacity: 1;	
+	}
+}
+
+.search-results{
+	&__header{
+		padding: 30px;
+		border-radius: 3px;
+		border: 1px solid #eaeaea;
+		margin-bottom: 25px;
+
+		@include screen(tiny){
+			padding: 20px 15px;
+		}
+	}
+
+	&__title{
+		font-size: 2.8rem;
+		font-family: $alternate-font;
+		// color: $color-grey-mid;
+	}
+
+	&__label{
+		display: inline-block;
+		color: $color-grey-mid;
+		font-size: 1.5rem;
+		margin-bottom: 5px;
+	}
+}
+
+
+
+

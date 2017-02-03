@@ -1,0 +1,228 @@
+// @font-face {
+//     font-family: 'Fakt Hair';
+//     src: url('../fonts/fakt/FaktPro-Hair.eot');
+//     src: url('../fonts/fakt/FaktPro-Hair.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Hair.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Hair.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-Thin.eot');
+//     src: url('../fonts/fakt/FaktPro-Thin.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Thin.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Thin.ttf') format('truetype');
+//     font-weight: 100;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-ThinItalic.eot');
+//     src: url('../fonts/fakt/FaktPro-ThinItalic.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-ThinItalic.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-ThinItalic.ttf') format('truetype');
+//     font-weight: 100;
+//     font-style: italic;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-Light.eot');
+//     src: url('../fonts/fakt/FaktPro-Light.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Light.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Light.ttf') format('truetype');
+//     font-weight: 200;
+//     font-style: normal;
+// }
+
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-Blond.eot');
+//     src: url('../fonts/fakt/FaktPro-Blond.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Blond.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Blond.ttf') format('truetype');
+//     font-weight: 300;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-Normal.eot');
+//     src: url('../fonts/fakt/FaktPro-Normal.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Normal.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Normal.ttf') format('truetype');
+//     font-weight: 400;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-Medium.eot');
+//     src: url('../fonts/fakt/FaktPro-Medium.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-Medium.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-Medium.ttf') format('truetype');
+//     font-weight: 500;
+//     font-style: normal;
+// }
+
+// @font-face {
+//     font-family: 'Fakt';
+//     src: url('../fonts/fakt/FaktPro-SemiBold.eot');
+//     src: url('../fonts/fakt/FaktPro-SemiBold.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/fakt/FaktPro-SemiBold.woff') format('woff'),
+//          url('../fonts/fakt/FaktPro-SemiBold.ttf') format('truetype');
+//     font-weight: 600;
+//     font-style: normal;
+// }
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('../fonts/graphikweb/Graphik-Light.eot');
+  src: url('../fonts/graphikweb/Graphik-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/graphikweb/Graphik-Light.woff') format('woff'),
+    url('../fonts/graphikweb/Graphik-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+// @font-face {
+//   font-family: 'Graphik Web';
+//   src: url('../fonts/graphikweb/Graphik-Bold.eot');
+//   src: url('../fonts/graphikweb/Graphik-Bold.eot?#iefix') format('embedded-opentype'),
+//     url('../fonts/graphikweb/Graphik-Bold.woff') format('woff'),
+//     url('../fonts/graphikweb/Graphik-Bold.ttf') format('truetype');
+//   font-weight: bold;
+//   font-style: normal;
+// }
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('../fonts/graphikweb/Graphik-Medium.eot');
+  src: url('../fonts/graphikweb/Graphik-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/graphikweb/Graphik-Medium.woff') format('woff'),
+    url('../fonts/graphikweb/Graphik-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('../fonts/graphikweb/Graphik-Regular.eot');
+  src: url('../fonts/graphikweb/Graphik-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/graphikweb/Graphik-Regular.woff') format('woff'),
+    url('../fonts/graphikweb/Graphik-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('../fonts/graphikweb/Graphik-Semibold.eot');
+  src: url('../fonts/graphikweb/Graphik-Semibold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/graphikweb/Graphik-Semibold.woff') format('woff'),
+    url('../fonts/graphikweb/Graphik-Semibold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Myriad';
+    src: url('../fonts/myriad/MyriadApple-Text.eot');
+    src: url('../fonts/myriad/MyriadApple-Text.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/myriad/MyriadApple-Text.woff') format('woff'),
+        url('../fonts/myriad/MyriadApple-Text.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad';
+    src: url('../fonts/myriad/MyriadApple-Bold.eot');
+    src: url('../fonts/myriad/MyriadApple-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/myriad/MyriadApple-Bold.woff') format('woff'),
+        url('../fonts/myriad/MyriadApple-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Black.eot');
+  src: url('../fonts/sailec/Sailec-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Black.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Medium.eot');
+  src: url('../fonts/sailec/Sailec-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Medium.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '../fonts/sailec/Sailec-Hairline';
+  src: url('../fonts/sailec/Sailec-Hairline.eot');
+  src: url('../fonts/sailec/Sailec-Hairline.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Hairline.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Hairline.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Bold.eot');
+  src: url('../fonts/sailec/Sailec-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Bold.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Thin.eot');
+  src: url('../fonts/sailec/Sailec-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Thin.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Light.eot');
+  src: url('../fonts/sailec/Sailec-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Light.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sailec';
+  src: url('../fonts/sailec/Sailec-Regular.eot');
+  src: url('../fonts/sailec/Sailec-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sailec/Sailec-Regular.woff') format('woff'),
+    url('../fonts/sailec/Sailec-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+

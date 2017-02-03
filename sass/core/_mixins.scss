@@ -1,0 +1,75 @@
+/* MEDIA QUERIES ----------- */
+
+$breakpoint-tiny: 460px;
+$breakpoint-small: 600px;
+$breakpoint-med-small: 925px;
+$breakpoint-med: 960px;
+
+
+// $breakpoint-small: 600px;
+// $breakpoint-med-small: 750px;
+// $breakpoint-med: 960px;
+
+
+/* MIXINS FOR MEDIA QUERIES ----------- */
+
+@mixin screen($size, $type: max, $pixels: 600) {
+    @if $size=='tiny' {
+        @media screen and (max-width: $breakpoint-tiny) {
+            @content;
+        }
+    }
+    @if $size=='small' {
+        @media screen and (max-width: $breakpoint-small) {
+            @content;
+        }
+    }
+    @if $size=='med-small' {
+        @media screen and (max-width: $breakpoint-med-small) {
+            @content;
+        }
+    }
+    @else if $size=='med' {
+        @media screen and (max-width: $breakpoint-med) {
+            @content;
+        }
+    }
+    @else if $size=='mid' {
+        @media screen and (min-width: $breakpoint-med-small) and (max-width: $breakpoint-med) {
+            @content;
+        }
+    }
+    @else if $size=='large' {
+        @media screen and (min-width: $breakpoint-med) {
+            @content;
+        }
+    }
+    @else if $size=='custom' {
+        @media screen and ($type + -width: $pixels + px) {
+            @content;
+        }
+    }
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin transition($duration){
+    -webkit-transition: all $duration;
+    -moz-transition: all $duration;
+    -ms-transition: all $duration;
+    -o-transition: all $duration;
+    transition: all $duration;
+}

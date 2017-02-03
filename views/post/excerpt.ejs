@@ -1,0 +1,59 @@
+<article class="post-excerpt card">
+  <a href="/post/<%= post.id %>">
+    <h3 class="post-excerpt__title"><%= post.title %></h3>
+    <img src="<%= post.featured_image_url %>" class="post-excerpt__img" alt="">
+  </a>
+  <div class="post-excerpt__footer u-flex u-space-between">
+    <div class="post-excerpt__author u-flex u-vertical-align">
+      <img class="post-excerpt__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
+      <a href="/user/<%= post.author.id %>" class="post-excerpt__author-name"><%= post.author.username %></a>
+    </div>
+    <div class="post-excerpt__actions">
+      <button class="post-excerpt__action button button--no-pad button--clear">
+        <span class="post-excerpt__action-icon post-excerpt__action-icon--like"></span> Like
+      </button>
+      <a href="/post/<%= post.id %>#comments" class="post-excerpt__action button button--no-pad button--clear">
+        <span class="post-excerpt__action-icon post-excerpt__action-icon--comment"></span> Comment
+      </a>
+    </div>
+
+    <div class="post-excerpt__share">
+      <a href="#" class="post-excerpt__share-item post-excerpt__share-item--facebook">
+        <span class="sr-only">Facebook</span>
+        <i class="ion-social-facebook"></i>
+      </a>
+      <a href="#" class="post-excerpt__share-item post-excerpt__share-item--twitter">
+        <span class="sr-only">Twitter</span>
+        <i class="ion-social-twitter"></i>
+      </a>
+      <a href="#" class="post-excerpt__share-item">
+        <span class="sr-only">Email</span>
+        <i class="ion-email"></i>
+      </a>
+      <a href="#" class="post-excerpt__share-item post-excerpt__share-item--pinterest">
+        <span class="sr-only">Pinterest</span>
+        <i class="ion-social-pinterest"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="post-excerpt__share-mobile">
+    <a href="#" class="post-excerpt__share-item post-excerpt__share-item--facebook">
+      <span class="sr-only">Facebook</span>
+      <i class="ion-social-facebook"></i>
+    </a>
+    <a href="#" class="post-excerpt__share-item post-excerpt__share-item--twitter">
+      <span class="sr-only">Twitter</span>
+      <i class="ion-social-twitter"></i>
+    </a>
+    <a href="#" class="post-excerpt__share-item">
+      <span class="sr-only">Email</span>
+      <i class="ion-email"></i>
+    </a>
+    <a href="#" class="post-excerpt__share-item post-excerpt__share-item--pinterest">
+      <span class="sr-only">Pinterest</span>
+      <i class="ion-social-pinterest"></i>
+    </a>
+  </div>
+
+</article>

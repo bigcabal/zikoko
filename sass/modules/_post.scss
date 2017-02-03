@@ -1,0 +1,120 @@
+.post{
+	width: 100%;
+	position: relative;
+	padding: 25px;
+	padding-left: 0;
+	margin-bottom: 30px;
+
+	@include screen(tiny){
+		padding: 20px 15px;
+	}
+
+
+	&__title{
+		font-size: 3.2rem;
+		line-height: 1.2;
+		font-weight: bold;
+		margin-bottom: 20px;
+	}
+
+	&__author{
+		margin-bottom: 15px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid #eaeaea;
+	}
+
+	&__author-img{
+		height: 55px;
+		width: 55px;
+		background-color: whitesmoke;
+		border-radius: 3px;
+		margin-right: 15px;
+		object-position: center;
+		object-fit: cover;
+	}
+
+	&__author-name{
+		font-weight: bold;
+		color: $color-purple;
+		margin-bottom: 8px;
+		margin-top: 5px;
+		font-size: 1.6rem;
+		display: inline-block;
+		font-weight: 500;
+		
+	}
+
+	&__author-role{
+		color: $color-grey-mid;
+		font-size: 1.6rem;
+		margin-bottom: 5px;
+		display: inline-block;
+	}
+
+	&__dot{
+		height: 3px;
+		width: 3px;
+		border-radius: 50%;
+		display: inline-block;
+		background-color: $color-grey-light;
+		margin: 0 3px 3px;
+	}
+
+	&__time-stamp{
+		color: $color-grey-mid;
+		font-size: 1.4rem;
+		font-family: $alternate-font;
+	}
+
+	&__items{
+		margin-top: 60px;
+	}
+
+	&__item{
+		margin-bottom: 60px;
+	}
+
+	&__item-title{
+		font-weight: bold;
+		font-size: 2.1rem;
+		margin-bottom: 20px;
+		line-height: 1.3;
+		// color: $color-black-alt;
+
+		@include screen(tiny){
+			color: $color-black;
+		}
+	}
+
+	&__item-img{
+		width: 100%;
+		background-color: #ddd;
+		margin-bottom: 20px;
+		object-position: center;
+		object-fit: contain;
+	}
+
+	&__item-subtitle{
+		font-size: 1.6rem;
+		color: $color-grey;
+		font-family: $alternate-font;
+	}
+
+	&__actions{
+		position: absolute;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 30px;
+
+		border-top: 1px solid #ddd;
+	}
+}
+
+
+
+
+
+
