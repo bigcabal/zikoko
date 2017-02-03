@@ -8,10 +8,8 @@
 var https = require('https');
 
 const config = {
-  host: 'formation-api.herokuapp.com',
-  path: '/api',
   headers: {
-    'Authorization': sails.config.authorization.foo
+    'Authorization': `Basic ${new Buffer(`${sails.config.authorization.identifier}:${sails.config.authorization.password}`).toString('base64')}`
   }
 }
 
@@ -20,9 +18,9 @@ module.exports = {
   get: function (path) {
     return new Promise(function (resolve, reject) {
       let options = {
-        host: config.host,
+        host: sails.config.globals.API.host,
         port: 443,
-        path: `${config.path}${path}`,
+        path: `${sails.config.globals.API.path}${path}`,
         method: 'GET',
         headers: config.headers
       }

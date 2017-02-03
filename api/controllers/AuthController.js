@@ -17,6 +17,8 @@ module.exports = {
     };
     const authorization = new Buffer(`${user.identifier}:${user.password}`).toString('base64');
 
+
+
     AuthService.signIn(user)
       .then((signedInUser) => {
         if ( !signedInUser ) return Promise.reject();
