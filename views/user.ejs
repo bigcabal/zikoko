@@ -1,10 +1,36 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
-<header>
-  <h1>User: @<%= user.username %></h1>
-  <p><%= user.role %></p>
-</header>
+<div class="zkk-site-wrap u-flex u-center-align">
+  <div class="zkk-main">
 
-<% posts.forEach(function(post) { %>
-<%- partial('./post/excerpt.ejs', { post: post }) %>
-<% }) %>
+    <div class="card profile">
+      <div class="u-flex u-space-between">
+        <div>
+          <div class="profile__role"><%= user.role %></div>
+          <h2 class="profile__name">@<%= user.username %></h2>
+          <a href="/me/profile" class="profile__edit">Edit</a>
+        </div>
+
+        <img src="<%= user.imageUrl || user.gravatarUrl %>">
+      </div>
+
+      <div class="profile__tabs">
+        <div class="profile__tab profile__tab--active">
+          <div class="profile__stat-number"><%= posts.length %></div> Posts
+        </div>
+        <!-- <div class="profile__tab">
+          <div class="profile__stat-number">2.4K</div> Likes
+        </div> -->
+      </div>
+    </div>
+
+    <div class="profile-posts">
+      <h3 class="profile-posts__title">Posts</h3>
+      <% posts.forEach(function(post) { %>
+      <%- partial('./post/excerpt.ejs', { post: post }) %>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- partial('./partials/sidebar.ejs') %>
+</div>
