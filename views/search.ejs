@@ -1,12 +1,16 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
-<h1>Search Results: <%= term %></h1>
+<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align">
+  <div class="zkk-main">
+    <div class="search-results__header">
+      <span class="search-results__label"><%= posts.length %> Results for:</span>
+      <h2 class="search-results__title">"<%= term %>"</h2>
+    </div>
+    <% posts.forEach(function(post) { %>
+    <%- partial('./post/excerpt.ejs', { post: post }) %>
+    <% }) %>
+  </div>
+  <%- partial('./partials/sidebar.ejs') %>
+</div>
 
-<%- partial('./partials/posts-list.ejs') %>
-
-<h2>Categories</h2>
-<ul>
-  <% categories.forEach(function(category) { %>
-  <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
-  <% }) %>
-</ul>
+<%- partial('./partials/footer.ejs') %>

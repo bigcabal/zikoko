@@ -1,25 +1,40 @@
-<%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
+<%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
 
-<header>
-  <h1><%= post.title %></h1>
-  <p><%= post.excerpt %></p>
-  <p><%= post.description %></p>
-</header>
+<div class="zkk-site-wrap zkk-site-wrap--white u-flex u-center-align">
+  <div class="zkk-main">
+    <article class="post">
+      <header>
+        <h2 class="post__title"><%= post.title %></h2>
+        <div class="post__author u-flex">
+          <img class="post__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
+          <div>
+            <a href="/user/<%= post.author.id %>" class="post__author-name">@<%= post.author.username %></a>
+            <span class="post__dot"></span>
+            <span class="post__author-role">Staff Writer</span>
+            <div class="post__time-stamp"><%= post.publishedAt %></div>
+          </div>
+        </div>
+      </header>
+      <div class="post__items">
+        <%- partial('./post/content-'+ post.post_type +'.ejs') %>
+      </div>
+      <div class="post-excerpt__footer u-flex u-space-between">
+        <%- partial('./post/actions.ejs') %>
+        <%- partial('./post/share.ejs') %>
+      </div>
+    </article>
 
-<img src="<%= post.featured_image_url %>" alt="">
+    <!-- @todo Comments -->
+    <div id="comments">
+      Comments here
+    </div>
+    <br><br><br><br>
 
-<div>
-  <p>Posted by <a href="/user/<%= post.author.id %>">@<%= post.author.username %></a></p>
-  <p>Posted on <%= post.publishedAt %></p>
-  <p>Category: <%= post.categories[0].name %></p>
-  <p>Tags: <% post.tags.forEach((tag) => { %> <%= tag.name %>, <%  }) %></p>
+    <!-- @todo Next Post? -->
+    <p>Next Post</p>
+
+  </div>
+  <%- partial('./partials/sidebar.ejs') %>
 </div>
 
-
-<div id="comments">
-  Comments here
-</div>
-
-
-
-
+<%- partial('./partials/footer.ejs') %>
