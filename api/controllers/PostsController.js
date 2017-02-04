@@ -13,7 +13,7 @@ module.exports = {
     data.order = req.param('order') || 'hot';
     data.feed = 'Everything';
 
-    APIService.request('/posts?populate=[author]&sort=publishedAt%20DESC')
+    APIService.request('/posts?populate=[author,sharing]&sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
@@ -32,7 +32,7 @@ module.exports = {
     let data = {};
     data.order = req.param('order') || 'hot';
 
-    APIService.request('/posts?populate=[author]&sort=publishedAt%20DESC')
+    APIService.request('/posts?populate=[author,sharing]&sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
