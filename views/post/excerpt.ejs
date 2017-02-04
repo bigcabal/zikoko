@@ -1,7 +1,8 @@
 <article class="post-excerpt card">
   <a href="/post/<%= post.id %>">
     <h3 class="post-excerpt__title"><%= post.title %></h3>
-    <img src="<%= post.featured_image_url %>" class="post-excerpt__img" alt="">
+
+    <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
   </a>
   <div class="post-excerpt__footer u-flex u-space-between">
     <div class="post-excerpt__author u-flex u-vertical-align">

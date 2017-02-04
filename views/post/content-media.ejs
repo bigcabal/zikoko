@@ -1,4 +1,6 @@
 <div class="post__item">
-  <img class="post__item-img" src="<%= post.media.url %>">
+
+  <%- partial('./image.ejs', { url: post.media.url, placement: 'post' }) %>
+
   <p class="post__item-subtitle"><%= post.media.description %></p>
 </div>

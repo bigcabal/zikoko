@@ -1,0 +1,44 @@
+<%
+  /* IMAGE REPLACEMENT
+  *  =======================
+  *   Replace default cloudinary images with optimised versions
+  *   Replace gif with HTML5 video (MP4 or WebM)
+  *
+  */
+
+  function getImageClass(placement) {
+    switch(placement) {
+      case 'post':
+        return 'post__item-img';
+      case 'excerpt':
+        return 'post-excerpt__img';
+      default:
+        return 'post__item-img';
+    };
+  }
+
+  function getDisplayImage(url) {
+
+    const imageClass = getImageClass(placement);
+
+    if (url.indexOf('.gif') === -1) {
+      return `<img class="${imageClass}" src="${url}" alt="">`;
+    }
+
+    const base = url.split('.gif')[0];
+    return `<video class="${imageClass}" width="600" style="width: 100%;" poster="${base}.jpg" autoplay loop muted playsinline>
+              <source type="video/mp4" src="${base}.mp4">
+              <source type="video/webm" src="${base}.webm">
+              <img src="${base}.jpg" alt="" />
+            </video>`;
+  }
+
+  function getOptimizedUrl(url) {
+    // @todo
+    return url;
+  }
+
+  url = getOptimizedUrl(url);
+  let result = getDisplayImage(url);
+%>
+<%- result %>

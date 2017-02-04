@@ -1,0 +1,21 @@
+<h2 class="post__title"><%= post.title %></h2>
+
+<!-- @todo Kachi border-bottom shouldn't be on post__author incase post author is not being shown -->
+<% if (post.show_post_author === true) { %>
+<div class="post__author u-flex">
+  <img class="post__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
+  <div>
+    <a href="/user/<%= post.author.id %>" class="post__author-name">@<%= post.author.username %></a>
+    <span class="post__dot"></span>
+    <span class="post__author-role">Staff Writer</span>
+    <div class="post__time-stamp"><%= post.publishedAt || post.createdAt %></div>
+  </div>
+</div>
+<% } %>
+
+<!-- @todo Kachi style tags (you can move the position wherever you want) -->
+<% if (post.tags) { %>
+<div class="post__tags">
+  <% post.tags.forEach(function(tag) { %><span>#<%= tag.name %></span> <% }) %>
+</div>
+<% } %>

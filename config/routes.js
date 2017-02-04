@@ -50,6 +50,7 @@ module.exports.routes = {
   'get /search': 'PostsController.search',
 
   'get /new': { view: 'new' },
+  'post /new': 'PostsController.create',
   'get /post/:id': 'PostsController.single',
   'get /post/:id/amp': 'PostsController.amp',
   'get /feed/instant-articles': 'PostsController.instant_articles',

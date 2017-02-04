@@ -54,8 +54,8 @@ module.exports.sockets = {
 
  /***************************************************************************
   *                                                                          *
-  * Whether to expose a 'get /__getcookie' route with CORS support that sets *
-  * a cookie (this is used by the sails.io.js socket client to get access to *
+  * Whether to expose a 'request /__getcookie' route with CORS support that sets *
+  * a cookie (this is used by the sails.io.js socket client to request access to *
   * a 3rd party cookie and to enable sessions).                              *
   *                                                                          *
   * Warning: Currently in this scenario, CORS settings apply to interpreted  *

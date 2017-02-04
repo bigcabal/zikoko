@@ -12,7 +12,7 @@
 
     <!-- @todo use block.embed -->
     <% if (block.media) { %>
-    <img class="post__item-img" src="<%= block.media.url %>">
+    <%- partial('./image.ejs', { url: block.embed.url, placement: 'post' }) %>
     <% } %>
 
     <% if (block.additional_text) { %>

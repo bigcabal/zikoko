@@ -15,13 +15,13 @@ const config = {
 
 module.exports = {
 
-  get: function (path) {
+  request: function (path, method = 'GET', data = null) {
     return new Promise(function (resolve, reject) {
       let options = {
         host: sails.config.globals.API.host,
         port: 443,
         path: `${sails.config.globals.API.path}${path}`,
-        method: 'GET',
+        method: method,
         headers: config.headers
       }
       let newRequest = https.request(options, function (response) {
@@ -39,12 +39,11 @@ module.exports = {
         console.error(e);
         reject(e);
       });
+
+      if ( method.toLowerCase() === 'post' ) newRequest.write( JSON.stringify(data) );
       newRequest.end();
 
     })
-
-
   }
-
 };
 

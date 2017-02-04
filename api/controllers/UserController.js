@@ -12,12 +12,12 @@ module.exports = {
     const userId = req.params.id;
     let data = {}
 
-    APIService.get(`/users/${userId}?populate=[roles]`)
+    APIService.request(`/users/${userId}?populate=[roles]`)
       .then((user) => {
         user.role = getHighestRole(user.roles);
         return data.user = user;
       })
-      .then(() => APIService.get(`/users/${userId}/posts`))
+      .then(() => APIService.request(`/users/${userId}/posts`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
         return data.posts = posts
@@ -31,7 +31,7 @@ module.exports = {
     const userId = req.params.id;
     let data = {}
 
-    APIService.get(`/users/${userId}`)
+    APIService.request(`/users/${userId}`)
       .then((user) => {
         console.log(user);
         return data.user = user;

@@ -11,7 +11,7 @@
           <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
         </div>
 
-        <form class="form form-page__form form--no-label">
+        <form action="/new" method="post" class="form form-page__form form--no-label">
           <div class="form__group">
             <div class="form__drag-and-drop">
               <div class="form__drag-and-drop-icon">
@@ -22,11 +22,11 @@
           </div>
 
           <div class="form__group">
-            <textarea class="form__field" rows="3" placeholder="Description"></textarea>
+            <textarea name="description" class="form__field" rows="3" placeholder="Description"></textarea>
           </div>
 
           <div class="form__group">
-            <input class="form__field" placeholder="Tags, e.g #tag #tagtwo" />
+            <input name="tags" class="form__field" value="#one #two" placeholder="Tags, e.g #tag #tagtwo" />
           </div>
 
           <div class="form__action">

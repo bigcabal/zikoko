@@ -600,7 +600,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       delete requestCtx.cb;
 
       // Name of the appropriate socket.io listener on the server
-      // ( === the request method or "verb", e.g. 'get', 'post', 'put', etc. )
+      // ( === the request method or "verb", e.g. 'request', 'post', 'put', etc. )
       var sailsEndpoint = requestCtx.method;
 
       socket._raw.emit(sailsEndpoint, requestCtx, function serverResponded(responseCtx) {
@@ -658,7 +658,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
         // Okay to change global headers while socket is connected
         if (option == 'headers') {return;}
         Object.defineProperty(self, option, {
-          get: function() {
+          request: function() {
             if (option == 'url') {
               return _opts[option] || (self._raw && self._raw.io && self._raw.io.uri);
             }
@@ -748,12 +748,12 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
 
       // Determine whether this is a cross-origin socket by examining the
       // hostname and port on the `window.location` object.  If it's cross-origin,
-      // we'll attempt to get a cookie for the domain so that a Sails session can
+      // we'll attempt to request a cookie for the domain so that a Sails session can
       // be established.
       var isXOrigin = (function (){
 
         // If `window` doesn't exist (i.e. being used from Node.js), then
-        // we won't bother attempting to get a cookie.  If you're using sockets
+        // we won't bother attempting to request a cookie.  If you're using sockets
         // from Node.js and find you need to share a session between multiple
         // socket connections, you'll need to make an HTTP request to the /__getcookie
         // endpoint of the Sails server (or any endpoint that returns a set-cookie header)
@@ -877,7 +877,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
             ''
             // ' ⚓︎ (development mode)'
             // 'e.g. to send a GET request to Sails via WebSockets, run:'+ '\n' +
-            // '`io.socket.get("/foo", function serverRespondedWith (body, jwr) { console.log(body); })`'+ '\n' +
+            // '`io.socket.request("/foo", function serverRespondedWith (body, jwr) { console.log(body); })`'+ '\n' +
           );
         });
 
@@ -1084,7 +1084,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
     /**
      * Simulate a GET request to sails
      * e.g.
-     *    `socket.get('/user/3', Stats.populate)`
+     *    `socket.request('/user/3', Stats.populate)`
      *
      * @api public
      * @param {String} url    ::    destination URL
@@ -1092,7 +1092,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
      * @param {Function} cb   ::    callback function to call when finished [optional]
      */
 
-    SailsSocket.prototype.get = function(url, data, cb) {
+    SailsSocket.prototype.request = function(url, data, cb) {
 
       // `data` is optional
       if (typeof data === 'function') {
@@ -1101,7 +1101,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       }
 
       return this.request({
-        method: 'get',
+        method: 'request',
         params: data,
         url: url
       }, cb);
@@ -1221,7 +1221,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       'Usage:\n'+
       'socket.request( options, [fnToCallWhenComplete] )\n\n'+
       'options.url :: e.g. "/foo/bar"'+'\n'+
-      'options.method :: e.g. "get", "post", "put", or "delete", etc.'+'\n'+
+      'options.method :: e.g. "request", "post", "put", or "delete", etc.'+'\n'+
       'options.params :: e.g. { emailAddress: "mike@sailsjs.org" }'+'\n'+
       'options.headers :: e.g. { "x-my-custom-header": "some string" }';
       // Old usage:
@@ -1280,7 +1280,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       // (and sanitize/marshal options along the way)
       var requestCtx = {
 
-        method: options.method.toLowerCase() || 'get',
+        method: options.method.toLowerCase() || 'request',
 
         headers: options.headers,
 
@@ -1347,7 +1347,7 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       // Whether to automatically connect a socket and save it as `io.socket`.
       autoConnect: true,
 
-      // The route (path) to hit to get a x-origin (CORS) cookie
+      // The route (path) to hit to request a x-origin (CORS) cookie
       // (or true to use the default: '/__getcookie')
       useCORSRouteToGetCookie: true,
 

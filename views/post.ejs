@@ -4,16 +4,7 @@
   <div class="zkk-main">
     <article class="post">
       <header>
-        <h2 class="post__title"><%= post.title %></h2>
-        <div class="post__author u-flex">
-          <img class="post__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
-          <div>
-            <a href="/user/<%= post.author.id %>" class="post__author-name">@<%= post.author.username %></a>
-            <span class="post__dot"></span>
-            <span class="post__author-role">Staff Writer</span>
-            <div class="post__time-stamp"><%= post.publishedAt %></div>
-          </div>
-        </div>
+        <%- partial('./post/header.ejs') %>
       </header>
       <div class="post__items">
         <%- partial('./post/content-'+ post.post_type +'.ejs') %>
@@ -25,13 +16,11 @@
     </article>
 
     <!-- @todo Comments -->
-    <div id="comments">
-      Comments here
-    </div>
-    <br><br><br><br>
+    <%- partial('./post/comments.ejs') %>
 
     <!-- @todo Next Post? -->
     <p>Next Post</p>
+    <br><br><br>
 
   </div>
   <%- partial('./partials/sidebar.ejs') %>
