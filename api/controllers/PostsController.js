@@ -10,6 +10,7 @@ module.exports = {
   index: function (req, res) {
 
     let data = {};
+    data.order = req.param('order') || 'hot';
     data.feed = 'Everything';
 
     APIService.get('/posts?populate=[author]')
@@ -28,7 +29,8 @@ module.exports = {
   category: function (req, res) {
 
     const categoryId = req.params.category_id;
-    let data = {}
+    let data = {};
+    data.order = req.param('order') || 'hot';
 
     APIService.get('/posts?populate=[author]')
       .then((posts) => data.posts = posts)

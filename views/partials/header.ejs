@@ -18,8 +18,8 @@
         </ul>
       </a>
       <div class="feed-filter__tabs u-inline-block">
-        <a href="#" class="feed-filter__tab feed-filter__tab--active">Hot</a>
-        <a href="#" class="feed-filter__tab">Latest</a>
+        <a href="?order=hot" class="feed-filter__tab <% if (order === 'hot') { %>feed-filter__tab--active<% } %>">Hot</a>
+        <a href="?order=latest" class="feed-filter__tab <% if (order === 'latest') { %>feed-filter__tab--active<% } %>">Latest</a>
       </div>
     </div>
     <% } %>
