@@ -21,6 +21,36 @@ module.exports = {
         host: sails.config.globals.API.host,
         port: 443,
         path: `${sails.config.globals.API.path}${path}`,
+        method: method
+      }
+      let newRequest = https.request(options, function (response) {
+        let body = '';
+        response.on('data', function (data) {
+          data = data.toString();
+          body += data;
+        });
+        response.on('end', function () {
+          body = JSON.parse(body);
+          resolve(body);
+        });
+      });
+      newRequest.on('error', (e) => {
+        console.error(e);
+        reject(e);
+      });
+
+      if ( method.toLowerCase() === 'post' ) newRequest.write( JSON.stringify(data) );
+      newRequest.end();
+
+    })
+  },
+
+  authRequest: function (auth, path, method = 'GET', data = null) {
+    return new Promise(function (resolve, reject) {
+      let options = {
+        host: sails.config.globals.API.host,
+        port: 443,
+        path: `${sails.config.globals.API.path}${path}`,
         method: method,
         headers: config.headers
       }
@@ -44,6 +74,6 @@ module.exports = {
       newRequest.end();
 
     })
-  }
+  },
 };
 

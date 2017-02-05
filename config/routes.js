@@ -44,8 +44,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'get /': 'PostsController.index',
-  'get /category/:category_id': 'PostsController.category',
+  'get /': 'PostsController.list',
+  'get /category/:category_id': 'PostsController.list',
 
   'get /search': 'PostsController.search',
 
@@ -59,7 +59,9 @@ module.exports.routes = {
   'get /user/:id/likes': 'UserController.likes',
 
   'get /me/profile': { view: 'me-profile' },
+  'post /me/profile': 'UserController.updateProfile',
   'get /me/password': { view: 'me-password' },
+  'post /me/password': 'UserController.updatePassword',
 
   'get /login': { view: 'sign-in' },
   'post /login': 'AuthController.login',

@@ -7,68 +7,45 @@
 
 module.exports = {
 
-  index: function (req, res) {
+  list: function (req, res) {
 
+    const categoryId = req.params.category_id || null;
     let data = {};
-    data.order = req.param('order') || 'hot';
-    data.feed = 'Everything';
+    data.order = req.param('order') || 'latest';
+    data.feed = categoryId ? null : 'Everything';
 
     APIService.request('/posts?populate=[author,sharing]&sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
       .then(() => {
-        res.view('posts', data);
+        if ( data.feed === 'Everything' ) return Promise.resolve();
+        const category = data.categories.find((category) => { return category.id === categoryId });
+        return data.feed = category.name;
       })
+      .then(() => res.view('posts', data))
       .catch((err) => {
-        console.log("error", err)
-      })
-
-  },
-
-  category: function (req, res) {
-
-    const categoryId = req.params.category_id;
-    let data = {};
-    data.order = req.param('order') || 'hot';
-
-    APIService.request('/posts?populate=[author,sharing]&sort=publishedAt%20DESC')
-      .then((posts) => data.posts = posts)
-      .then(() => APIService.request('/categories'))
-      .then((categories) => data.categories = categories)
-      .then(() => {
-        const category = data.categories.find((category) => {
-          return category.id === categoryId
-        });
-        data.feed = category.name;
-        res.view('posts', data);
-      })
-      .catch((err) => {
-        console.log("error", err);
+        console.log(err);
         res.redirect('/');
-      })
+      });
 
   },
 
   search: function (req, res) {
 
     const term = req.param('term') || '';
-    let data = {}
+    let data = { term: term };
 
     APIService.request('/posts?populate=[author]&sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
-      .then(() => {
-        data.term = term;
-        res.view('search', data);
-      })
+      .then(() => res.view('search', data))
       .catch((err) => {
         console.log("error", err)
-      })
+      });
 
   },
-
 
   single: function (req, res) {
 
@@ -80,8 +57,10 @@ module.exports = {
         console.log(post);
         return data.post = post;
       })
-      .then(() => {
-        res.view('post', data);
+      .then(() => res.view('post', data))
+      .catch((err) => {
+        console.log(err);
+        res.redirect('/');
       })
 
   },
@@ -96,9 +75,9 @@ module.exports = {
       .then(() => createTags(post.tags))
       .then((tags) => {
         console.log("finish creating tags")
-        post.tags = tags
+        return post.tags = tags;
       })
-      .then(() => APIService.request('/posts', 'post', post))
+      .then(() => APIService.authRequest(null, '/posts', 'post', post))
       .then(() => {
         console.log("finish creating post")
         res.redirect('/')
@@ -107,13 +86,11 @@ module.exports = {
   },
 
   amp: function (req, res) {
-    "use strict";
-    res.view('new-post');
+    res.view('post-amp');
   },
 
   instant_articles: function (req, res) {
-    "use strict";
-    res.view('new-post');
+    res.redirect('/');
   }
 
 };
@@ -141,11 +118,9 @@ function createTags(tagList) {
 }
 
 
-
-
 function setupPost(postDetails) {
 
-  const image = 'https://res.cloudinary.com/big-cabal/image/upload/w_800,f_auto,fl_lossy,q_auto/v1476207568/running_ra4qwq.gif';
+  const image = postDetails.image || 'https://res.cloudinary.com/big-cabal/image/upload/w_800,f_auto,fl_lossy,q_auto/v1476207568/running_ra4qwq.gif';
   const description = postDetails.description;
   const tags = postDetails.tags;
 

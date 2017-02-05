@@ -21,8 +21,7 @@ module.exports = {
         host: sails.config.globals.API.host,
         port: 443,
         path: `${sails.config.globals.API.path}/register`,
-        method: 'POST',
-        headers: config.headers
+        method: 'POST'
       }
       let newRequest = https.request(options, function (response) {
         let body = '';
@@ -49,8 +48,7 @@ module.exports = {
         host: sails.config.globals.API.host,
         port: 443,
         path: `${sails.config.globals.API.path}/auth/local`,
-        method: 'POST',
-        headers: config.headers
+        method: 'POST'
       }
 
       let newRequest = https.request(options, function (response) {

@@ -57,7 +57,7 @@ module.exports = {
       res.view('sign-up', { error: 'Error message here' });
     }
 
-    APIService.request('/roles')
+    APIService.authRequest(null, '/roles')
       .then((roles) => setupUser(roles))
       .then((newUser) => AuthService.createUser(newUser))
       .then((registeredUser) => {
