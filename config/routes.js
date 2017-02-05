@@ -54,6 +54,7 @@ module.exports.routes = {
   'get /post/:id': 'PostsController.single',
   'get /post/:id/amp': 'PostsController.amp',
   'get /feed/instant-articles': 'PostsController.instant_articles',
+  'post /post/likePost': 'PostsController.likePost',
 
   'get /user/:id': 'UserController.posts',
   'get /user/:id/likes': 'UserController.likes',

@@ -65,6 +65,17 @@ module.exports = {
 
   },
 
+  likePost: function(req, res) {
+
+    // @todo like Post
+
+    // user = req.body.user_id
+    console.log(req.body);
+
+    res.redirect(`/post/${req.body.post_id}`);
+
+  },
+
 
   create: function (req, res) {
 
