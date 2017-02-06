@@ -18,7 +18,7 @@ module.exports = {
     APIService.request(`/users?username=${username}`)
       .then((users) => {
         data.user = users[0];
-        data.user.role = getHighestRole(data.user.roles);
+        data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
         return data.user;
       })
@@ -102,24 +102,4 @@ module.exports = {
 
 };
 
-
-function getHighestRole(roles) {
-  const ROLES = ['admin', 'editor', 'registered'];
-  const PUBLIC_ROLE_NAMES = {
-    'admin': 'Staff Writer',
-    'editor': 'Staff Writer',
-    'registered': 'Ninja'
-  }
-
-  let lowestIndex = ROLES.length - 1;
-  roles.forEach(role => {
-    if (role.active) {
-      const index = ROLES.indexOf(role.name);
-      if ( index < lowestIndex ) lowestIndex = index;
-    }
-  });
-
-  let highestRole = PUBLIC_ROLE_NAMES[ROLES[lowestIndex]];
-  return highestRole;
-}
 

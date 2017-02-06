@@ -10,8 +10,7 @@
       <% if (block.heading) { %><%= block.heading %><% } %>
     </h3>
 
-    <!-- @todo use block.embed -->
-    <% if (block.media) { %>
+    <% if (block.embed) { %>
     <%- partial('./image.ejs', { url: block.embed.url, placement: 'post' }) %>
     <% } %>
 

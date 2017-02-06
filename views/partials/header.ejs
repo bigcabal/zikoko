@@ -26,13 +26,12 @@
 
     <nav>
       <ul class="zkk-nav" role="navigation">
-
-        <% if (!currentUser) { %>
         <li class="zkk-nav__item zkk-nav__item--text-md">
           <a href="#footer__search" class="toggle--open-search">
             <i class="ion-android-search"></i>
           </a>
         </li>
+        <% if (!currentUser) { %>
         <li class="zkk-nav__item zkk-nav__item--desktop zkk-nav__item--pad-sm">
           <a href="/login">Login</a>
         </li>

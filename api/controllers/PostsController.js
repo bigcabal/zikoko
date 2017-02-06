@@ -43,14 +43,12 @@ module.exports = {
     data.term = term;
     data.currentUser = req.session.user;
 
-    APIService.request('/posts?populate=[author]&sort=publishedAt%20DESC')
+    APIService.request('/posts?sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
       .then(() => res.view('search', data))
-      .catch((err) => {
-        console.log("error", err)
-      });
+      .catch(() => res.redirect('/'))
 
   },
 
@@ -62,32 +60,35 @@ module.exports = {
     data.currentUser = req.session.user;
 
     APIService.request(`/posts?slug=${postSlug}`)
-      .then((posts) => {
-        console.log(posts[0]);
-        return data.post = posts[0];
+      .then((post) => {
+        console.log(post);
+        return data.post = post;
       })
+      .then(() => APIService.request(`/users?username=${data.post.author.username}`))
+      .then((users) => { return data.post.author.role = RolesService.getHighestRole(users[0].roles) })
       .then(() => res.view('post', data))
-      .catch((err) => {
-        console.log(err);
-        res.redirect('/');
-      })
+      .catch(() => res.redirect('/'))
+
 
   },
 
   likePost: function(req, res) {
+    if ( !req.session.user ) res.redirect('/login');
 
     // @todo like Post
 
-    // user = req.body.user_id
-    console.log(req.body);
+    const userId = req.session.user.id;
+    const postId = req.body.post_id;
 
-    res.redirect(`/post/${req.body.post_id}`);
+    res.redirect(`/post/${postId}`);
 
   },
 
 
 
   create: function (req, res) {
+    if ( !req.session.user ) res.redirect('/login');
+
     let post;
     setupPost(req.body)
       .then((newPost) => post = newPost)
