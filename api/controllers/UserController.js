@@ -15,7 +15,7 @@ module.exports = {
 
     console.log(username);
 
-    APIService.request(`/users?username=${username}&populate=[roles]`)
+    APIService.request(`/users?username=${username}`)
       .then((users) => {
         data.user = users[0];
         data.user.role = getHighestRole(data.user.roles);
@@ -45,21 +45,24 @@ module.exports = {
 
     const profile = {
       username: req.body.username,
-      email: req.body.email
+      email: req.body.email,
+      first_name: req.body.first_name || '',
+      last_name: req.body.last_name || ''
     };
 
-    console.log(profile);
-    res.redirect('/me/profile');
-
-    // const path = `/users/id`;
-    // APIService.authRequest(null, path, 'put', profile)
-    //   .then((updatedUser) => {
-    //     console.log(updatedUser);
-    //     res.redirect('/me/profile')
-    //   })
-    //   .catch(() => {
-    //     console.log("error")
-    //   })
+    const path = `/users/${req.session.user.id}`;
+    APIService.authRequest(req.session.user.authorization, path, 'PUT', profile)
+      .then((updatedUser) => {
+        const authorization = req.session.user.authorization;
+        req.session.user = updatedUser;
+        req.session.user.authorization = authorization;
+        console.log(updatedUser);
+        res.redirect('/me/profile')
+      })
+      .catch(() => {
+        console.log("error");
+        res.redirect('/me/profile?error=true')
+      })
 
   },
   updateProfileView: function(req, res) {
@@ -105,7 +108,7 @@ function getHighestRole(roles) {
   const PUBLIC_ROLE_NAMES = {
     'admin': 'Staff Writer',
     'editor': 'Staff Writer',
-    'registered': 'User'
+    'registered': 'Ninja'
   }
 
   let lowestIndex = ROLES.length - 1;

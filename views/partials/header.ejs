@@ -11,7 +11,10 @@
         <%= feed %>
         <span class="feed-filter__caret-down"></span>
         <ul class="feed-filter__dropdown-list">
-          <li class="feed-filter__dropdown-item">Everything</li>
+          <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
+          <% categories.forEach(function(category) { %>
+          <li class="feed-filter__dropdown-item"><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
+          <% }) %>
         </ul>
       </a>
       <%/* <div class="feed-filter__tabs u-inline-block">
@@ -38,7 +41,7 @@
         </li>
         <% } else { %>
         <li class="zkk-nav__item zkk-nav__item--pad-sm zkk-nav__dropdown">
-          <a href="/me/profile">
+          <a href="/user/<%= currentUser.username %>">
             <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>" class="zkk-nav__profile-img">
           </a>
           <ul class="zkk-nav__dropdown-list">

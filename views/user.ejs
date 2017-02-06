@@ -8,7 +8,10 @@
         <div>
           <div class="profile__role"><%= user.role %></div>
           <h2 class="profile__name">@<%= user.username %></h2>
+
+          <% if (currentUser) { if ( currentUser.username === user.username ) { %>
           <a href="/me/profile" class="profile__edit">Edit</a>
+          <% } } %>
         </div>
 
         <img src="<%= user.imageUrl || user.gravatarUrl %>">
@@ -18,9 +21,9 @@
         <a href="/user/<%= user.id %>" class="profile__tab profile__tab--active">
           <div class="profile__stat-number"><%= posts.length %></div> Posts
         </a>
-        <div href="/user/<%= user.id %>/likes" class="profile__tab">
+        <!--<a href="/user/<%= //user.id %>/likes" class="profile__tab">
           <div class="profile__stat-number">2.4K</div> Likes
-        </div>
+        </a>-->
       </div>
     </div>
 

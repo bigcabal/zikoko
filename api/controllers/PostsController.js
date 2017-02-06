@@ -16,14 +16,14 @@ module.exports = {
     data.feed = categorySlug ? null : 'Everything';
     data.currentUser = req.session.user;
 
-    let query = '/posts?populate=[author,sharing]&sort=publishedAt%20DESC';
+    let query = '/posts?sort=publishedAt%20DESC';
 
     APIService.request('/categories')
       .then((categories) => data.categories = categories)
       .then(() => {
         if ( data.feed === 'Everything' ) return Promise.resolve();
         const category = data.categories.find((category) => { return category.slug === categorySlug });
-        query = `/categories/${category.id}/posts?populate=[author,sharing]&sort=publishedAt%20DESC`;
+        query = `/categories/${category.id}/posts?sort=publishedAt%20DESC`;
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
