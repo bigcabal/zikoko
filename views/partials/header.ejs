@@ -11,23 +11,20 @@
         <%= feed %>
         <span class="feed-filter__caret-down"></span>
         <ul class="feed-filter__dropdown-list">
-          <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
-          <% categories.forEach(function(category) { %>
-          <li class="feed-filter__dropdown-item"><a href="/category/<%= category.id %>"><%= category.name %></a></li>
-          <% }) %>
+          <li class="feed-filter__dropdown-item">Everything</li>
         </ul>
       </a>
-      <div class="feed-filter__tabs u-inline-block">
-        <a href="?order=hot" class="feed-filter__tab <% if (order === 'hot') { %>feed-filter__tab--active<% } %>">Hot</a>
-        <a href="?order=latest" class="feed-filter__tab <% if (order === 'latest') { %>feed-filter__tab--active<% } %>">Latest</a>
-      </div>
+      <%/* <div class="feed-filter__tabs u-inline-block">
+        <a href="#" class="feed-filter__tab feed-filter__tab--active">Hot</a>
+        <a href="#" class="feed-filter__tab">Latest</a>
+      </div> */ %>
     </div>
     <% } %>
 
     <nav>
       <ul class="zkk-nav" role="navigation">
         <li class="zkk-nav__item zkk-nav__item--text-md">
-          <a href="#" class="toggle--open-search">
+          <a href="#footer__search" class="toggle--open-search">
             <i class="ion-android-search"></i>
           </a>
         </li>
@@ -78,10 +75,10 @@
         <% }) %>
       </ul>
     </a>
-    <div class="feed-filter__tabs u-inline-block">
+    <% /*<div class="feed-filter__tabs u-inline-block">
       <a href="#" class="feed-filter__tab feed-filter__tab--active">Hot</a>
       <a href="#" class="feed-filter__tab">Latest</a>
-    </div>
+    </div> */ %>
   </div>
   <% } %>
 
@@ -99,3 +96,5 @@
 </div>
 
 <div class="page-overlay"></div>
+
+<%- partial('./ad.ejs', { adType: 'leaderboard' }) %>

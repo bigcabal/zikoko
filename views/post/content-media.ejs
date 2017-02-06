@@ -1,6 +1,8 @@
 <div class="post__item">
 
+  <% if ( post.media.media_type === 'image' ) { %>
   <%- partial('./image.ejs', { url: post.media.url, placement: 'post' }) %>
+  <% } %>
 
   <p class="post__item-subtitle"><%= post.media.description %></p>
 </div>
