@@ -9,20 +9,18 @@ module.exports = {
 
   login: function(req, res) {
 
-    // @todo (Timi) Session tingz
-
     const user = {
       identifier: req.body.identifier,
       password: req.body.password
     };
     const authorization = new Buffer(`${user.identifier}:${user.password}`).toString('base64');
 
-
-
     AuthService.signIn(user)
       .then((signedInUser) => {
         if ( !signedInUser ) return Promise.reject();
-        console.log("SUCCESS", authorization);
+        req.session.user = JSON.parse(signedInUser);
+        req.session.user.authorization = authorization;
+        console.log(req.session.user);
         res.redirect('/new');
       })
       .catch(() => {
@@ -30,6 +28,11 @@ module.exports = {
         res.redirect('/login');
       })
 
+  },
+
+  logout: function(req, res) {
+    req.session.user = null;
+    res.redirect('/');
   },
 
   register: function(req, res) {
@@ -46,9 +49,25 @@ module.exports = {
     }
 
     function handleSuccess() {
-      // @todo Login user and redirect them to edit profile page or new post page
-      // @todo (Timi) Session tingz
-      res.redirect('/login');
+      const user = {
+        identifier: req.body.email,
+        password: req.body.password
+      };
+      const authorization = new Buffer(`${user.identifier}:${user.password}`).toString('base64');
+
+      AuthService.signIn(user)
+        .then((signedInUser) => {
+          if ( !signedInUser ) return Promise.reject();
+          req.session.user = JSON.parse(signedInUser);
+          req.session.user.authorization = authorization;
+          console.log(req.session.user);
+          res.redirect('/me/profile');
+        })
+        .catch(() => {
+          console.log("errrorrrr");
+          res.redirect('/login');
+        })
+
     }
 
     function handleError() {
@@ -57,7 +76,7 @@ module.exports = {
       res.view('sign-up', { error: 'Error message here' });
     }
 
-    APIService.authRequest(null, '/roles')
+    APIService.request('/roles')
       .then((roles) => setupUser(roles))
       .then((newUser) => AuthService.createUser(newUser))
       .then((registeredUser) => {

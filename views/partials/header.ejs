@@ -23,6 +23,8 @@
 
     <nav>
       <ul class="zkk-nav" role="navigation">
+
+        <% if (!currentUser) { %>
         <li class="zkk-nav__item zkk-nav__item--text-md">
           <a href="#footer__search" class="toggle--open-search">
             <i class="ion-android-search"></i>
@@ -34,15 +36,19 @@
         <li class="zkk-nav__item zkk-nav__item--desktop zkk-nav__item--pad-sm">
           <a href="/register">Create Account</a>
         </li>
-        <!-- li class="zkk-nav__item zkk-nav__item--pad-sm zkk-nav__dropdown">
-            <a href="#">
-                <img src="http://www.aceshowbiz.com/images/photo/lil_uzi_vert.jpg" class="zkk-nav__profile-img">
-            </a>
-            <ul class="zkk-nav__dropdown-list">
-              <li class="zkk-nav__dropdown-item"><a href="/login">Login</a></li>
-              <li class="zkk-nav__dropdown-item"><a href="/Register">Sign up</a></li>
-            </ul>
-        </li> -->
+        <% } else { %>
+        <li class="zkk-nav__item zkk-nav__item--pad-sm zkk-nav__dropdown">
+          <a href="/me/profile">
+            <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>" class="zkk-nav__profile-img">
+          </a>
+          <ul class="zkk-nav__dropdown-list">
+            <li class="zkk-nav__dropdown-item"><a href="/me/profile">Profile</a></li>
+            <li class="zkk-nav__dropdown-item"><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+        <% } %>
+
+
         <li class="zkk-nav__item zkk-nav__item--mobile zkk-nav__item--text-md zkk-nav__dropdown">
           <a href="#">
             <i class="ion-person"></i>
@@ -71,7 +77,7 @@
       <ul class="feed-filter__dropdown-list">
         <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
         <% categories.forEach(function(category) { %>
-        <li class="feed-filter__dropdown-item"><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+        <li class="feed-filter__dropdown-item"><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
         <% }) %>
       </ul>
     </a>

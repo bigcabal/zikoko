@@ -5,7 +5,7 @@
 <div class="post__author u-flex">
   <img class="post__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
   <div>
-    <a href="/user/<%= post.author.id %>" class="post__author-name">@<%= post.author.username %></a>
+    <a href="/user/<%= post.author.username %>" class="post__author-name">@<%= post.author.username %></a>
     <span class="post__dot"></span>
     <span class="post__author-role">Staff Writer</span>
     <div class="post__time-stamp"><%= post.publishedAt || post.createdAt %></div>

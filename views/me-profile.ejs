@@ -13,7 +13,7 @@
       <form action="/me/profile" method="post" class="profile-edit__form form">
 
         <div class="form__group u-flex">
-          <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAXdAAAAJDdkNTcwYzE0LTUyMGMtNDZlYi04MWY0LTdiNTE1NzMxNmI5NQ.jpg" class="profile__img">
+          <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>">
           <div>
             <input type="file" name="image">
             <p class="form__hint">PNG, JPG or GIF with size 2MB or less</p>
@@ -22,22 +22,22 @@
 
         <div class="form__group">
           <label class="form__label" for="username">Username *</label>
-          <input type="text" id="username" name="username" class="form__field" required>
+          <input type="text" id="username" name="username" class="form__field" value="<%= currentUser.username %>" required>
         </div>
 
         <div class="form__group">
           <label class="form__label" for="email">Email Address *</label>
-          <input type="email" id="email" name="email" class="form__field" required>
+          <input type="email" id="email" name="email" class="form__field" value="<%= currentUser.email %>" required>
         </div>
 
         <div class="form__group">
           <label class="form__label" for="first_name">First Name</label>
-          <input type="text" id="first_name" name="first_name" class="form__field">
+          <input type="text" id="first_name" name="first_name" class="form__field" value="<%= currentUser.first_name || '' %>">
         </div>
 
         <div class="form__group">
           <label class="form__label" for="last_name">Last Name</label>
-          <input type="text" id="last_name" name="last_name" class="form__field">
+          <input type="text" id="last_name" name="last_name" class="form__field" value="<%= currentUser.last_name || '' %>">
         </div>
 
         <div class="form__action">

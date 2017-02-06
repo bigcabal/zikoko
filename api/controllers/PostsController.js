@@ -9,20 +9,25 @@ module.exports = {
 
   list: function (req, res) {
 
-    const categoryId = req.params.category_id || null;
+    const categorySlug = req.params.category_slug || null;
+
     let data = {};
     data.order = req.param('order') || 'latest';
-    data.feed = categoryId ? null : 'Everything';
+    data.feed = categorySlug ? null : 'Everything';
+    data.currentUser = req.session.user;
 
-    APIService.request('/posts?populate=[author,sharing]&sort=publishedAt%20DESC')
-      .then((posts) => data.posts = posts)
-      .then(() => APIService.request('/categories'))
+    let query = '/posts?populate=[author,sharing]&sort=publishedAt%20DESC';
+
+    APIService.request('/categories')
       .then((categories) => data.categories = categories)
       .then(() => {
         if ( data.feed === 'Everything' ) return Promise.resolve();
-        const category = data.categories.find((category) => { return category.id === categoryId });
+        const category = data.categories.find((category) => { return category.slug === categorySlug });
+        query = `/categories/${category.id}/posts?populate=[author,sharing]&sort=publishedAt%20DESC`;
         return data.feed = category.name;
       })
+      .then(() => APIService.request(query))
+      .then((posts) => data.posts = posts)
       .then(() => res.view('posts', data))
       .catch((err) => {
         console.log(err);
@@ -34,7 +39,9 @@ module.exports = {
   search: function (req, res) {
 
     const term = req.param('term') || '';
-    let data = { term: term };
+    let data = {};
+    data.term = term;
+    data.currentUser = req.session.user;
 
     APIService.request('/posts?populate=[author]&sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
@@ -49,13 +56,15 @@ module.exports = {
 
   single: function (req, res) {
 
-    const postId = req.params.id;
-    let data = {}
+    const postSlug = req.params.slug;
 
-    APIService.request(`/posts/${postId}`)
-      .then((post) => {
-        console.log(post);
-        return data.post = post;
+    let data = {};
+    data.currentUser = req.session.user;
+
+    APIService.request(`/posts?slug=${postSlug}`)
+      .then((posts) => {
+        console.log(posts[0]);
+        return data.post = posts[0];
       })
       .then(() => res.view('post', data))
       .catch((err) => {
@@ -77,10 +86,9 @@ module.exports = {
   },
 
 
+
   create: function (req, res) {
-
     let post;
-
     setupPost(req.body)
       .then((newPost) => post = newPost)
       .then(() => createTags(post.tags))
@@ -88,12 +96,17 @@ module.exports = {
         console.log("finish creating tags")
         return post.tags = tags;
       })
-      .then(() => APIService.authRequest(null, '/posts', 'post', post))
-      .then(() => {
-        console.log("finish creating post")
-        res.redirect('/')
+      .then(() => APIService.authRequest(req.session.user.authorization, '/posts', 'post', post))
+      .then((newPost) => {
+        console.log(newPost);
+        res.redirect(`/post/${newPost.slug}`)
       })
       .catch(() => res.redirect('/new'))
+  },
+  createView: function(req, res) {
+    if ( !req.session.user ) res.redirect('/login');
+    let data = { currentUser: req.session.user };
+    res.view('new', data);
   },
 
   amp: function (req, res) {

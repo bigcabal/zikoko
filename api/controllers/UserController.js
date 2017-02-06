@@ -9,15 +9,20 @@ module.exports = {
 
   posts: function (req, res) {
 
-    const userId = req.params.id;
-    let data = {}
+    const username = req.params.username;
+    let data = {};
+    data.currentUser = req.session.user;
 
-    APIService.request(`/users/${userId}?populate=[roles]`)
-      .then((user) => {
-        user.role = getHighestRole(user.roles);
-        return data.user = user;
+    console.log(username);
+
+    APIService.request(`/users?username=${username}&populate=[roles]`)
+      .then((users) => {
+        data.user = users[0];
+        data.user.role = getHighestRole(data.user.roles);
+        console.log(data.user);
+        return data.user;
       })
-      .then(() => APIService.request(`/users/${userId}/posts?sort=publishedAt%20DESC`))
+      .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
         return data.posts = posts
@@ -28,17 +33,11 @@ module.exports = {
 
   likes: function (req, res) {
 
-    const userId = req.params.id;
-    let data = {}
+    const username = req.params.username;
+    let data = {};
+    data.currentUser = req.session.user;
 
-    APIService.request(`/users/${userId}`)
-      .then((user) => {
-        console.log(user);
-        return data.user = user;
-      })
-      .then(() => {
-        res.view('user', data);
-      })
+    res.view('user', data);
 
   },
 
@@ -63,6 +62,11 @@ module.exports = {
     //   })
 
   },
+  updateProfileView: function(req, res) {
+    if ( !req.session.user ) res.redirect('/login');
+    let data = { currentUser: req.session.user };
+    res.view('me-profile', data);
+  },
 
   updatePassword: function(req, res) {
 
@@ -86,7 +90,12 @@ module.exports = {
     //   })
 
 
-  }
+  },
+  updatePasswordView: function(req, res) {
+    if ( !req.session.user ) res.redirect('/login');
+    let data = { currentUser: req.session.user };
+    res.view('me-password', data);
+  },
 
 };
 

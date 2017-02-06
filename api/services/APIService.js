@@ -52,7 +52,9 @@ module.exports = {
         port: 443,
         path: `${sails.config.globals.API.path}${path}`,
         method: method,
-        headers: config.headers
+        headers: {
+          'Authorization': auth ? `Basic ${auth}` : config.headers.Authorization
+        }
       }
       let newRequest = https.request(options, function (response) {
         let body = '';

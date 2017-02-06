@@ -45,27 +45,28 @@ module.exports.routes = {
   ***************************************************************************/
 
   'get /': 'PostsController.list',
-  'get /category/:category_id': 'PostsController.list',
+  'get /category/:category_slug': 'PostsController.list',
 
   'get /search': 'PostsController.search',
 
-  'get /new': { view: 'new' },
+  'get /new': 'PostsController.createView',
   'post /new': 'PostsController.create',
-  'get /post/:id': 'PostsController.single',
-  'get /post/:id/amp': 'PostsController.amp',
+  'get /post/:slug': 'PostsController.single',
+  'get /post/:slug/amp': 'PostsController.amp',
   'get /feed/instant-articles': 'PostsController.instant_articles',
   'post /post/likePost': 'PostsController.likePost',
 
-  'get /user/:id': 'UserController.posts',
-  'get /user/:id/likes': 'UserController.likes',
+  'get /user/:username': 'UserController.posts',
+  'get /user/:username/likes': 'UserController.likes',
 
-  'get /me/profile': { view: 'me-profile' },
+  'get /me/profile': 'UserController.updateProfileView',
   'post /me/profile': 'UserController.updateProfile',
-  'get /me/password': { view: 'me-password' },
+  'get /me/password': 'UserController.updatePasswordView',
   'post /me/password': 'UserController.updatePassword',
 
   'get /login': { view: 'sign-in' },
   'post /login': 'AuthController.login',
+  'get /logout': 'AuthController.logout',
   'get /register': { view: 'sign-up' },
   'post /register': 'AuthController.register',
   'get /reset-password': { view: 'reset-password' }
