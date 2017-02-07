@@ -96,7 +96,7 @@
 		font-size: 1.4rem;
 	}
 
-	&__file{
+	&__drag-and-drop-file{
 		width: 0.1px;
 		height: 0.1px;
 		opacity: 0;
@@ -114,7 +114,7 @@
 	}
 }
 
-.form__file:focus + .form__drag-and-drop-label{
+.form__drag-and-drop-file:focus + .form__drag-and-drop-label{
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
 }
