@@ -1,0 +1,14 @@
+<svg width="100" height="100" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>liked</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(227 246)" figma:type="canvas">
+<g id="liked" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path0_fill" transform="translate(-226 -241)" fill="#E02421" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 48.7952 90C 47.6987 90 46.7849 89.6378 45.8711 89.0946C 38.1955 84.2052 -1.3943e-06 58.4909 -1.3943e-06 30.4225C -1.3943e-06 14.1247 13.5238 -6.43349e-15 28.875 -6.43349e-15C 39.6575 -6.43349e-15 44.7746 5.07042 48.7952 9.59758C 52.633 5.07042 57.7501 -6.43349e-15 68.7153 -6.43349e-15C 84.0666 -6.43349e-15 97.5904 14.3058 97.5904 30.4225C 97.5904 58.4909 59.3949 84.2052 51.7192 89.0946C 50.8055 89.8189 49.8917 90 48.7952 90Z"/>
+</defs>
+</svg>
