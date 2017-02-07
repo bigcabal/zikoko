@@ -38,9 +38,14 @@
 		background-color: #f9f9fc;
 		text-align: center;
 		font-family: $alternate-font;
-		cursor: pointer;
+		// cursor: pointer;
 		padding: 30px;
 		border-radius: 3px;
+		transition: all .3s;
+
+		&.is-dragover{
+			background-color: #eee;
+		}
 	}
 
 	&__drag-and-drop-icon{
@@ -50,9 +55,20 @@
 		color: $color-grey-light;
 	}
 
-	&__drag-and-drop-text{
+	&__drag-and-drop-label{
 		font-size: 1.4rem;
 		color: $color-grey-mid;
+		transition: all .3s;
+		cursor: pointer;
+		display: inline-block;
+
+		strong{
+			font-weight: bold;
+		}
+
+		&:hover{
+			color: $color-purple;
+		}
 	}
 
 	&__group{
@@ -79,6 +95,29 @@
 		margin-bottom: 5px;
 		font-size: 1.4rem;
 	}
+
+	&__file{
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
 }
+
+.show-if-dnd-enabled{
+	display: none;
+ 
+	.form__drag-and-drop--has-advanced-upload &{
+		display: inline-block;
+	}
+}
+
+.form__file:focus + .form__drag-and-drop-label{
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
 
 
