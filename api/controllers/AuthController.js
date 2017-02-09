@@ -85,7 +85,27 @@ module.exports = {
       })
       .catch(() => handleError())
 
-  }
+  },
+
+
+  loginView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Login');
+    data.metaData = MetaDataService.metaData();
+    res.view('sign-in', data);
+  },
+  registerView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Register');
+    data.metaData = MetaDataService.metaData();
+    res.view('sign-up', data);
+  },
+  resetPasswordView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Reset Password');
+    data.metaData = MetaDataService.metaData();
+    res.view('reset-password', data);
+  },
 
 };
 

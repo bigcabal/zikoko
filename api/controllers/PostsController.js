@@ -15,6 +15,7 @@ module.exports = {
     data.order = req.param('order') || 'latest';
     data.feed = categorySlug ? null : 'Everything';
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle();
 
     let query = '/posts?sort=publishedAt%20DESC';
 
@@ -27,7 +28,11 @@ module.exports = {
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
-      .then((posts) => data.posts = posts)
+      .then((posts) => {
+        data.title = MetaDataService.pageTitle(data.feed);
+        data.metaData = MetaDataService.metaData(data.feed, null, null, null);
+        data.posts = posts
+      })
       .then(() => res.view('posts', data))
       .catch((err) => {
         console.log(err);
@@ -42,6 +47,8 @@ module.exports = {
     let data = {};
     data.term = term;
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle('Search Results');
+    data.metaData = MetaDataService.metaData();
 
     APIService.request('/posts?sort=publishedAt%20DESC')
       .then((posts) => data.posts = posts)
@@ -62,6 +69,8 @@ module.exports = {
     APIService.request(`/posts?slug=${postSlug}`)
       .then((post) => {
         console.log(post);
+        data.title = MetaDataService.pageTitle(post.title);
+        data.metaData = MetaDataService.metaData(post.title, post.excerpt, post.featured_image_url, null);
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))
@@ -116,6 +125,8 @@ module.exports = {
   createView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Upload');
+    data.metaData = MetaDataService.metaData();
     res.view('new', data);
   },
 

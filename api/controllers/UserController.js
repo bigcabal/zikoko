@@ -12,19 +12,19 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-
-    console.log(username);
+    data.title = MetaDataService.pageTitle(`@${username}`);
 
     APIService.request(`/users?username=${username}`)
       .then((users) => {
         data.user = users[0];
-        data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
         return data.user;
       })
       .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
+        data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.metaData = MetaDataService.metaData(data.user.username, null, data.user.imageUrl || data.user.gravatarUrl, null);
         return data.posts = posts
       })
       .then(() =>  res.view('user', data));
@@ -36,6 +36,7 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle(`@${username}`);
 
     res.view('user', data);
 
@@ -43,12 +44,16 @@ module.exports = {
 
   updateProfile: function(req, res) {
 
+    console.log("===================")
+
     const profile = {
       username: req.body.username,
       email: req.body.email,
       first_name: req.body.first_name || '',
       last_name: req.body.last_name || ''
     };
+
+    console.log(profile);
 
     const path = `/users/${req.session.user.id}`;
     APIService.authRequest(req.session.user.authorization, path, 'PUT', profile)
@@ -68,6 +73,8 @@ module.exports = {
   updateProfileView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Edit Profile');
+    data.metaData = MetaDataService.metaData();
     res.view('me-profile', data);
   },
 
@@ -97,6 +104,8 @@ module.exports = {
   updatePasswordView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Change Password');
+    data.metaData = MetaDataService.metaData();
     res.view('me-password', data);
   },
 
