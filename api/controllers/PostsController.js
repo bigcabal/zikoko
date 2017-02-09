@@ -89,20 +89,40 @@ module.exports = {
   create: function (req, res) {
     if ( !req.session.user ) res.redirect('/login');
 
-    let post;
-    setupPost(req.body)
-      .then((newPost) => post = newPost)
-      .then(() => createTags(post.tags))
-      .then((tags) => {
-        console.log("finish creating tags")
-        return post.tags = tags;
-      })
-      .then(() => APIService.authRequest(req.session.user.authorization, '/posts', 'post', post))
-      .then((newPost) => {
-        console.log(newPost);
-        res.redirect(`/post/${newPost.slug}`)
-      })
-      .catch(() => res.redirect('/new'))
+    console.log(req.body.postImage);
+
+    req.file('postImage').upload(function(err, uploadedFiles) {
+      if (err) {
+        return res.negotiate(err);
+      }
+
+      // If no files were uploaded, respond with an error.
+      if (uploadedFiles.length === 0){
+        return res.badRequest('No file was uploaded');
+      }
+
+      console.log(" success----")
+      console.log(uploadedFiles);
+      res.redirect('/new')
+
+    })
+
+
+
+    // let post;
+    // setupPost(req.body)
+    //   .then((newPost) => post = newPost)
+    //   .then(() => createTags(post.tags))
+    //   .then((tags) => {
+    //     console.log("finish creating tags")
+    //     return post.tags = tags;
+    //   })
+    //   .then(() => APIService.authRequest(req.session.user.authorization, '/posts', 'post', post))
+    //   .then((newPost) => {
+    //     console.log(newPost);
+    //     res.redirect(`/post/${newPost.slug}`)
+    //   })
+    //   .catch(() => res.redirect('/new'))
   },
   createView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
