@@ -25,11 +25,11 @@ module.exports = {
         if ( data.feed === 'Everything' ) return Promise.resolve();
         const category = data.categories.find((category) => { return category.slug === categorySlug });
         query = `/categories/${category.id}/posts?sort=publishedAt%20DESC`;
+        data.title = MetaDataService.pageTitle(category.name);
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
       .then((posts) => {
-        data.title = MetaDataService.pageTitle(data.feed);
         data.metaData = MetaDataService.metaData(data.feed, null, null, null);
         data.posts = posts
       })
