@@ -16,6 +16,7 @@ module.exports = {
     data.feed = categorySlug ? null : 'Everything';
     data.currentUser = req.session.user;
     data.title = MetaDataService.pageTitle();
+    data.metaData = MetaDataService.metaData();
 
     let query = '/posts?sort=publishedAt%20DESC';
 
@@ -26,13 +27,11 @@ module.exports = {
         const category = data.categories.find((category) => { return category.slug === categorySlug });
         query = `/categories/${category.id}/posts?sort=publishedAt%20DESC`;
         data.title = MetaDataService.pageTitle(category.name);
+        data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
-      .then((posts) => {
-        data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
-        data.posts = posts
-      })
+      .then((posts) => data.posts = posts)
       .then(() => res.view('posts', data))
       .catch((err) => {
         console.log(err);
@@ -150,6 +149,10 @@ module.exports = {
 
 function createTags(tagList) {
 
+  console.log("createTags()");
+
+  if (!tagList || tagList == '') return Promise.resolve([]);
+
   const tags = tagList.split(' ');
   const final = [];
 
@@ -202,6 +205,8 @@ function setupPost(postDetails, imageUrl) {
   newPost.tags = tags;
 
   newPost.status = 'published';
+
+  console.log("new post setup")
 
   return Promise.resolve(newPost);
 }
