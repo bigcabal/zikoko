@@ -24,8 +24,7 @@ module.exports = {
         res.redirect('/new');
       })
       .catch(() => {
-        console.log("errrorrrr");
-        res.redirect('/login');
+        res.redirect('/login?error=true');
       })
 
   },

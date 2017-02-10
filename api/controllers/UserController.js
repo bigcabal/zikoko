@@ -59,8 +59,6 @@ module.exports = {
 
   updateProfile: function(req, res) {
 
-    console.log("===================")
-
     const profile = {
       username: req.body.username,
       email: req.body.email,
@@ -102,23 +100,16 @@ module.exports = {
   updatePassword: function(req, res) {
 
     const details = {
-      oldPassword: req.body.old_password,
       newPassword: req.body.password,
       confirmation: req.body.password_confirmation
     }
 
-    console.log(details);
-    res.redirect('/me/password')
-
-    // const path = `/users/changePassword/:id`;
-    // APIService.authRequest(null, path, 'put', details)
-    //   .then((updatedUser) => {
-    //     console.log(updatedUser);
-    //     res.redirect('/me/password')
-    //   })
-    //   .catch(() => {
-    //     console.log("error")
-    //   })
+    const path = `/users/changePassword/${req.session.user.id}`;
+    APIService.authRequest(req.session.user.authorization, path, 'PUT', details)
+      .then(() => res.redirect('/logout'))
+      .catch(() => {
+        res.redirect('/me/password?error=true')
+      })
 
 
   },
