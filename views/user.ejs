@@ -14,7 +14,7 @@
           <% } } %>
         </div>
 
-        <img src="<%= user.imageUrl || user.gravatarUrl %>">
+        <%- ImageService.getDisplayImage(user.imageUrl || user.gravatarUrl, 'profile') %>
       </div>
 
       <div class="profile__tabs">

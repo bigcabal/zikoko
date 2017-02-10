@@ -29,12 +29,13 @@ function getImageClass(placement) {
       return 'post__item-img';
     case 'excerpt':
       return 'post-excerpt__img';
+    case 'profile':
+      return 'profile__img';
     default:
       return 'post__item-img';
   }
   ;
 }
-
 
 function getOptimizedUrl(url, placement) {
 
@@ -45,6 +46,9 @@ function getOptimizedUrl(url, placement) {
       break;
     case 'excerpt':
       transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      break;
+    case 'profile':
+      transformation = 'w_100,f_auto,fl_lossy,q_auto/';
       break;
     default:
       transformation = 'w_600,f_auto,fl_lossy,q_auto/';

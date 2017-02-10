@@ -68,11 +68,17 @@ module.exports = {
       last_name: req.body.last_name || ''
     };
 
-    console.log(profile);
-
     const path = `/users/${req.session.user.id}`;
-    APIService.authRequest(req.session.user.authorization, path, 'PUT', profile)
+
+    checkIfFileUploaded( req.file('profileImage') )
+      .then((fileWasUploaded) => {
+        if (!fileWasUploaded) return Promise.resolve();
+        return CloudinaryService.upload( req.file('profileImage') )
+          .then((result) => { return profile.imageUrl = result.secure_url })
+      })
+      .then(() => APIService.authRequest(req.session.user.authorization, path, 'PUT', profile))
       .then((updatedUser) => {
+        console.log(updatedUser);
         const authorization = req.session.user.authorization;
         req.session.user = updatedUser;
         req.session.user.authorization = authorization;
@@ -126,4 +132,15 @@ module.exports = {
 
 };
 
+
+function checkIfFileUploaded( file ) {
+  return new Promise((resolve) => {
+    file.upload(function (err, uploadedFiles) {
+      if (err) resolve(false)
+      if (!uploadedFiles) resolve(false)
+      if (uploadedFiles.length === 0) resolve(false)
+      resolve(true);
+    });
+  })
+}
 
