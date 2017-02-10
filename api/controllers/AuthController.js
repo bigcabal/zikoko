@@ -36,9 +36,27 @@ module.exports = {
 
   register: function(req, res) {
 
+    function getUsername(user) {
+      return new Promise((resolve, reject) => {
+        const data = { username: user.username };
+        APIService.request('/users/checkUsername', 'POST', data)
+          .then((response) => {
+            console.log(response);
+            if ( response.available ) {
+              resolve(user)
+            } else {
+              user.username = user.username + Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+              resolve(user);
+            }
+
+          })
+      })
+
+    }
+
     function setupUser(roles) {
       const registeredRole = roles.find((role) => { return role.name === 'registered' });
-      const username = req.body.email.split('@')[0] + Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+      const username = req.body.email.split('@')[0];
       return Promise.resolve({
         email: req.body.email,
         password: req.body.password,
@@ -77,6 +95,7 @@ module.exports = {
 
     APIService.request('/roles')
       .then((roles) => setupUser(roles))
+      .then((newUser) => getUsername(newUser))
       .then((newUser) => AuthService.createUser(newUser))
       .then((registeredUser) => {
         if ( !registeredUser ) return Promise.reject();

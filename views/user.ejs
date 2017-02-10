@@ -14,7 +14,12 @@
           <% } } %>
         </div>
 
-        <%- ImageService.getDisplayImage(user.imageUrl || user.gravatarUrl, 'profile') %>
+        <% if (user.imageUrl) { %>
+        <%- ImageService.getDisplayImage(user.imageUrl, 'profile') %>
+        <% } else { %>
+        <img src="<%= user.gravatarUrl %>" alt="">
+        <% } %>
+        
       </div>
 
       <div class="profile__tabs">

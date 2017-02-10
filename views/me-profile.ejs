@@ -14,7 +14,11 @@
 
         <div class="form__group u-flex">
 
-          <%- ImageService.getDisplayImage(currentUser.imageUrl || currentUser.gravatarUrl, 'profile') %>
+          <% if (currentUser.imageUrl) { %>
+          <%- ImageService.getDisplayImage(currentUser.imageUrl, 'profile') %>
+          <% } else { %>
+          <img src="<%= currentUser.gravatarUrl %>" alt="">
+          <% } %>
 
           <div>
             <input type="file" name="profileImage" id="profileImage">
