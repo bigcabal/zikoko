@@ -18,10 +18,10 @@
       </div>
 
       <div class="profile__tabs">
-        <a href="/user/<%= user.username %>" class="profile__tab profile__tab--active">
+        <a href="/user/<%= user.username %>" class="profile__tab <% if (activeTab === 'posts') { %>profile__tab--active<% }%>">
           <div class="profile__stat-number"><%= posts.length %></div> Posts
         </a>
-        <a href="/user/<%= user.username %>/likes" class="profile__tab">
+        <a href="/user/<%= user.username %>/likes" class="profile__tab <% if (activeTab === 'likes') { %>profile__tab--active<% }%>">
           <div class="profile__stat-number">2.4K</div> Likes
         </a>
       </div>

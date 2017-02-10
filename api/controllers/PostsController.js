@@ -30,7 +30,7 @@ module.exports = {
       })
       .then(() => APIService.request(query))
       .then((posts) => {
-        data.metaData = MetaDataService.metaData(data.feed, null, null, null);
+        data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
         data.posts = posts
       })
       .then(() => res.view('posts', data))
@@ -43,18 +43,25 @@ module.exports = {
 
   search: function (req, res) {
 
-    const term = req.param('term') || '';
+    const term = req.param('term') || null;
+    if ( !term ) res.redirect('/');
+
     let data = {};
     data.term = term;
     data.currentUser = req.session.user;
-    data.title = MetaDataService.pageTitle('Search Results');
-    data.metaData = MetaDataService.metaData();
+    data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
+    data.metaData = MetaDataService.metaData(`Search Results for ${term}`, null, null, null);
 
-    APIService.request('/posts?sort=publishedAt%20DESC')
-      .then((posts) => data.posts = posts)
+    const query = `/posts?where={"title":{"contains":"${term}"}}`;
+
+    APIService.request(query)
+      .then((posts) => data.posts = [posts] /* @todo Error here, returning a single post */)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
-      .then(() => res.view('search', data))
+      .then(() => {
+        console.log(data.posts);
+        res.view('search', data)
+      })
       .catch(() => res.redirect('/'))
 
   },
@@ -70,7 +77,7 @@ module.exports = {
       .then((post) => {
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
-        data.metaData = MetaDataService.metaData(post.title, post.excerpt, post.featured_image_url, null);
+        data.metaData = MetaDataService.metaData(post.sharing.title, post.sharing.subtitle, post.sharing.imageUrl, `/post/${post.slug}`);
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))

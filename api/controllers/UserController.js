@@ -13,6 +13,7 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
     data.title = MetaDataService.pageTitle(`@${username}`);
+    data.activeTab = 'posts';
 
     APIService.request(`/users?username=${username}`)
       .then((users) => {
@@ -24,7 +25,7 @@ module.exports = {
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
         data.user.role = RolesService.getHighestRole(data.user.roles);
-        data.metaData = MetaDataService.metaData(data.user.username, null, data.user.imageUrl || data.user.gravatarUrl, null);
+        data.metaData = MetaDataService.metaData(data.user.username, `Posts created by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}`);
         return data.posts = posts
       })
       .then(() =>  res.view('user', data));
@@ -37,8 +38,22 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
     data.title = MetaDataService.pageTitle(`@${username}`);
+    data.activeTab = 'likes';
 
-    res.view('user', data);
+    APIService.request(`/users?username=${username}`)
+      .then((users) => {
+        data.user = users[0];
+        console.log(data.user);
+        return data.user;
+      })
+      .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
+      .then((posts) => {
+        posts.forEach((post) => { post.author = data.user });
+        data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.metaData = MetaDataService.metaData(data.user.username, `Posts liked by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}/likes`);
+        return data.posts = posts
+      })
+      .then(() =>  res.view('user', data));
 
   },
 
