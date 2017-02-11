@@ -89,20 +89,29 @@ module.exports = {
   create: function (req, res) {
     if ( !req.session.user ) res.redirect('/login');
 
+    function handleError() {
+      res.redirect('/new?error')
+    }
+
+    function handleSuccess(newPost) {
+      console.log(newPost);
+      res.redirect(`/post/${newPost.slug}`)
+    }
+
     let post;
-    setupPost(req.body)
+    CloudinaryService.upload( req.file('postImage') )
+      .then((result) => {
+        console.log(result);
+        return result.secure_url;
+      })
+      .then((imageUrl) => setupPost(req.body, imageUrl))
       .then((newPost) => post = newPost)
       .then(() => createTags(post.tags))
-      .then((tags) => {
-        console.log("finish creating tags")
-        return post.tags = tags;
-      })
+      .then((tags) => post.tags = tags)
       .then(() => APIService.authRequest(req.session.user.authorization, '/posts', 'post', post))
-      .then((newPost) => {
-        console.log(newPost);
-        res.redirect(`/post/${newPost.slug}`)
-      })
-      .catch(() => res.redirect('/new'))
+      .then((newPost) => handleSuccess(newPost))
+      .catch(() => handleError())
+
   },
   createView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
@@ -143,9 +152,9 @@ function createTags(tagList) {
 }
 
 
-function setupPost(postDetails) {
+function setupPost(postDetails, imageUrl) {
 
-  const image = postDetails.image || 'https://res.cloudinary.com/big-cabal/image/upload/w_800,f_auto,fl_lossy,q_auto/v1476207568/running_ra4qwq.gif';
+  const image = imageUrl;
   const description = postDetails.description;
   const tags = postDetails.tags;
 

@@ -11,7 +11,7 @@
     </h3>
 
     <% if (block.embed) { %>
-    <%- partial('./image.ejs', { url: block.embed.url, placement: 'post' }) %>
+    <%- partial('./mediaembed-'+ block.embed.media_type +'.ejs', { mediaembed: block.embed }) %>
     <% } %>
 
     <% if (block.additional_text) { %>

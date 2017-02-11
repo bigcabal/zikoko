@@ -22,7 +22,7 @@
     const imageClass = getImageClass(placement);
 
     if (url.indexOf('.gif') === -1) {
-      return `<img class="${imageClass}" src="${url}" alt="">`;
+      return `<img class="${imageClass}" src="${ url }" alt="">`;
     }
 
     const base = url.split('.gif')[0];
@@ -33,12 +33,31 @@
             </video>`;
   }
 
-  function getOptimizedUrl(url) {
-    // @todo
-    return url;
+  function getOptimizedUrl(url, placement) {
+
+    let transformation;
+    switch(placement) {
+      case 'post':
+        transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+        break;
+      case 'excerpt':
+        transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+        break;
+      default:
+        transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+        break;
+    };
+
+    const string = 'upload/';
+    const index = url.indexOf(string) + string.length;
+    const optimizedUrl = url.slice(0, index) + transformation + url.slice(index);
+
+    return optimizedUrl;
   }
 
-  url = getOptimizedUrl(url);
+
+
+  url = getOptimizedUrl(url, placement);
   let result = getDisplayImage(url);
 %>
 <%- result %>
