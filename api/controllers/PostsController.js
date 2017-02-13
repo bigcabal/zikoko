@@ -73,16 +73,22 @@ module.exports = {
     data.currentUser = req.session.user;
 
     APIService.request(`/posts?slug=${postSlug}`)
-      .then((post) => {
+      .then((posts) => {
+        const post = posts[0]; // @todo bug: Why is the an array now?
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
+        console.log(post.sharing);
         data.metaData = MetaDataService.metaData(post.sharing.title, post.sharing.subtitle, post.sharing.imageUrl, `/post/${post.slug}`);
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))
       .then((users) => { return data.post.author.role = RolesService.getHighestRole(users[0].roles) })
       .then(() => res.view('post', data))
-      .catch(() => res.redirect('/'))
+      .catch((err) => {
+        "use strict";
+        console.log("ERR", err);
+        res.redirect('/')
+      })
 
 
   },
