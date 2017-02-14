@@ -17,7 +17,7 @@
         <% if (user.imageUrl) { %>
         <%- ImageService.getDisplayImage(user.imageUrl, 'profile') %>
         <% } else { %>
-        <img src="<%= user.gravatarUrl %>" alt="">
+        <img src="<%= user.gravatarUrl %>" alt="" class="profile__img">
         <% } %>
 
       </div>

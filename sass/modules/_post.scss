@@ -23,8 +23,7 @@
 
 	&__author{
 		margin-bottom: 15px;
-		padding-bottom: 30px;
-		border-bottom: 1px solid #eaeaea;
+		// padding-bottom: 30px;
 	}
 
 	&__author-img{
@@ -70,8 +69,14 @@
 		font-family: $alternate-font;
 	}
 
+	&__divider{
+		margin-top: 30px;
+		border-bottom: 1px solid #eaeaea;
+	}
+
 	&__items{
 		// margin-top: 60px;
+		margin-bottom: 60px;
 	}
 
 	&__item{
@@ -105,15 +110,9 @@
 	}
 
 	&__actions{
-		position: absolute;
-		width: 100%;
-		left: 0;
-		bottom: 0;
 		display: flex;
 		justify-content: space-between;
-		padding: 20px 30px;
-
-		border-top: 1px solid #ddd;
+		align-items: center;
 	}
 
 	&-tags{
@@ -153,6 +152,7 @@
 		cursor: pointer;
 		transition: color .3s;
 		font-size: 1.6rem;
+		margin-right: 20px;
 
 		&:hover{
 			color: $color-black;
@@ -173,6 +173,10 @@
 
 		&--liked{
 			background-image: url('../images/icons/liked.svg');
+		}
+
+		&--comment{
+			background-image: url('../images/icons/comment.svg');
 		}
 	}
 
@@ -222,7 +226,7 @@
 }
 
 .comments{
-	margin: 90px 0 90px;
+	margin: 60px 0 60px;
 	padding: 20px;
 	height: 300px;
 	font-size: 1.4rem;
