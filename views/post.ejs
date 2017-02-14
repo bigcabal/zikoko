@@ -15,13 +15,54 @@
       </div>
     </article>
 
+    <div class="post-tags">
+        <h2 class="post-tags__title">Tags</h2>
+        <ul>
+            <li class="post-tag"><a href="#">#lol</a></li>
+            <li class="post-tag"><a href="#">#omg</a></li>
+            <li class="post-tag"><a href="#">#funny</a></li>
+        </ul>
+    </div>
+    
+    <div class="post__footer u-flex u-space-between">
+        
+        <span class="post__action">
+            <span class="post__action-icon post__action-icon--like"></span> Like
+        </span>   
+        
+        <div class="post__share">
+            <span class="post__share-item post__share-item--facebook">
+                                <span class="sr-only">Facebook</span>
+            <i class="ion-social-facebook"></i>
+            </span>
+            <span class="post__share-item post__share-item--twitter">
+                                <span class="sr-only">Twitter</span>
+            <i class="ion-social-twitter"></i>
+            </span>
+            <span class="post__share-item">
+                                <span class="sr-only">Email</span>
+            <i class="ion-email"></i>
+            </span>
+            <span class="post__share-item post__share-item--pinterest">
+                                <span class="sr-only">Pinterest</span>
+            <i class="ion-social-pinterest"></i>
+            </span>
+        </div>
+    </div>
+
     <!-- @todo Comments -->
-    <%- partial('./post/comments.ejs') %>
+    <!-- <//%- partial('./post/comments.ejs') %> -->
 
-    <!-- @todo Next Post? -->
-    <p>Next Post</p>
-    <br><br><br>
+    <div class="comments">
+        Comments
+    </div>
 
+    <div class="u-flex u-space-between">
+        <a href="#" class="button button--md button--icon-right button--full-width">
+            <span class="button__text">Next Post</span>
+            <span class="button__icon"><i class="ion-ios-arrow-right"></i></span>
+        </a>
+    </div>
   </div>
   <%- partial('./partials/sidebar.ejs') %>
 </div>
