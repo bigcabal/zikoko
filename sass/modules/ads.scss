@@ -1,0 +1,17 @@
+.ad__content{
+
+	background-color: orange;
+	border-radius: 3px;
+
+	.ad--banner &{
+		margin: 0 auto 30px;
+		width: 728px;
+		height: 90px;
+		max-width: 100%;
+	}
+
+	.ad--sidebar &{
+		height: 250px;
+		width: 300px;
+	}	
+}

@@ -32,45 +32,6 @@
 		}
 	}
 
-	&__drag-and-drop{
-		height: 250px;
-		border: 1px solid $color-grey-light;
-		background-color: #f9f9fc;
-		text-align: center;
-		font-family: $alternate-font;
-		// cursor: pointer;
-		padding: 30px;
-		border-radius: 3px;
-		transition: all .3s;
-
-		&.is-dragover{
-			background-color: #eee;
-		}
-	}
-
-	&__drag-and-drop-icon{
-		font-size: 8rem;
-		margin-top: 30px;
-		margin-bottom: 15px;
-		color: $color-grey-light;
-	}
-
-	&__drag-and-drop-label{
-		font-size: 1.4rem;
-		color: $color-grey-mid;
-		transition: all .3s;
-		cursor: pointer;
-		display: inline-block;
-
-		strong{
-			font-weight: bold;
-		}
-
-		&:hover{
-			color: $color-purple;
-		}
-	}
-
 	&__group{
 		margin-bottom: 30px;
 
@@ -95,8 +56,49 @@
 		margin-bottom: 5px;
 		font-size: 1.4rem;
 	}
+}
 
-	&__drag-and-drop-file{
+.form__image{
+	&-field{
+		height: 250px;
+		background-color: #f9f9fc;
+		border-radius: 3px;
+		border: 1px solid $color-grey-light;
+		position: relative;
+		width: 100%;
+
+		overflow: hidden;
+		
+	}
+	&-file-and-label, &-prompt, &-uploaded{
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+	}
+
+	&-uploaded{
+		object-fit: cover;
+		object-position: center;
+	}
+
+	&-prompt{
+		text-align: center;
+		padding-top: 45px;
+		&-icon{
+			font-size: 8rem;
+			color: $color-grey-light;
+		}
+		&-text{
+			color: $color-grey-mid;
+			font-weight: bold;
+			margin-top: 10px;
+			display: inline-block;
+		}
+	}
+
+	&-file{
 		width: 0.1px;
 		height: 0.1px;
 		opacity: 0;
@@ -104,20 +106,21 @@
 		position: absolute;
 		z-index: -1;
 	}
+
+	&-label{
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: block;
+		cursor: pointer;
+		z-index: 1;
+	}	
 }
 
-.show-if-dnd-enabled{
-	display: none;
- 
-	.form__drag-and-drop--has-advanced-upload &{
-		display: inline-block;
-	}
+.form__image-file:focus + .form__image-label{
+	// outline: 1px dotted #000;
+	// outline: -webkit-focus-ring-color auto 5px;
+	border: 1px solid $color-purple;
 }
-
-.form__drag-and-drop-file:focus + .form__drag-and-drop-label{
-	outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
-}
-
-
 

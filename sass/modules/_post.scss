@@ -5,6 +5,10 @@
 	padding-left: 0;
 	margin-bottom: 30px;
 
+	@include screen(med-small){
+		padding: 20px;
+	}
+
 	@include screen(tiny){
 		padding: 20px 15px;
 	}
@@ -67,11 +71,11 @@
 	}
 
 	&__items{
-		margin-top: 60px;
+		// margin-top: 60px;
 	}
 
 	&__item{
-		margin-bottom: 60px;
+		margin-top: 60px;
 	}
 
 	&__item-title{
@@ -111,6 +115,120 @@
 
 		border-top: 1px solid #ddd;
 	}
+
+	&-tags{
+		margin: 20px 0 20px;
+	}
+
+	&-tags__title{
+		font-size: 1.4rem;
+		color: $color-grey-mid;
+		margin-bottom: 15px;
+		font-family: $alternate-font;
+	}
+
+	&-tag{
+		padding: 6px 8px 3px;
+		color: $color-purple;
+		border: 1px solid $color-purple;
+		
+		border-radius: 3px;
+		font-size: 1.4rem;
+		display: inline-flex;
+		margin-right: 3px;
+		justify-content: center;
+		align-items: center;
+		transition: all .3s;
+
+		&:hover{
+			background-color: $color-purple;
+			color: white;
+		}
+	}
+
+	&__action{
+		display: inline-flex; 
+		align-items: center;
+		color: $color-grey-mid;
+		cursor: pointer;
+		transition: color .3s;
+		font-size: 1.6rem;
+
+		&:hover{
+			color: $color-black;
+		}
+	}
+
+	&__action-icon{
+		height: 32px;
+		width: 32px;
+		margin-right: 10px;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		&--like{
+			background-image: url('../images/icons/like.svg');
+		}
+
+		&--liked{
+			background-image: url('../images/icons/liked.svg');
+		}
+	}
+
+	&__share-item{
+		display: inline-flex;
+		margin-left: 3px;
+		height: 40px;
+		width: 40px;
+		border-radius: 3px;
+		font-size: 1.8rem;
+		justify-content: center;
+		align-items: center;
+		background-color: $color-grey-mid;
+		color: white;
+
+		&--twitter{
+			background-color: $color-twitter-blue;
+			border-color: $color-twitter-blue;
+		}
+
+		&--facebook{
+			background-color: $color-facebook-blue;
+			border-color: $color-facebook-blue;
+		}
+
+		&--pinterest{
+			background-color: $color-pinterest-red;
+			border-color: $color-pinterest-red;
+		}
+
+		&--google{
+			background-color: $color-google-red;
+			border-color: $color-google-red;
+		}
+	}
+
+	&__footer{
+		color: $color-grey;
+		font-size: 1.4rem;
+		flex-flow: wrap;
+		font-family: $alternate-font;
+		align-items: center;
+		padding-top: 20px;
+		margin-top: 30px;
+		border-top: 1px solid #ddd;
+	}
+}
+
+.comments{
+	margin: 90px 0 90px;
+	padding: 20px;
+	height: 300px;
+	font-size: 1.4rem;
+	border-radius: 3px;
+	font-family: $alternate-font;
+	background-color: #ddd;
 }
 
 

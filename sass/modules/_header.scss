@@ -92,7 +92,9 @@
         opacity: 0;
         pointer-events: none;
         z-index: 3;
-        @include transition(.3s);
+        transition: all .3s;
+
+
         .zkk-nav__dropdown--opened & {
             opacity: 1;
             pointer-events: auto;
