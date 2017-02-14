@@ -2,32 +2,22 @@
   /*  SHARE BUTTONS
   *  =======================
   */
-
-  const url = encodeURIComponent( `https://zikoko.com/post/${post.slug}` );
-  const title = encodeURIComponent( post.sharing.title );
-  const subtitle = encodeURIComponent( post.sharing.subtitle );
-  const image = encodeURIComponent( post.sharing.imageUrl );
-
-  const share_facebook = `http://www.facebook.com/sharer/sharer.php?u=${url}`;
-  const share_twitter = `https://twitter.com/intent/tweet/?text=${title}&url=${url}&via=zikokomag`;
-  const share_email = `mailto:?subject=${title}&body=${url}`;
-  const share_pinterest = `https://www.pinterest.com/pin/create/button/?url=${url}&description=${title}&media=${image}`;
 %>
 
 <div class="post-excerpt__share">
-    <a href="<%= share_facebook %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--facebook">
+    <a href="<%= ShareService.getShareUrl(post, 'facebook') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--facebook">
       <span class="sr-only">Facebook</span>
       <i class="ion-social-facebook"></i>
     </a>
-    <a href="<%= share_twitter %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--twitter">
+    <a href="<%= ShareService.getShareUrl(post, 'twitter') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--twitter">
       <span class="sr-only">Twitter</span>
       <i class="ion-social-twitter"></i>
     </a>
-    <a href="<%= share_email %>" class="post-excerpt__share-item">
+    <a href="<%= ShareService.getShareUrl(post, 'email') %>" class="post-excerpt__share-item">
       <span class="sr-only">Email</span>
       <i class="ion-email"></i>
     </a>
-    <a href="<%= share_pinterest %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--pinterest">
+    <a href="<%= ShareService.getShareUrl(post, 'pinterest') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--pinterest">
       <span class="sr-only">Pinterest</span>
       <i class="ion-social-pinterest"></i>
     </a>
