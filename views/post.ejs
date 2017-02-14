@@ -12,12 +12,12 @@
 
       <% if (post.tags) { %>
       <div class="post-tags">
-          <h2 class="post-tags__title">Tags</h2>
-          <ul>
-              <% post.tags.forEach(function(tag) { %>
-              <li class="post-tag"><a href="/search?term=<%= tag.name %>">#<%= tag.name %></a></li>
-              <% }) %>
-          </ul>
+        <h2 class="post-tags__title">Tags</h2>
+        <ul>
+          <% post.tags.forEach(function(tag) { %>
+          <li class="post-tag"><a href="/search?term=<%= tag.name %>">#<%= tag.name %></a></li>
+          <% }) %>
+        </ul>
       </div>
       <% } %>
 
@@ -52,7 +52,7 @@
       <%- partial('./post/comments.ejs') %>
 
       <div class="u-flex u-space-between">
-          <a href="#" class="button button--md button--icon-right button--full-width">
+          <a href="/" class="button button--md button--icon-right button--full-width">
               <span class="button__text">Next Post</span>
               <span class="button__icon"><i class="ion-ios-arrow-right"></i></span>
           </a>
