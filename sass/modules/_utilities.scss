@@ -2,6 +2,10 @@
 	display: flex;
 }
 
+.u-row-wrap{
+	flex-flow: row wrap;
+}
+
 .u-inline-block{
 	display: inline-block;
 }
@@ -16,4 +20,8 @@
 
 .u-vertical-align{
 	align-items: center;
+}
+
+.u-clear{
+	clear: both;
 }

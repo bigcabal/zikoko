@@ -7,8 +7,9 @@
 
     <% if (includeFeedFilter) { %>
     <div class="feed-filter">
-      <a href="#" class="feed-filter__dropdown">
-        <%= feed %>
+      <div class="feed-filter__dropdown">
+        
+        <button class="button--clear feed-filter__dropdown-toggle"><%= feed %></button>
         <span class="feed-filter__caret-down"></span>
         <ul class="feed-filter__dropdown-list">
           <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
@@ -16,7 +17,7 @@
           <li class="feed-filter__dropdown-item"><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
           <% }) %>
         </ul>
-      </a>
+      </div>
       <%/* <div class="feed-filter__tabs u-inline-block">
         <a href="#" class="feed-filter__tab feed-filter__tab--active">Hot</a>
         <a href="#" class="feed-filter__tab">Latest</a>
@@ -73,8 +74,8 @@
   <% if (includeFeedFilter) { %>
   <div class="feed-filter__divider"></div>
   <div class="feed-filter feed-filter--mobile">
-    <a href="#" class="feed-filter__dropdown">
-      <%= feed %>
+    <div class="feed-filter__dropdown">
+      <button class="button--clear feed-filter__dropdown-toggle"><%= feed %></button>
       <span class="feed-filter__caret-down"></span>
       <ul class="feed-filter__dropdown-list">
         <li class="feed-filter__dropdown-item"><a href="/">Everything</a></li>
@@ -82,7 +83,7 @@
         <li class="feed-filter__dropdown-item"><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
         <% }) %>
       </ul>
-    </a>
+    </div>
     <% /*<div class="feed-filter__tabs u-inline-block">
       <a href="#" class="feed-filter__tab feed-filter__tab--active">Hot</a>
       <a href="#" class="feed-filter__tab">Latest</a>
