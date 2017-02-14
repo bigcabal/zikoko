@@ -24,8 +24,7 @@ module.exports = {
         res.redirect('/new');
       })
       .catch(() => {
-        console.log("errrorrrr");
-        res.redirect('/login');
+        res.redirect('/login?error=true');
       })
 
   },
@@ -37,9 +36,27 @@ module.exports = {
 
   register: function(req, res) {
 
+    function getUsername(user) {
+      return new Promise((resolve, reject) => {
+        const data = { username: user.username };
+        APIService.request('/users/checkUsername', 'POST', data)
+          .then((response) => {
+            console.log(response);
+            if ( response.available ) {
+              resolve(user)
+            } else {
+              user.username = user.username + Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+              resolve(user);
+            }
+
+          })
+      })
+
+    }
+
     function setupUser(roles) {
       const registeredRole = roles.find((role) => { return role.name === 'registered' });
-      const username = req.body.email.split('@')[0] + Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
+      const username = req.body.email.split('@')[0];
       return Promise.resolve({
         email: req.body.email,
         password: req.body.password,
@@ -78,6 +95,7 @@ module.exports = {
 
     APIService.request('/roles')
       .then((roles) => setupUser(roles))
+      .then((newUser) => getUsername(newUser))
       .then((newUser) => AuthService.createUser(newUser))
       .then((registeredUser) => {
         if ( !registeredUser ) return Promise.reject();
@@ -85,7 +103,27 @@ module.exports = {
       })
       .catch(() => handleError())
 
-  }
+  },
+
+
+  loginView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Login');
+    data.metaData = MetaDataService.metaData();
+    res.view('sign-in', data);
+  },
+  registerView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Register');
+    data.metaData = MetaDataService.metaData();
+    res.view('sign-up', data);
+  },
+  resetPasswordView: function(req, res) {
+    let data = {};
+    data.title = MetaDataService.pageTitle('Reset Password');
+    data.metaData = MetaDataService.metaData();
+    res.view('reset-password', data);
+  },
 
 };
 

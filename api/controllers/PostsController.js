@@ -15,6 +15,8 @@ module.exports = {
     data.order = req.param('order') || 'latest';
     data.feed = categorySlug ? null : 'Everything';
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle();
+    data.metaData = MetaDataService.metaData();
 
     let query = '/posts?sort=publishedAt%20DESC';
 
@@ -24,6 +26,8 @@ module.exports = {
         if ( data.feed === 'Everything' ) return Promise.resolve();
         const category = data.categories.find((category) => { return category.slug === categorySlug });
         query = `/categories/${category.id}/posts?sort=publishedAt%20DESC`;
+        data.title = MetaDataService.pageTitle(category.name);
+        data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
@@ -38,16 +42,25 @@ module.exports = {
 
   search: function (req, res) {
 
-    const term = req.param('term') || '';
+    const term = req.param('term') || null;
+    if ( !term ) res.redirect('/');
+
     let data = {};
     data.term = term;
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
+    data.metaData = MetaDataService.metaData(`Search Results for ${term}`, null, null, null);
 
-    APIService.request('/posts?sort=publishedAt%20DESC')
-      .then((posts) => data.posts = posts)
+    const query = `/posts?where={"title":{"contains":"${term}"}}`;
+
+    APIService.request(query)
+      .then((posts) => data.posts = [posts] /* @todo Error here, returning a single post */)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
-      .then(() => res.view('search', data))
+      .then(() => {
+        console.log(data.posts);
+        res.view('search', data)
+      })
       .catch(() => res.redirect('/'))
 
   },
@@ -60,14 +73,22 @@ module.exports = {
     data.currentUser = req.session.user;
 
     APIService.request(`/posts?slug=${postSlug}`)
-      .then((post) => {
+      .then((posts) => {
+        const post = posts[0]; // @todo bug: Why is the an array now?
         console.log(post);
+        data.title = MetaDataService.pageTitle(post.title);
+        console.log(post.sharing);
+        data.metaData = MetaDataService.metaData(post.sharing.title, post.sharing.subtitle, post.sharing.imageUrl, `/post/${post.slug}`);
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))
       .then((users) => { return data.post.author.role = RolesService.getHighestRole(users[0].roles) })
       .then(() => res.view('post', data))
-      .catch(() => res.redirect('/'))
+      .catch((err) => {
+        "use strict";
+        console.log("ERR", err);
+        res.redirect('/')
+      })
 
 
   },
@@ -116,6 +137,8 @@ module.exports = {
   createView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Upload');
+    data.metaData = MetaDataService.metaData();
     res.view('new', data);
   },
 
@@ -131,6 +154,10 @@ module.exports = {
 
 
 function createTags(tagList) {
+
+  console.log("createTags()");
+
+  if (!tagList || tagList == '') return Promise.resolve([]);
 
   const tags = tagList.split(' ');
   const final = [];
@@ -184,6 +211,8 @@ function setupPost(postDetails, imageUrl) {
   newPost.tags = tags;
 
   newPost.status = 'published';
+
+  console.log("new post setup")
 
   return Promise.resolve(newPost);
 }

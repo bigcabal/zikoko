@@ -64,11 +64,11 @@ module.exports.routes = {
   'get /me/password': 'UserController.updatePasswordView',
   'post /me/password': 'UserController.updatePassword',
 
-  'get /login': { view: 'sign-in' },
+  'get /login': 'AuthController.loginView',
   'post /login': 'AuthController.login',
   'get /logout': 'AuthController.logout',
-  'get /register': { view: 'sign-up' },
+  'get /register': 'AuthController.registerView',
   'post /register': 'AuthController.register',
-  'get /reset-password': { view: 'reset-password' }
+  'get /reset-password': 'AuthController.resetPasswordView'
 
 };

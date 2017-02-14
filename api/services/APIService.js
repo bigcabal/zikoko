@@ -39,7 +39,7 @@ module.exports = {
         reject(e);
       });
 
-      if ( method.toLowerCase() === 'post' ) newRequest.write( JSON.stringify(data) );
+      if ( method.toLowerCase() === 'post' | method.toLowerCase() === 'put' ) newRequest.write( JSON.stringify(data) );
       newRequest.end();
 
     })
@@ -72,7 +72,9 @@ module.exports = {
         reject(e);
       });
 
-      if ( method.toLowerCase() === 'post' ) newRequest.write( JSON.stringify(data) );
+      if ( method.toLowerCase() === 'post' || method.toLowerCase() === 'put' ) {
+        newRequest.write( JSON.stringify(data) );
+      }
       newRequest.end();
 
     })

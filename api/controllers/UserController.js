@@ -12,19 +12,20 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-
-    console.log(username);
+    data.title = MetaDataService.pageTitle(`@${username}`);
+    data.activeTab = 'posts';
 
     APIService.request(`/users?username=${username}`)
       .then((users) => {
         data.user = users[0];
-        data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
         return data.user;
       })
       .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
+        data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.metaData = MetaDataService.metaData(data.user.username, `Posts created by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}`);
         return data.posts = posts
       })
       .then(() =>  res.view('user', data));
@@ -36,8 +37,23 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
+    data.title = MetaDataService.pageTitle(`@${username}`);
+    data.activeTab = 'likes';
 
-    res.view('user', data);
+    APIService.request(`/users?username=${username}`)
+      .then((users) => {
+        data.user = users[0];
+        console.log(data.user);
+        return data.user;
+      })
+      .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
+      .then((posts) => {
+        posts.forEach((post) => { post.author = data.user });
+        data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.metaData = MetaDataService.metaData(data.user.username, `Posts liked by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}/likes`);
+        return data.posts = posts
+      })
+      .then(() =>  res.view('user', data));
 
   },
 
@@ -51,8 +67,16 @@ module.exports = {
     };
 
     const path = `/users/${req.session.user.id}`;
-    APIService.authRequest(req.session.user.authorization, path, 'PUT', profile)
+
+    checkIfFileUploaded( req.file('profileImage') )
+      .then((fileWasUploaded) => {
+        if (!fileWasUploaded) return Promise.resolve();
+        return CloudinaryService.upload( req.file('profileImage') )
+          .then((result) => { return profile.imageUrl = result.secure_url })
+      })
+      .then(() => APIService.authRequest(req.session.user.authorization, path, 'PUT', profile))
       .then((updatedUser) => {
+        console.log(updatedUser);
         const authorization = req.session.user.authorization;
         req.session.user = updatedUser;
         req.session.user.authorization = authorization;
@@ -68,38 +92,46 @@ module.exports = {
   updateProfileView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Edit Profile');
+    data.metaData = MetaDataService.metaData();
     res.view('me-profile', data);
   },
 
   updatePassword: function(req, res) {
 
     const details = {
-      oldPassword: req.body.old_password,
       newPassword: req.body.password,
       confirmation: req.body.password_confirmation
     }
 
-    console.log(details);
-    res.redirect('/me/password')
-
-    // const path = `/users/changePassword/:id`;
-    // APIService.authRequest(null, path, 'put', details)
-    //   .then((updatedUser) => {
-    //     console.log(updatedUser);
-    //     res.redirect('/me/password')
-    //   })
-    //   .catch(() => {
-    //     console.log("error")
-    //   })
+    const path = `/users/changePassword/${req.session.user.id}`;
+    APIService.authRequest(req.session.user.authorization, path, 'PUT', details)
+      .then(() => res.redirect('/logout'))
+      .catch(() => {
+        res.redirect('/me/password?error=true')
+      })
 
 
   },
   updatePasswordView: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
+    data.title = MetaDataService.pageTitle('Change Password');
+    data.metaData = MetaDataService.metaData();
     res.view('me-password', data);
   },
 
 };
 
+
+function checkIfFileUploaded( file ) {
+  return new Promise((resolve) => {
+    file.upload(function (err, uploadedFiles) {
+      if (err) resolve(false)
+      if (!uploadedFiles) resolve(false)
+      if (uploadedFiles.length === 0) resolve(false)
+      resolve(true);
+    });
+  })
+}
 

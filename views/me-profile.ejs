@@ -10,12 +10,18 @@
         <a href="/me/password" class="profile__tab">Change Password</a>
       </nav>
 
-      <form action="/me/profile" method="post" class="profile-edit__form form">
+      <form action="/me/profile" method="post" enctype="multipart/form-data" class="profile-edit__form form">
 
         <div class="form__group u-flex">
-          <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>">
+
+          <% if (currentUser.imageUrl) { %>
+          <%- ImageService.getDisplayImage(currentUser.imageUrl, 'profile') %>
+          <% } else { %>
+          <img src="<%= currentUser.gravatarUrl %>" alt="">
+          <% } %>
+
           <div>
-            <input type="file" name="image">
+            <input type="file" name="profileImage" id="profileImage">
             <p class="form__hint">PNG, JPG or GIF with size 2MB or less</p>
           </div>
         </div>
