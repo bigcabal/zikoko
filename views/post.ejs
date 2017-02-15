@@ -10,7 +10,7 @@
         <%- partial('./post/content-'+ post.post_type +'.ejs') %>
       </div>
 
-      <% if (post.tags) { %>
+      <% if (post.tags.length > 0) { %>
       <div class="post-tags">
         <h2 class="post-tags__title">Tags</h2>
         <ul>

@@ -105,6 +105,11 @@ module.exports = {
 
   },
 
+  resetPassword: function(req, res) {
+
+
+  },
+
 
   loginView: function(req, res) {
     let data = {};
