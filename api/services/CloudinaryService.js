@@ -22,12 +22,21 @@ module.exports = {
       };
 
       image.upload(function (err, uploadedFiles) {
-        if (err) reject();
-        if (uploadedFiles.length === 0) reject();
-        cloudinary.v2.uploader.upload(uploadedFiles[0].fd, options, (error, result) => {
-          if (error) reject(error)
-          resolve(result);
-        });
+        if (err) {
+          reject();
+        }
+        else if (uploadedFiles.length < 1) {
+          reject();
+        }
+        else {
+          console.log("there were files");
+          cloudinary.v2.uploader.upload(uploadedFiles[0].fd, options, (error, result) => {
+            if (error) reject(error)
+            resolve(result);
+          });
+        }
+
+
 
       });
 

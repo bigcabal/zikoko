@@ -12,17 +12,6 @@
         </div>
 
         <form action="/new" method="post" enctype="multipart/form-data" class="form form-page__form form--no-label">
-          <!-- <div class="form__group">
-            <div class="form__drag-and-drop">
-                <div class="form__drag-and-drop-icon">
-                    <i class="ion-upload"></i>
-                </div>
-                <input class="form__drag-and-drop-file" type="file" name="postImage" id="postImage"/>
-                <label for="postImage" class="form__drag-and-drop-label">
-                    <strong>Choose a file</strong> <span class="show-if-dnd-enabled">or drag it here</span>.
-                </label>
-            </div>
-          </div> -->
           <div class="form__group">
               <div class="form__image-field">
                   <div class="form__image-prompt">
@@ -33,7 +22,7 @@
                   </div>
                   <img src="" class="form__image-uploaded">
                   <div class="form__image-file-and-label">
-                      <input type="file" id="postImage" class="form__image-file" accept="image/*">
+                      <input type="file" id="postImage" name="postImage" class="form__image-file" accept="image/*">
                       <label for="postImage" class="form__image-label"></label>
                   </div>
               </div>
@@ -65,15 +54,15 @@
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
+
             reader.onload = function (e) {
                 image.src = e.target.result;
             }
-            
+
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
+
     document.getElementById("postImage").addEventListener('change', function(){
         readURL(this);
     });
