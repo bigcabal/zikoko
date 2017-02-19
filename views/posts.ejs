@@ -7,6 +7,7 @@
     <% posts.forEach(function(post) { %>
       <%- partial('./post/excerpt.ejs', { post: post }) %>
     <% }) %>
+    <%- partial('./partials/pagination.ejs') %>
   </div>
   <%- partial('./partials/sidebar.ejs') %>
 </div>
