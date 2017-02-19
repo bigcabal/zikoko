@@ -20,3 +20,15 @@ $color-twitter-blue: #1ea1f3;
 $color-pinterest-red: #BD081C;
 // $color-black: #231f20;
 // $color-grey: #8f8f8f;
+
+
+$main-column-width: 600px;
+$main-column-margin: 25px;
+$sidebar-width: 300px;
+$full-page-width: $main-column-width + $main-column-margin + $sidebar-width;
+
+
+$ad-leaderboard-width: 728px;
+$ad-leaderboard-height: 90px;
+$ad-sidebar-width: 300px; 
+$ad-sidebar-height: 250px; 

@@ -1,14 +1,18 @@
 /* @todo Styles for adverts*/
-
-.ad-container {
+.ad{
+  background-color: orange;
+  border-radius: 3px;
 }
 
-.ad--leaderboard {
-  /* 728 x 90 */
-
+.ad--leaderboard{
+  width: $ad-leaderboard-width;
+  height: $ad-leaderboard-height;
+  margin: 0 auto 30px;
+  max-width: 100%;
 }
 
-.ad--sidebar {
-  /* 300 x 250 */
+.ad--sidebar{
+  height: $ad-sidebar-height;
+  width: $ad-sidebar-width;
 }
 

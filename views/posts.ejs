@@ -1,8 +1,9 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: true }) %>
 
-<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align">
-
+<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align u-row-wrap">
+  <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
   <div class="zkk-main">
+
     <% posts.forEach(function(post) { %>
       <%- partial('./post/excerpt.ejs', { post: post }) %>
     <% }) %>
