@@ -22,30 +22,8 @@
       <% } %>
 
       <div class="post__footer u-flex u-space-between">
-        <div class="post__actions">
-            <span class="post__action">
-                <span class="post__action-icon post__action-icon--like"></span> Like
-            </span>
-        </div>
-
-        <div class="post__share">
-          <a href="<%= ShareService.getShareUrl(post, 'facebook') %>" target="_blank" class="post__share-item post__share-item--facebook">
-            <span class="sr-only">Facebook</span>
-            <i class="ion-social-facebook"></i>
-          </a>
-          <a href="<%= ShareService.getShareUrl(post, 'twitter') %>" target="_blank" class="post__share-item post__share-item--twitter">
-            <span class="sr-only">Twitter</span>
-            <i class="ion-social-twitter"></i>
-          </a>
-          <a href="<%= ShareService.getShareUrl(post, 'email') %>" class="post__share-item">
-            <span class="sr-only">Email</span>
-            <i class="ion-email"></i>
-          </a>
-          <a href="<%= ShareService.getShareUrl(post, 'pinterest') %>" target="_blank" class="post__share-item post__share-item--pinterest">
-            <span class="sr-only">Pinterest</span>
-            <i class="ion-social-pinterest"></i>
-          </a>
-        </div>
+        <%- partial('./partials/actions.ejs') %>
+        <%- partial('./partialsshare.ejs') %>
       </div>
 
       <!-- @todo Comments -->

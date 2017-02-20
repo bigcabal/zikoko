@@ -10,7 +10,7 @@
 	}
 
 	@include screen(tiny){
-		padding: 20px 15px;
+		padding: 20px 15px 60px;
 	}
 
 
@@ -76,7 +76,6 @@
 
 	&__items{
 		// margin-top: 60px;
-		margin-bottom: 60px;
 	}
 
 	&__item{
@@ -142,74 +141,6 @@
 		&:hover{
 			background-color: $color-purple;
 			color: white;
-		}
-	}
-
-	&__action{
-		display: inline-flex; 
-		align-items: center;
-		color: $color-grey-mid;
-		cursor: pointer;
-		transition: color .3s;
-		font-size: 1.6rem;
-		margin-right: 20px;
-
-		&:hover{
-			color: $color-black;
-		}
-	}
-
-	&__action-icon{
-		height: 32px;
-		width: 32px;
-		margin-right: 10px;
-		background-size: contain;
-		background-position: center;
-		background-repeat: no-repeat;
-
-		&--like{
-			background-image: url('../images/icons/like.svg');
-		}
-
-		&--liked{
-			background-image: url('../images/icons/liked.svg');
-		}
-
-		&--comment{
-			background-image: url('../images/icons/comment.svg');
-		}
-	}
-
-	&__share-item{
-		display: inline-flex;
-		margin-left: 3px;
-		height: 40px;
-		width: 40px;
-		border-radius: 3px;
-		font-size: 1.8rem;
-		justify-content: center;
-		align-items: center;
-		background-color: $color-grey-mid;
-		color: white;
-
-		&--twitter{
-			background-color: $color-twitter-blue;
-			border-color: $color-twitter-blue;
-		}
-
-		&--facebook{
-			background-color: $color-facebook-blue;
-			border-color: $color-facebook-blue;
-		}
-
-		&--pinterest{
-			background-color: $color-pinterest-red;
-			border-color: $color-pinterest-red;
-		}
-
-		&--google{
-			background-color: $color-google-red;
-			border-color: $color-google-red;
 		}
 	}
 

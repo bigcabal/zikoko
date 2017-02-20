@@ -4,20 +4,20 @@
   */
 %>
 
-<div class="post-excerpt__share">
-    <a href="<%= ShareService.getShareUrl(post, 'facebook') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--facebook">
+<div class="post-share">
+    <a href="<%= ShareService.getShareUrl(post, 'facebook') %>" target="_blank" class="post-share-item post-share-item--facebook">
       <span class="sr-only">Facebook</span>
       <i class="ion-social-facebook"></i>
     </a>
-    <a href="<%= ShareService.getShareUrl(post, 'twitter') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--twitter">
+    <a href="<%= ShareService.getShareUrl(post, 'twitter') %>" target="_blank" class="post-share-item post-share-item--twitter">
       <span class="sr-only">Twitter</span>
       <i class="ion-social-twitter"></i>
     </a>
-    <a href="<%= ShareService.getShareUrl(post, 'email') %>" class="post-excerpt__share-item">
+    <a href="<%= ShareService.getShareUrl(post, 'email') %>" class="post-share-item">
       <span class="sr-only">Email</span>
       <i class="ion-email"></i>
     </a>
-    <a href="<%= ShareService.getShareUrl(post, 'pinterest') %>" target="_blank" class="post-excerpt__share-item post-excerpt__share-item--pinterest">
+    <a href="<%= ShareService.getShareUrl(post, 'pinterest') %>" target="_blank" class="post-share-item post-share-item--pinterest">
       <span class="sr-only">Pinterest</span>
       <i class="ion-social-pinterest"></i>
     </a>

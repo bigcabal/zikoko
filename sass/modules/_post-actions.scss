@@ -1,0 +1,136 @@
+.post{
+	&-actions{
+		display: flex; 
+		align-items: center;
+	}
+
+	&-action{
+		margin-right: 30px;
+		display: inline-flex; 
+		align-items: center;
+		line-height: 24px;
+		color: $color-grey-mid;
+		cursor: pointer;
+		transition: color .3s;
+
+		&:hover{
+			color: $color-black;
+		}
+
+		@include screen(tiny){
+			margin-right: 15px;
+			&:last-child{
+				margin-right: 0;
+			}
+		}
+
+		.post &{
+			font-size: 1.6rem;
+		}
+	}
+
+	&-action-icon{
+		height: 24px;
+		width: 24px;
+		margin-right: 10px;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		&--like{
+			background-image: url('../images/icons/like.svg');
+		}
+
+		&--liked{
+			background-image: url('../images/icons/liked.svg');
+		}
+
+		&--comment{
+			background-image: url('../images/icons/comment.svg');
+		}
+
+		&--delete{
+			background-image: url('../images/icons/delete.svg');
+		}
+
+		@include screen(tiny){
+			margin-right: 5px;
+		}
+
+		.post &{
+			height: 32px;
+			width: 32px;
+			margin-right: 10px;
+		}
+	}
+
+	&-share{
+		@include screen(tiny){
+			display: flex;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.post &{
+			@include screen(tiny){
+				position: fixed;
+			}
+		}
+	}
+
+	&-share-item{
+		display: inline-flex;
+		margin-left: 3px;
+		height: 35px;
+		width: 35px;
+		border-radius: 3px;
+		font-size: 1.6rem;
+		justify-content: center;
+		align-items: center;
+		background-color: $color-grey-mid;
+		color: white;
+
+		.post &{
+			height: 40px;
+			width: 40px;
+		}
+
+		@include screen(tiny){
+			margin-left: 0;
+			font-size: 2.1rem;
+			width: 25%;
+			flex-grow: 1;
+			border-radius: 0;
+			height: 48px;
+			margin: 0;
+		}
+
+		&--twitter{
+			background-color: $color-twitter-blue;
+			border-color: $color-twitter-blue;
+		}
+
+		&--facebook{
+			background-color: $color-facebook-blue;
+			border-color: $color-facebook-blue;
+		}
+
+		&--pinterest{
+			background-color: $color-pinterest-red;
+			border-color: $color-pinterest-red;
+		}
+
+		&--google{
+			background-color: $color-google-red;
+			border-color: $color-google-red;
+		}
+	}
+}
+
+.post-action--delete:hover{
+	color: $color-google-red;
+}
+
+
