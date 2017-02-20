@@ -6,6 +6,7 @@
  */
 
 var https = require('https');
+var isJSON = require('is-json');
 
 const config = {
   headers: {
