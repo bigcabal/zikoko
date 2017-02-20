@@ -25,16 +25,21 @@ function closeSearchHeader() {
 }
 
 
-// Feed Filter
-var feed_filter_dropdown = Array.from( document.querySelectorAll('.feed-filter__dropdown') );
-feed_filter_dropdown.forEach(function(element) {
-  element.addEventListener('click', function (e) {
+var feed_filter_dropdown_toggle =  Array.from( document.querySelectorAll('.feed-filter__dropdown-toggle') );
+
+feed_filter_dropdown_toggle.forEach(function(element){
+  element.addEventListener('click', function(e){
     e.preventDefault();
     console.log("clicked feed filter dropdown");
-    e.target.classList.toggle('feed-filter__dropdown--opened');
-    return false;
+    findAncestor(e.target, 'feed-filter__dropdown').classList.toggle('feed-filter__dropdown--opened');
   })
-})
+});
+
+function findAncestor (el, cls) {
+  while ((el = el.parentElement) && !el.classList.contains(cls));
+  return el;
+}
+
 
 var zkk_nav_dropdown = Array.from( document.querySelectorAll('.zkk-nav__dropdown') );
 zkk_nav_dropdown.forEach(function(element) {

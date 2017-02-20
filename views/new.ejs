@@ -63,7 +63,6 @@
 
 <script>
     var image = document.querySelector('.form__image-uploaded');
-
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -75,7 +74,6 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
     document.getElementById("postImage").addEventListener('change', function(){
         readURL(this);
     });
@@ -87,14 +85,12 @@
 
     document.querySelector('.form-page__form').onsubmit = function(e){
         e.preventDefault();
-        // alert('clicked');
-        form.className += ' form-page__inner--hidden';
-        // alert(form.className);
-        loading.className = 'form-page__inner form-page__inner--loading';
+        form.classList.add('form-page__inner--hidden');
+        loading.classList.remove('form-page__inner--hidden');
 
         setTimeout(function(){
-            form.className = 'form-page__inner form-page__inner--form';
-            loading.className += ' form-page__inner--hidden';
+            form.classList.remove('form-page__inner--hidden');
+            loading.classList.add('form-page__inner--hidden');
         }, 5000);
     };
 </script>
