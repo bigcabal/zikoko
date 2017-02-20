@@ -7,7 +7,13 @@
     <span class="post-action-icon post-action-icon--like"></span>
     <span>Like</span>
   </button>
+  
   <a href="/post/<%= post.id %>#comments" class="post-action button button--no-pad button--clear">
     <span class="post-action-icon post-action-icon--comment"></span> Comment
   </a>
+  
+  <!-- Use this to replace Like & Comment on single post page if User is the Post Author-->
+  <!-- <button class="post-action post-action--delete button button--no-pad button--clear" href="#" class="post-action">
+      <span class="post-action-icon post-action-icon--delete"></span> Delete this post
+  </button> -->
 </form>
