@@ -24,7 +24,11 @@ module.exports = {
       .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
-        data.user.role = RolesService.getHighestRole(data.user.roles);
+
+        // @todo there is no fucking role to get the fucking highest yet okay??!!?
+        //data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.user.role = 'TINGZ FAM';
+
         data.metaData = MetaDataService.metaData(data.user.username, `Posts created by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}`);
         return data.posts = posts
       })
