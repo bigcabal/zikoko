@@ -32,10 +32,7 @@ module.exports = {
         return data.feed = category.name;
       })
       .then(() => APIService.request(query))
-      .then((posts) => {
-        console.log(posts);
-        data.posts = posts
-      })
+      .then((posts) => data.posts = posts)
       .then(() => res.view('posts', data))
       .catch((err) => {
         console.log(err);
@@ -71,14 +68,15 @@ module.exports = {
 
   single: function (req, res) {
 
+    console.log("===================");
+
     const postSlug = req.params.slug;
 
     let data = {};
     data.currentUser = req.session.user;
 
     APIService.request(`/posts?slug=${postSlug}`)
-      .then((posts) => {
-        const post = posts[0]; // @todo bug: Why is the an array now?
+      .then((post) => {
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         console.log(post.sharing);
@@ -86,7 +84,11 @@ module.exports = {
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))
-      .then((users) => { return data.post.author.role = RolesService.getHighestRole(users[0].roles) })
+      .then((users) => {
+        // @todo fix role
+        //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
+        return data.post.author.role = 'Tingz Fam';
+      })
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";

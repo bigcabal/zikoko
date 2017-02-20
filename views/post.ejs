@@ -1,6 +1,9 @@
 <%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
 
 <div class="zkk-site-wrap zkk-site-wrap--white u-flex u-center-align">
+
+  <% /* - partial('./partials/ad.ejs', { adType: 'leaderboard' }) */ %>
+
   <div class="zkk-main">
     <article class="post">
       <header>
@@ -22,8 +25,8 @@
       <% } %>
 
       <div class="post__footer u-flex u-space-between">
-        <%- partial('./partials/actions.ejs') %>
-        <%- partial('./partialsshare.ejs') %>
+        <%- partial('./post/actions-single.ejs') %>
+        <%- partial('./post/share.ejs') %>
       </div>
 
       <!-- @todo Comments -->

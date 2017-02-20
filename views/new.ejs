@@ -11,9 +11,7 @@
           <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
         </div>
 
-        <!-- <form action="/new" method="post" enctype="multipart/form-data" class="form form-page__form form--no-label"> -->
-        <!-- Commented out the line above to show loading screen -->
-        <form class="form form-page__form form--no-label">
+        <form action="/new" method="post" enctype="multipart/form-data" class="form form-page__form form--no-label">
           <div class="form__group">
               <div class="form__image-field">
                   <div class="form__image-prompt">
@@ -66,11 +64,9 @@
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 image.src = e.target.result;
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -84,14 +80,8 @@
     var loading = document.querySelector('.form-page__inner--loading');
 
     document.querySelector('.form-page__form').onsubmit = function(e){
-        e.preventDefault();
         form.classList.add('form-page__inner--hidden');
         loading.classList.remove('form-page__inner--hidden');
-
-        setTimeout(function(){
-            form.classList.remove('form-page__inner--hidden');
-            loading.classList.add('form-page__inner--hidden');
-        }, 5000);
     };
 </script>
 
