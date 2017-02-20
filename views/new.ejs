@@ -4,14 +4,16 @@
   <div class="zkk-main zkk-main--full-width">
 
     <div class="form-page card">
-      <div class="form-page__inner">
+      <div class="form-page__inner form-page__inner--form">
 
         <div class="form-page__heading">
           <h2 class="form-page__title">New Post</h2>
           <p class="form-page__subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit incididunt ut labore.</p>
         </div>
 
-        <form action="/new" method="post" enctype="multipart/form-data" class="form form-page__form form--no-label">
+        <!-- <form action="/new" method="post" enctype="multipart/form-data" class="form form-page__form form--no-label"> -->
+        <!-- Commented out the line above to show loading screen -->
+        <form class="form form-page__form form--no-label">
           <div class="form__group">
               <div class="form__image-field">
                   <div class="form__image-prompt">
@@ -42,7 +44,18 @@
             </button>
           </div>
         </form>
+      </div>
 
+      <div class="form-page__inner form-page__inner--loading form-page__inner--hidden">
+          <div class="form-page__loading">
+              <div class="loading-spinner">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+
+              <div class="loading-text">Uploading your post</div>
+          </div>
       </div>
     </div>
   </div>
@@ -66,6 +79,24 @@
     document.getElementById("postImage").addEventListener('change', function(){
         readURL(this);
     });
+
+    // show loading screen
+    var uploadButton = document.querySelector('.button--upload');
+    var form = document.querySelector('.form-page__inner--form');
+    var loading = document.querySelector('.form-page__inner--loading');
+
+    document.querySelector('.form-page__form').onsubmit = function(e){
+        e.preventDefault();
+        // alert('clicked');
+        form.className += ' form-page__inner--hidden';
+        // alert(form.className);
+        loading.className = 'form-page__inner form-page__inner--loading';
+
+        setTimeout(function(){
+            form.className = 'form-page__inner form-page__inner--form';
+            loading.className += ' form-page__inner--hidden';
+        }, 5000);
+    };
 </script>
 
 
