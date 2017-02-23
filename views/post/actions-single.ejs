@@ -1,13 +1,18 @@
+<% if ( currentUser) { %>
 <% if ( currentUser.id === post.author.id ) { %>
-<form action="/post/deletePost" method="post" class="post__actions">
+<form action="/post/delete" method="post" class="post__actions">
+
+  <!-- Hidden field, don't touch -->
+  <input type="hidden" name="post_id" value="<%= post.id %>">
 
   <button type="submit" class="post-action post-action--delete button button--no-pad button--clear" class="post-action">
     <span class="post-action-icon post-action-icon--delete"></span> Delete this post
   </button>
 
 </form>
+<% } %>
 <% } else { %>
-<form action="/post/likePost" method="post" class="post__actions">
+<form action="/post/like" method="post" class="post__actions">
 
   <!-- Hidden field, don't touch -->
   <input type="hidden" name="post_id" value="<%= post.id %>">

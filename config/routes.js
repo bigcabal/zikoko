@@ -46,15 +46,16 @@ module.exports.routes = {
 
   'get /': 'PostsController.list',
   'get /category/:category_slug': 'PostsController.list',
-
   'get /search': 'PostsController.search',
 
-  'get /new': 'PostsController.createView',
-  'post /new': 'PostsController.create',
-  'get /post/:slug': 'PostsController.single',
-  'get /post/:slug/amp': 'PostsController.amp',
-  'get /feed/instant-articles': 'PostsController.instant_articles',
-  'post /post/likePost': 'PostsController.likePost',
+  'get /new': 'NewPostController.view',
+  'post /new': 'NewPostController.create',
+
+  'get /post/:slug': 'PostController.single',
+  'get /post/:slug/amp': 'PostController.amp',
+  'get /feed/instant-articles': 'PostController.instant_articles',
+  'post /post/like': 'PostController.like',
+  'post /post/delete': 'PostController.delete',
 
   'get /user/:username': 'UserController.posts',
   'get /user/:username/likes': 'UserController.likes',

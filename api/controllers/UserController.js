@@ -50,7 +50,7 @@ module.exports = {
         console.log(data.user);
         return data.user;
       })
-      .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
+      .then(() => APIService.request(`/users/${data.user.id}/likes`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
         data.user.role = RolesService.getHighestRole(data.user.roles);
