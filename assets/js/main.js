@@ -51,4 +51,49 @@ zkk_nav_dropdown.forEach(function(element) {
 
 
 
+/*
+ * LIKE POST
+ *
+ */
+
+
+
+var likePostForms = Array.from( document.querySelectorAll('.js-likePostForm') );
+
+function likePost(e) {
+
+  e.preventDefault();
+
+  var postId = e.target[0].value;
+  var userId = '5897941e9bc4d71100448c21';
+  var userAuth = 'aXJlQGJpZ2NhYmFsLmNvbTpwYXNzd29yZA==';
+
+  console.log("STARTING====")
+
+  //
+
+  var xhr = new XMLHttpRequest();
+  var url = "https://formation-api.herokuapp.com/api/likes";
+  var formData = { post: postId, user: userId };
+
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.setRequestHeader("Authorization", "Basic "+userAuth);
+  xhr.onreadystatechange = function() {
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      // Request finished. Do processing here.
+      console.log("done ==========")
+      console.log(xhr);
+    }
+  }
+  xhr.send(formData);
+
+
+}
+
+likePostForms.forEach(function(form) {
+  form.addEventListener('submit', likePost);
+})
+
+
 
