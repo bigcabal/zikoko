@@ -6,16 +6,8 @@
  */
 
 var https = require('https');
-var isJSON = require('is-json');
-
-const config = {
-  headers: {
-    'Authorization': `Basic ${new Buffer(`${ process.env.AUTH_IDENTIFIER || sails.config.authorization.identifier }:${ process.env.AUTH_PASSWORD || sails.config.authorization.password }`).toString('base64')}`
-  }
-}
 
 module.exports = {
-
 
   req: function(options) {
     return new Promise(function (resolve, reject) {
