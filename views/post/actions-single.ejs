@@ -1,4 +1,4 @@
-<% if ( currentUser) { %>
+<% currentUser = currentUser || {} %>
 <% if ( currentUser.id === post.author.id ) { %>
 <form action="/post/delete" method="post" class="post__actions">
 
@@ -10,7 +10,6 @@
   </button>
 
 </form>
-<% } %>
 <% } else { %>
 <form action="/post/like" method="post" class="post__actions js-likePostForm">
 
@@ -19,7 +18,8 @@
 
   <button type="submit" class="post-action button button--no-pad button--clear">
     <span class="post-action-icon post-action-icon--like"></span>
-    <span>Like</span>
+    <span><%= post.likes_count === 0 ? 'Like' : post.likes_count %></span>
+    <% if ( post.has_liked ) { %> <span>(Y)</span> <% } %>
   </button>
 
 </form>

@@ -19,16 +19,14 @@ module.exports = {
       .then((users) => {
         data.user = users[0];
         console.log(data.user);
-        return data.user;
-      })
-      .then(() => APIService.request(`/users/${data.user.id}/posts?sort=publishedAt%20DESC`))
-      .then((posts) => {
-        posts.forEach((post) => { post.author = data.user });
 
         // @todo there is no fucking role to get the fucking highest yet okay??!!?
         //data.user.role = RolesService.getHighestRole(data.user.roles);
         data.user.role = 'TINGZ FAM';
-
+        return data.user;
+      })
+      .then(() => APIService.request(`/posts?author=${data.user.id}&sort=publishedAt%20DESC`))
+      .then((posts) => {
         data.metaData = MetaDataService.metaData(data.user.username, `Posts created by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}`);
         return data.posts = posts
       })
@@ -48,9 +46,13 @@ module.exports = {
       .then((users) => {
         data.user = users[0];
         console.log(data.user);
+
+        // @todo there is no fucking role to get the fucking highest yet okay??!!?
+        //data.user.role = RolesService.getHighestRole(data.user.roles);
+        data.user.role = 'TINGZ FAM';
         return data.user;
       })
-      .then(() => APIService.request(`/users/${data.user.id}/likes`))
+      .then(() => APIService.request(`/likes?user=${data.user.id}&sort=publishedAt%20DESC`))
       .then((posts) => {
         posts.forEach((post) => { post.author = data.user });
         data.user.role = RolesService.getHighestRole(data.user.roles);

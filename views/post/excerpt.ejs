@@ -8,7 +8,11 @@
 
     <% if (post.author) { %>
     <div class="post-excerpt__author u-flex u-vertical-align">
-      <img class="post-excerpt__author-img" src="<%= post.author.imageUrl || post.author.gravatarUrl %>">
+      <% if (post.author.imageUrl) { %>
+      <%- ImageService.getDisplayImage(post.author.imageUrl, 'profile-excerpt') %>
+      <% } else { %>
+      <img src="<%= post.author.gravatarUrl %>" alt="" class="post-excerpt__author-img">
+      <% } %>
       <a href="/user/<%= post.author.username %>" class="post-excerpt__author-name">@<%= post.author.username %></a>
     </div>
     <% } %>

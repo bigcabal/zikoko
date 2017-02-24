@@ -31,6 +31,8 @@ function getImageClass(placement) {
       return 'post-excerpt__img';
     case 'profile':
       return 'profile__img';
+    case 'profile-excerpt':
+      return 'post-excerpt__author-img';
     default:
       return 'post__item-img';
   }
@@ -49,6 +51,9 @@ function getOptimizedUrl(url, placement) {
       break;
     case 'profile':
       transformation = 'w_100,f_auto,fl_lossy,q_auto/';
+      break;
+    case 'profile-excerpt':
+      transformation = 'w_50,f_auto,fl_lossy,q_auto/';
       break;
     default:
       transformation = 'w_600,f_auto,fl_lossy,q_auto/';

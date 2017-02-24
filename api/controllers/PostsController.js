@@ -9,6 +9,8 @@ module.exports = {
 
   list: function (req, res) {
 
+    console.log("POSTS ============")
+
     const categorySlug = req.params.category_slug || null;
 
     let data = {};
@@ -31,8 +33,14 @@ module.exports = {
         data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
         return data.feed = category.name;
       })
-      .then(() => APIService.request(query))
-      .then((posts) => data.posts = posts)
+      .then(() => {
+        if (data.currentUser) return APIService.authRequest(req.session.user.authorization, query)
+        return APIService.request(query)
+      })
+      .then((posts) => {
+        console.log(posts[0]);
+        return data.posts = posts;
+      })
       .then(() => res.view('posts', data))
       .catch((err) => {
         console.log(err);

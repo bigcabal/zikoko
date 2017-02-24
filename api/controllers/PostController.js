@@ -49,10 +49,10 @@ module.exports = {
 
   like: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
+
     const postId = req.body.post_id;
     const like = {
-      post: postId,
-      user: req.session.user.id
+      post: postId
     };
 
     APIService.authRequest(req.session.user.authorization, `/likes`, 'POST', like)

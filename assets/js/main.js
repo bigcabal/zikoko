@@ -92,7 +92,7 @@ function likePost(e) {
 }
 
 likePostForms.forEach(function(form) {
-  form.addEventListener('submit', likePost);
+  //form.addEventListener('submit', likePost);
 })
 
 
