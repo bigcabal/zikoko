@@ -11,7 +11,7 @@ module.exports = {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
     data.title = MetaDataService.pageTitle('Upload');
-    data.metaData = MetaDataService.metaData();
+    data.metaData = MetaDataService.pageMeta();
     res.view('new', data);
   },
 

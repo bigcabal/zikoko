@@ -18,7 +18,7 @@ module.exports = {
     data.feed = categorySlug ? null : 'Everything';
     data.currentUser = req.session.user;
     data.title = MetaDataService.pageTitle();
-    data.metaData = MetaDataService.metaData();
+    data.metaData = MetaDataService.pageMeta();
 
     let query = '/posts?sort=publishedAt%20DESC';
 
@@ -30,7 +30,7 @@ module.exports = {
         console.log(category)
         query = `/categories/${category.id}/populatedposts`;
         data.title = MetaDataService.pageTitle(category.name);
-        data.metaData = MetaDataService.metaData(`Posts in ${data.feed} Category`, null, null, `/category/${categorySlug}`);
+        data.metaData = MetaDataService.pageMeta('category', category);
         return data.feed = category.name;
       })
       .then(() => {
@@ -58,7 +58,7 @@ module.exports = {
     data.term = term;
     data.currentUser = req.session.user;
     data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
-    data.metaData = MetaDataService.metaData(`Search Results for ${term}`, null, null, null);
+    data.metaData = MetaDataService.pageMeta('search', term);
 
     const query = `/posts?where={"title":{"contains":"${term}"}}`;
 

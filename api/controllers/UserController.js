@@ -12,7 +12,6 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-    data.title = MetaDataService.pageTitle(`@${username}`);
     data.activeTab = 'posts';
 
     APIService.request(`/users?username=${username}`)
@@ -20,14 +19,17 @@ module.exports = {
         data.user = users[0];
         console.log(data.user);
 
+        data.title = MetaDataService.pageTitle(`@${data.user.username}`);
+        data.metaData = MetaDataService.pageMeta('user-likes', data.user);
         // @todo there is no fucking role to get the fucking highest yet okay??!!?
         //data.user.role = RolesService.getHighestRole(data.user.roles);
         data.user.role = 'TINGZ FAM';
+
         return data.user;
       })
       .then(() => APIService.request(`/posts?author=${data.user.id}&sort=publishedAt%20DESC`))
       .then((posts) => {
-        data.metaData = MetaDataService.metaData(data.user.username, `Posts created by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}`);
+
         return data.posts = posts
       })
       .then(() =>  res.view('user', data));
@@ -39,7 +41,6 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-    data.title = MetaDataService.pageTitle(`@${username}`);
     data.activeTab = 'likes';
 
     APIService.request(`/users?username=${username}`)
@@ -47,18 +48,16 @@ module.exports = {
         data.user = users[0];
         console.log(data.user);
 
+        data.title = MetaDataService.pageTitle(`@${data.user.username}`);
+        data.metaData = MetaDataService.pageMeta('user-likes', data.user);
         // @todo there is no fucking role to get the fucking highest yet okay??!!?
         //data.user.role = RolesService.getHighestRole(data.user.roles);
         data.user.role = 'TINGZ FAM';
+
         return data.user;
       })
       .then(() => APIService.request(`/likes?user=${data.user.id}&sort=publishedAt%20DESC`))
-      .then((posts) => {
-        posts.forEach((post) => { post.author = data.user });
-        data.user.role = RolesService.getHighestRole(data.user.roles);
-        data.metaData = MetaDataService.metaData(data.user.username, `Posts liked by ${data.user.username}`, data.user.imageUrl || data.user.gravatarUrl, `/user/${data.user.username}/likes`);
-        return data.posts = posts
-      })
+      .then((posts) => { return data.posts = posts })
       .then(() =>  res.view('user', data));
 
   },
@@ -99,7 +98,7 @@ module.exports = {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
     data.title = MetaDataService.pageTitle('Edit Profile');
-    data.metaData = MetaDataService.metaData();
+    data.metaData = MetaDataService.pageMeta();
     res.view('me-profile', data);
   },
 
@@ -123,7 +122,7 @@ module.exports = {
     if ( !req.session.user ) res.redirect('/login');
     let data = { currentUser: req.session.user };
     data.title = MetaDataService.pageTitle('Change Password');
-    data.metaData = MetaDataService.metaData();
+    data.metaData = MetaDataService.pageMeta();
     res.view('me-password', data);
   },
 

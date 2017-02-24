@@ -20,8 +20,7 @@ module.exports = {
       .then((post) => {
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
-        console.log(post.sharing);
-        data.metaData = MetaDataService.metaData(post.sharing.title, post.sharing.subtitle, post.sharing.imageUrl, `/post/${post.slug}`);
+        data.metaData = MetaDataService.pageMeta('post', post);
         return data.post = post;
       })
       .then(() => APIService.request(`/users?username=${data.post.author.username}`))
