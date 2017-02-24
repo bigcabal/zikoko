@@ -13,8 +13,9 @@
 <% } else { %>
 <form action="/post/like" method="post" class="post__actions js-likePostForm">
 
-  <!-- Hidden field, don't touch -->
+  <!-- Hidden fields, don't touch -->
   <input type="hidden" name="post_id" value="<%= post.id %>">
+  <input type="hidden" name="post_slug" value="<%= post.slug %>">
 
   <button type="submit" class="post-action button button--no-pad button--clear">
     <span class="post-action-icon post-action-icon--like"></span>

@@ -14,7 +14,7 @@ module.exports = {
     data.currentUser = req.session.user;
     data.activeTab = 'posts';
 
-    APIService.request(`/users?username=${username}`)
+    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
         data.user = users[0];
         console.log(data.user);
@@ -27,9 +27,8 @@ module.exports = {
 
         return data.user;
       })
-      .then(() => APIService.request(`/posts?author=${data.user.id}&sort=publishedAt%20DESC`))
+      .then(() => APIService.req({ path: `/posts?author=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
-
         return data.posts = posts
       })
       .then(() =>  res.view('user', data));
@@ -43,7 +42,8 @@ module.exports = {
     data.currentUser = req.session.user;
     data.activeTab = 'likes';
 
-    APIService.request(`/users?username=${username}`)
+
+    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
         data.user = users[0];
         console.log(data.user);
@@ -56,8 +56,10 @@ module.exports = {
 
         return data.user;
       })
-      .then(() => APIService.request(`/likes?user=${data.user.id}&sort=publishedAt%20DESC`))
-      .then((posts) => { return data.posts = posts })
+      .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
+      .then((posts) => {
+        return data.posts = posts
+      })
       .then(() =>  res.view('user', data));
 
   },
@@ -79,7 +81,7 @@ module.exports = {
         return CloudinaryService.upload( req.file('profileImage') )
           .then((result) => { return profile.imageUrl = result.secure_url })
       })
-      .then(() => APIService.authRequest(req.session.user.authorization, path, 'PUT', profile))
+      .then(() => APIService.req({ path: path, user: req.session.user, method: 'PUT', data: profile }))
       .then((updatedUser) => {
         console.log(updatedUser);
         const authorization = req.session.user.authorization;
@@ -110,7 +112,7 @@ module.exports = {
     }
 
     const path = `/users/changePassword/${req.session.user.id}`;
-    APIService.authRequest(req.session.user.authorization, path, 'PUT', details)
+    APIService.req({ path: path, user: req.session.user, method: 'PUT', data: details })
       .then(() => res.redirect('/logout'))
       .catch(() => {
         res.redirect('/me/password?error=true')

@@ -11,8 +11,10 @@ module.exports = {
 
     console.log("POSTS ============")
 
+    // Request parameters
     const categorySlug = req.params.category_slug || null;
 
+    // Default view data
     let data = {};
     data.order = req.param('order') || 'latest';
     data.feed = categorySlug ? null : 'Everything';
@@ -22,38 +24,33 @@ module.exports = {
 
     let query = '/posts?sort=publishedAt%20DESC';
 
-    APIService.request('/categories')
+    APIService.req({ path: '/categories', user: data.currentUser })
       .then((categories) => data.categories = categories)
       .then(() => {
         if ( data.feed === 'Everything' ) return Promise.resolve();
         const category = data.categories.find((category) => { return category.slug === categorySlug });
-        console.log(category)
         query = `/categories/${category.id}/populatedposts`;
         data.title = MetaDataService.pageTitle(category.name);
         data.metaData = MetaDataService.pageMeta('category', category);
         return data.feed = category.name;
       })
-      .then(() => {
-        if (data.currentUser) return APIService.authRequest(req.session.user.authorization, query)
-        return APIService.request(query)
-      })
+      .then(() => APIService.req({ path: query, user: data.currentUser }))
       .then((posts) => {
         console.log(posts[0]);
         return data.posts = posts;
       })
       .then(() => res.view('posts', data))
-      .catch((err) => {
-        console.log(err);
-        res.redirect('/');
-      });
+      .catch((err) => res.redirect('/?error=list'));
 
   },
 
   search: function (req, res) {
 
+    // Search term
     const term = req.param('term') || null;
     if ( !term ) res.redirect('/');
 
+    // Default view data
     let data = {};
     data.term = term;
     data.currentUser = req.session.user;
@@ -62,9 +59,9 @@ module.exports = {
 
     let query = '/posts?sort=publishedAt%20DESC';
 
-    APIService.request(query)
+    APIService.req({ path: query, user: data.currentUser })
       .then((posts) => data.posts = posts)
-      .then(() => APIService.request('/categories'))
+      .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
       .then((categories) => data.categories = categories)
       .then(() => {
         console.log(data.posts);
@@ -76,8 +73,7 @@ module.exports = {
 
   instant_articles: function (req, res) {
 
-
-    APIService.request('/posts?limit=2')
+    APIService.req({ path: query })
       .then((posts) => {
         console.log(posts);
         res.set('Content-Type', 'application/rss+xml');

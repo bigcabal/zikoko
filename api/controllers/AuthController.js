@@ -39,7 +39,7 @@ module.exports = {
     function getUsername(user) {
       return new Promise((resolve, reject) => {
         const data = { username: user.username };
-        APIService.request('/users/checkUsername', 'POST', data)
+        APIService.req({ path: '/users/checkUsername', method: 'POST', data: data })
           .then((response) => {
             console.log(response);
             if ( response.available ) {
@@ -92,7 +92,7 @@ module.exports = {
       res.view('sign-up', { error: 'Error message here' });
     }
 
-    APIService.request('/roles')
+    APIService.req({ path: '/roles' })
       .then((roles) => setupUser(roles))
       .then((newUser) => getUsername(newUser))
       .then((newUser) => AuthService.createUser(newUser))

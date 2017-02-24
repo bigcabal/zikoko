@@ -28,7 +28,8 @@ module.exports = {
 function getTag(name) {
   const query = `/tags?where={"name":"${name}"}`;
   return new Promise((resolve, reject) => {
-    APIService.request(query)
+
+    APIService.req({ path: query })
       .then((res) => resolve(res))
       .catch(() => reject())
   });
@@ -38,7 +39,7 @@ function createTag(name) {
   const tag = { name: name };
   console.log("need to create tag - ", name);
   return new Promise((resolve, reject) => {
-    APIService.request('/tags', 'POST', tag)
+    APIService.req({ path: '/tags', method: 'POST', data: tag })
       .then((tag) => {
         if (tag) resolve({ name: tag.name, id: tag.id })
         reject();

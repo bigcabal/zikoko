@@ -39,7 +39,7 @@ module.exports = {
       .then((newPost) => post = newPost)
       .then(() => createTags(post.tags))
       .then((tags) => post.tags = tags)
-      .then(() => APIService.authRequest(req.session.user.authorization, '/posts', 'post', post))
+      .then(() => APIService.req({ path: '/posts', user: req.session.user, method: 'POST', data: post }))
       .then((newPost) => handleSuccess(newPost))
       .catch(() => handleError())
 

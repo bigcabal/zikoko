@@ -16,14 +16,14 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
 
-    APIService.request(`/posts?slug=${postSlug}`)
+    APIService.req({ path: `/posts?slug=${postSlug}`, user: req.session.user })
       .then((post) => {
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         data.metaData = MetaDataService.pageMeta('post', post);
         return data.post = post;
       })
-      .then(() => APIService.request(`/users?username=${data.post.author.username}`))
+      .then(() => APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user }))
       .then((users) => {
         // @todo fix role
         //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
@@ -48,12 +48,14 @@ module.exports = {
     if ( !req.session.user ) res.redirect('/login');
 
     const postId = req.body.post_id;
+    const postSlug = req.body.post_slug;
+
     const like = {
       post: postId
     };
 
-    APIService.authRequest(req.session.user.authorization, `/likes`, 'POST', like)
-      .then(() => res.redirect('/'))
+    APIService.req({ path: '/likes', user: req.session.user, method: 'POST', data: like })
+      .then(() => res.redirect(`/post/${postSlug}`))
       .catch((err) => res.redirect('/?error=likePost'))
   },
 
@@ -61,7 +63,7 @@ module.exports = {
     if ( !req.session.user ) res.redirect('/login');
     const postId = req.body.post_id;
 
-    APIService.authRequest(req.session.user.authorization, `/posts/${postId}`, 'DELETE')
+    APIService.req({ path: `/posts/${postId}`, user: req.session.user, method: 'DELETE' })
       .then(() => res.redirect('/'))
       .catch((err) => res.redirect('/?error=deletePost'))
   }
