@@ -10,20 +10,20 @@ var https = require('https');
 module.exports = {
 
   req: function(options) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
 
       const user = options.user || null;
       const path = options.path;
-      const method = options.method.toUpperCase() || 'GET';
+      const method = options.method ? options.method.toUpperCase() : 'GET';
       const data = options.data || null;
 
       const requestOptions = {
         host: sails.config.globals.API.host,
         port: 443,
         path: `${sails.config.globals.API.path}${path}`,
-        method: method,
-        headers: user ? {'Authorization': `Basic ${user.authorization}`} : null
+        method: method
       }
+      if (user) requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
 
       let newRequest = https.request(requestOptions, function (response) {
         let body = '';
