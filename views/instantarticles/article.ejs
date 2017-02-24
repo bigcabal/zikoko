@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" prefix="op: http://media.facebook.com/op#">
+<head>
+  <meta property="op:markup_version" content="v1.0">
+  <link rel="canonical" href="https://zikoko.com/post/<%= post.slug %>">
+  <meta property="fb:use_automatic_ad_placement" content="false">
+  <meta property="fb:article_style" content="zikoko">
+</head>
+<body>
+<article>
+
+  <%- partial('./header.ejs') %>
+
+  <%- partial('./content-'+ post.post_type +'.ejs') %>
+
+  <% /* partial('./analytics.ejs') */ %>
+
+  <%- partial('./ad.ejs') %>
+
+
+  <footer>
+    <aside>Zikoko, Enjoy &amp; Share</aside>
+    <small>© Big Cabal Media</small>
+
+    <ul class="op-related-articles">
+      <?php $next_post = get_previous_post(); ?>
+      <li><a href="<?php echo get_permalink( $next_post->ID ); ?>"></a></li>
+    </ul>
+  </footer>
+</article>
+</body>
+</html>

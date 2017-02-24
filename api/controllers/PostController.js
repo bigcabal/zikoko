@@ -42,9 +42,7 @@ module.exports = {
     res.view('post-amp');
   },
 
-  instant_articles: function (req, res) {
-    res.redirect('/');
-  },
+
 
   like: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');

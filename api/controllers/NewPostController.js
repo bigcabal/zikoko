@@ -9,9 +9,11 @@ module.exports = {
 
   view: function(req, res) {
     if ( !req.session.user ) res.redirect('/login');
-    let data = { currentUser: req.session.user };
-    data.title = MetaDataService.pageTitle('Upload');
-    data.metaData = MetaDataService.pageMeta();
+    const data = {
+      currentUser: req.session.user,
+      title: MetaDataService.pageTitle('Upload'),
+      metaData: MetaDataService.pageMeta()
+    };
     res.view('new', data);
   },
 

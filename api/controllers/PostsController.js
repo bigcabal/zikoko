@@ -60,10 +60,10 @@ module.exports = {
     data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
     data.metaData = MetaDataService.pageMeta('search', term);
 
-    const query = `/posts?where={"title":{"contains":"${term}"}}`;
+    let query = '/posts?sort=publishedAt%20DESC';
 
     APIService.request(query)
-      .then((posts) => data.posts = [posts] /* @todo Error here, returning a single post */)
+      .then((posts) => data.posts = posts)
       .then(() => APIService.request('/categories'))
       .then((categories) => data.categories = categories)
       .then(() => {
@@ -72,6 +72,22 @@ module.exports = {
       })
       .catch(() => res.redirect('/'))
 
-  }
+  },
+
+  instant_articles: function (req, res) {
+
+
+    APIService.request('/posts?limit=2')
+      .then((posts) => {
+        console.log(posts);
+        res.set('Content-Type', 'application/rss+xml');
+        res.type('application/rss+xml');
+        res.view('feed-ia', {
+          layout: null,
+          posts: posts
+        });
+      })
+      .catch(() => res.redirect('/'))
+  },
 
 };

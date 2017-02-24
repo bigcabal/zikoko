@@ -51,7 +51,6 @@ module.exports = {
 
           })
       })
-
     }
 
     function setupUser(roles) {
@@ -112,21 +111,24 @@ module.exports = {
 
 
   loginView: function(req, res) {
-    let data = {};
-    data.title = MetaDataService.pageTitle('Login');
-    data.metaData = MetaDataService.pageMeta();
+    const data = {
+      title: MetaDataService.pageTitle('Login'),
+      metaData: MetaDataService.pageMeta()
+    };
     res.view('sign-in', data);
   },
   registerView: function(req, res) {
-    let data = {};
-    data.title = MetaDataService.pageTitle('Register');
-    data.metaData = MetaDataService.pageMeta();
+    const data = {
+      title: MetaDataService.pageTitle('Register'),
+      metaData: MetaDataService.pageMeta()
+    };
     res.view('sign-up', data);
   },
   resetPasswordView: function(req, res) {
-    let data = {};
-    data.title = MetaDataService.pageTitle('Reset Password');
-    data.metaData = MetaDataService.pageMeta();
+    const data = {
+      title: MetaDataService.pageTitle('Reset Password'),
+      metaData: MetaDataService.pageMeta()
+    };
     res.view('reset-password', data);
   },
 

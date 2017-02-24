@@ -1,0 +1,13 @@
+<header>
+  <figure>
+    <%- ImageService.getDisplayImage(post.featured_image_url, 'excerpt') %>
+  </figure>
+
+  <h1><%= post.title %></h1>
+  <h2><%= post.excerpt %></h2>
+
+  <address><%= post.author.username %></address>
+
+  <time class="op-published" dateTime="<?php echo esc_attr( get_the_time( 'c' ) ); ?>"></time>
+  <time class="op-modified" dateTime="<?php echo esc_attr( get_the_modified_time( 'c' ) ); ?>"></time>
+</header>
