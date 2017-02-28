@@ -12,6 +12,8 @@
 		color: $color-grey-mid;
 		cursor: pointer;
 		transition: color .3s;
+		position: relative;
+		
 
 		&:hover{
 			color: $color-black;
@@ -27,7 +29,19 @@
 		.post &{
 			font-size: 1.6rem;
 		}
+
+		&--toggle-like{
+			min-width: 50px;
+			padding-left: 36px;
+			justify-content: flex-start;
+
+			.post &{
+				padding-left: 48px;
+			} 
+		}
 	}
+
+
 
 	&-action-icon{
 		height: 24px;
@@ -36,13 +50,35 @@
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
+		transition: all .3s;
 
 		&--like{
-			background-image: url('../images/icons/like.svg');
+			// background-image: url('../images/icons/like.svg');
+			.post-action--like &{
+				opacity: 1;
+			}
+
+			.post-action--liked &{
+				opacity: 0;
+			}
 		}
 
 		&--liked{
-			background-image: url('../images/icons/liked.svg');
+			// background-image: url('../images/icons/liked.svg');
+			.post-action--like &{
+				opacity: 0;
+			}
+
+			.post-action--liked &{
+				opacity: 1;
+			}
+		}
+
+		.post-action--toggle-like &{
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
 		}
 
 		&--comment{
@@ -61,6 +97,11 @@
 			height: 32px;
 			width: 32px;
 			margin-right: 10px;
+		}
+
+		svg{
+			height: 100%;
+			width: 100%;
 		}
 	}
 
