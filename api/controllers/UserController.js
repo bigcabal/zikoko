@@ -28,6 +28,8 @@ module.exports = {
       .then((posts) => {
         return data.posts = posts
       })
+      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() =>  res.view('user', data));
 
   },
@@ -55,6 +57,8 @@ module.exports = {
       .then((posts) => {
         return data.posts = posts
       })
+      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() =>  res.view('user', data));
 
   },

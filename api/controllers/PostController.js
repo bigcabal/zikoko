@@ -29,6 +29,8 @@ module.exports = {
         //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
         return data.post.author.role = 'Tingz Fam';
       })
+      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";

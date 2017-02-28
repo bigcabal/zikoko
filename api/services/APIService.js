@@ -16,6 +16,7 @@ module.exports = {
       const path = options.path;
       const method = options.method ? options.method.toUpperCase() : 'GET';
       const data = options.data || null;
+      const saveDataToSession = options.session || false;
 
       const requestOptions = {
         host: sails.config.globals.API.host,
@@ -25,61 +26,66 @@ module.exports = {
       }
       if (user) requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
 
-      let newRequest = https.request(requestOptions, function (response) {
-        let body = '';
-        response.on('data', function (data) {
-          data = data.toString();
-          body += data;
-        });
-        response.on('end', function () {
-          body = JSON.parse(body);
-          resolve(body);
-        });
-      });
-      newRequest.on('error', (e) => {
-        console.error(e);
-        reject(e);
-      });
 
-      if (method === 'POST' | method === 'PUT') {
-        newRequest.write(JSON.stringify(data));
+      if ( saveDataToSession ) {
+
+        options.session.temporaryStorage = options.session.temporaryStorage || {};
+
+        if ( options.session.temporaryStorage[path] ) {
+          console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE`);
+          resolve(options.session.temporaryStorage[path])
+        } else {
+          httpRequest(method, requestOptions, data, options.session)
+            .then((response) => resolve(response))
+            .catch((err) => reject(err));
+        }
+
+      } else {
+        httpRequest(method, requestOptions, data)
+          .then((response) => resolve(response))
+          .catch((err) => reject(err));
       }
 
-      newRequest.end();
+
+
+
 
     }) // end Promise
-  },
-
-
-  request: function (path, method = 'GET', data = null) {
-    return new Promise(function (resolve, reject) {
-      let options = {
-        host: sails.config.globals.API.host,
-        port: 443,
-        path: `${sails.config.globals.API.path}${path}`,
-        method: method
-      }
-      let newRequest = https.request(options, function (response) {
-        let body = '';
-        response.on('data', function (data) {
-          data = data.toString();
-          body += data;
-        });
-        response.on('end', function () {
-          body = JSON.parse(body);
-          resolve(body);
-        });
-      });
-      newRequest.on('error', (e) => {
-        console.error(e);
-        reject(e);
-      });
-
-      if ( method.toLowerCase() === 'post' | method.toLowerCase() === 'put' ) newRequest.write( JSON.stringify(data) );
-      newRequest.end();
-
-    })
   }
 
+
 };
+
+
+function httpRequest(method, requestOptions, data, session) {
+  return new Promise((resolve, reject) => {
+    let newRequest = https.request(requestOptions, function (response) {
+      let body = '';
+      response.on('data', function (data) {
+        data = data.toString();
+        body += data;
+      });
+      response.on('end', function () {
+        body = JSON.parse(body);
+
+        if ( session ) {
+          const path = requestOptions.path.split(sails.config.globals.API.path)[1];
+          session.temporaryStorage[path] = body;
+        }
+
+        resolve(body);
+      });
+    });
+    newRequest.on('error', (e) => {
+      console.error(e);
+      reject(e);
+    });
+
+    if (method === 'POST' | method === 'PUT') {
+      newRequest.write(JSON.stringify(data));
+    }
+
+    newRequest.end();
+  })
+}
 

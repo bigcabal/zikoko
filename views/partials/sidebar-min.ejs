@@ -22,14 +22,6 @@
     <%- partial('./ad.ejs', { adType: 'sidebar' }) %>
   </div>
 
-  <!-- Featured Posts -->
-  <div class="card sidebar__section">
-    <% sidebarPosts.forEach(function(post) { %>
-    <%- partial('../post/excerpt-min.ejs', { post: post }) %>
-    <% }) %>
-  </div>
-
-
   <!-- Subscribe -->
   <%- partial('../components/newsletter.ejs') %>
 

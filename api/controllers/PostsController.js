@@ -24,7 +24,7 @@ module.exports = {
 
     let query = '/posts?sort=publishedAt%20DESC';
 
-    APIService.req({ path: '/categories', user: data.currentUser })
+    APIService.req({ path: '/categories', user: data.currentUser, session: req.session })
       .then((categories) => data.categories = categories)
       .then(() => {
         if ( data.feed === 'Everything' ) return Promise.resolve();
@@ -39,6 +39,8 @@ module.exports = {
         console.log(posts[0]);
         return data.posts = posts;
       })
+      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() => res.view('posts', data))
       .catch((err) => res.redirect('/?error=list'));
 
@@ -63,6 +65,8 @@ module.exports = {
       .then((posts) => data.posts = posts)
       .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
       .then((categories) => data.categories = categories)
+      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() => {
         console.log(data.posts);
         res.view('search', data)
