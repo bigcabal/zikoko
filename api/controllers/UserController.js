@@ -17,15 +17,12 @@ module.exports = {
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
         data.user = users[0];
+        data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
-        // @todo there is no fucking role to get the fucking highest yet okay??!!?
-        //data.user.role = RolesService.getHighestRole(data.user.roles);
-        data.user.role = 'TINGZ FAM';
-
-        return data.user;
+        return;
       })
       .then(() => APIService.req({ path: `/posts?author=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
@@ -46,15 +43,13 @@ module.exports = {
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
         data.user = users[0];
+        data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
-        // @todo there is no fucking role to get the fucking highest yet okay??!!?
-        //data.user.role = RolesService.getHighestRole(data.user.roles);
-        data.user.role = 'TINGZ FAM';
 
-        return data.user;
+        return;
       })
       .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
