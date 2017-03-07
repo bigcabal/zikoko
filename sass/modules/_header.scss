@@ -36,7 +36,7 @@
         position: absolute;
         width: 100%;
         height: $headerHeight - 1px;
-        top: -7px;
+        top: -6px;
         left: 0;
         z-index: 1;
         display: flex;
@@ -316,17 +316,29 @@
 
 }
 
-body{
+.search-header {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    height: 96px;
+    background-color: white;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     width: 100%;
-}
-
-.content {
-    padding-top: $headerHeight + 24px;
-    min-width: 100%;
-    width: 100%;
-    &--extra-pad {
-        @include screen(med-small) {
-            padding-top: ($headerHeight * 2) + 24px;
+    opacity: 0;
+    @include transition(.5s);
+    &__close {
+        position: absolute;
+        right: 0;
+        top: 10px;
+        font-size: 3.6rem;
+        cursor: pointer;
+        @include screen(med) {
+            right: 15px;
         }
+    }
+    &--is-opened {
+        top: 0;
+        opacity: 1;
     }
 }

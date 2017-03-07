@@ -1,257 +1,245 @@
-
 // body, html{
 //     height: 100%;
 //     position: relative;
 //     overflow-x: hidden;
 //     background-color: #f9f9fc;
 // }
-
 // .zkk-site-wrap{
 // 	padding-top: 80px;
 // 	background-color: #f9f9fc;
 // 	z-index: 1;
 // 	position: relative;
 // 	min-height: 100%;
-
 // 	&--white{
 // 		background-color: white;
 // 	}
-
 // 	&--with-mobile-feed-filter{
 // 		@include screen(med-small){
 // 			padding-top: 120px;
 // 		}
 // 	}
 // }
-
 // .zkk-main{
 // 	width: $main-column-width;
 // 	margin-right: $main-column-margin;
-
 // 	@include screen(med){
 // 		margin: 0 auto;
 // 	}
-
 // 	@include screen(small){
 // 		width: 100%;
 // 	}
-
 // 	&--full-width{
 // 		width: 100%;
 // 		max-width: $full-page-width;
 // 		margin: 0 auto;
 // 		margin-top: -30px;
 // 		margin-bottom: 60px;
-
 // 		@include screen(med){
 // 			margin-top: -30px;
 // 		}
 // 	}
 // }
-
 // .card{
 // 	background-color: white;
 // 	border: 1px solid #eaeaea;
 // 	border-radius: 3px;
 // 	position: relative;
-
 // 	.zkk-site-wrap--white &{
 // 		box-shadow: none;
 // 	}
 // }
 
-// .form-page{
-// 	padding: 60px 0 60px;
-// 	font-size: 1.4rem;
-// 	font-family: $alternate-font;
-// 	transition: all .3s;
-
-// 	&--padding-top-lg{
-// 		padding: 100px 0 120px;
-// 	}
-
-// 	&__inner{
-// 		width: 100%;
-// 		max-width: 400px;
-// 		margin: 0 auto;
-// 		transition: all .5s;
-// 		max-height: auto;
-// 		// min-height: 50vh;
-		
-// 		@include screen(med){
-// 			padding: 0 30px;
-// 		}
-
-// 		&--hidden{
-// 			opacity: 0;
-// 			max-height: 0;	
-// 			pointer-events: none;
-// 			overflow: hidden;
-// 		}
-// 	}
-
-// 	&__heading{
-// 		text-align: center;
-// 		margin-bottom: 30px;
-// 	}
-
-// 	&__title{
-// 		font-size: 2.4rem;
-// 		font-weight: bold;
-// 		margin-bottom: 5px;
-// 		font-family: $regular-font;
-// 	}
-
-// 	&__subtitle{
-// 		color: $color-grey-mid;
-// 		line-height: 1.5;
-// 		font-family: $alternate-font;
-// 	}
-
-// 	&__form{
-// 		margin-bottom: 45px;
-// 	}
-
-// 	&__footer{
-// 		text-align: center;
-// 		color: $color-grey-mid;
-// 	}
-
-// 	&__footer-divider{
-// 		margin-bottom: 15px;
-// 	}
-
-// 	&__button-bar{
-// 		display: flex;
-// 		margin-bottom: 45px;
-// 	}
-
-// 	&__button-bar-left{
-// 		width: 50%;
-// 		padding-right: 5px
-// 	}
-
-// 	&__button-bar-right{
-// 		width: 50%;
-// 		padding-left: 5px;
-// 	}
-
-// 	&__link{
-// 		font-weight: bold;
-// 		color: $color-purple;
-// 	}
-// }
-
-// .page-overlay{
-// 	position: fixed;
-// 	z-index: 2;
-// 	background-color: rgba(0,0,0,0.85);
-// 	height: 100%;
-// 	width: 100%;
-// 	pointer-events: none;
-// 	opacity: 0;
-// 	@include transition(.5s);
-
-// 	&--is-visible{
-// 		pointer-events: auto;
-// 		@include transition(.5s);
-// 		opacity: 1;	
-// 	}
-// }
-
-// .search-results{
-// 	&__header{
-// 		padding: 30px;
-// 		border-radius: 3px;
-// 		border: 1px solid #eaeaea;
-// 		margin-bottom: 25px;
-
-// 		@include screen(tiny){
-// 			padding: 20px 15px;
-// 		}
-// 	}
-
-// 	&__title{
-// 		font-size: 2.8rem;
-// 		font-family: $alternate-font;
-// 		// color: $color-grey-mid;
-// 	}
-
-// 	&__label{
-// 		display: inline-block;
-// 		color: $color-grey-mid;
-// 		font-size: 1.5rem;
-// 		margin-bottom: 5px;
-// 	}
-// }
-
-// .form-page__loading{
-// 	padding-bottom: 120px;
-// }
-
-// .loading-text{
-// 	margin-top: 45px;
-// 	text-align: center;
-// }
-
-// .loading-spinner {
-//   margin: 100px auto 0;
-//   width: 70px;
-//   text-align: center;
-// }
-
-// .loading-spinner > .dot {
-//   width: 18px;
-//   height: 18px;
-//   background-color: $color-purple;
-
-//   border-radius: 100%;
-//   display: inline-block;
-//   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-//   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-// }
-
-// .loading-spinner .dot:first-child {
-//   -webkit-animation-delay: -0.32s;
-//   animation-delay: -0.32s;
-// }
-
-// .loading-spinner .dot:nth-child(2) {
-//   -webkit-animation-delay: -0.16s;
-//   animation-delay: -0.16s;
-// }
-
-// @-webkit-keyframes sk-bouncedelay {
-//   0%, 80%, 100% { -webkit-transform: scale(0) }
-//   40% { -webkit-transform: scale(1.0) }
-// }
-
-// @keyframes sk-bouncedelay {
-//   0%, 80%, 100% { 
-//     -webkit-transform: scale(0);
-//     transform: scale(0);
-//   } 40% { 
-//     -webkit-transform: scale(1.0);
-//     transform: scale(1.0);
-//   }
-// }
-
-body, html{
+body,
+html {
     height: 100%;
     position: relative;
     overflow-x: hidden;
     background-color: #F4F6F5;
-	// color: $grey;
 }
 
-main{
-	max-width: 600px;
-	width: 100%; 
-	margin-right: 30px;
+main {
+    max-width: 600px;
+    width: 100%;
+    margin-right: 30px;
+    @include screen(custom, max, 1000) {
+        margin-right: 0;
+    }
+}
 
-	@include screen(custom, max, 1000){
-		margin-right: 0;
-	}
+.content {
+    padding-top: $headerHeight + 24px;
+    min-width: 100%;
+    width: 100%;
+    &--extra-pad {
+        @include screen(med-small) {
+            padding-top: ($headerHeight * 2) + 24px;
+        }
+    }
 }
 
 
+.form-page {
+    padding: 60px 0 60px;
+    font-size: 1.4rem;
+    font-family: $alternate-font;
+    transition: all .3s;
+    &--padding-top-lg {
+        padding: 100px 0 120px;
+    }
+    &__inner {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        transition: all .5s;
+        max-height: auto;
+        // min-height: 50vh;
+        @include screen(med) {
+            padding: 0 30px;
+        }
+        &--hidden {
+            opacity: 0;
+            max-height: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+    }
+    &__heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    &__title {
+        font-size: 2.4rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-family: $regular-font;
+    }
+    &__subtitle {
+        color: $color-grey-mid;
+        line-height: 1.5;
+        font-family: $alternate-font;
+    }
+    &__form {
+        margin-bottom: 45px;
+    }
+    &__footer {
+        text-align: center;
+        color: $color-grey-mid;
+    }
+    &__footer-divider {
+        margin-bottom: 15px;
+    }
+    &__button-bar {
+        display: flex;
+        margin-bottom: 45px;
+    }
+    &__button-bar-left {
+        width: 50%;
+        padding-right: 5px
+    }
+    &__button-bar-right {
+        width: 50%;
+        padding-left: 5px;
+    }
+    &__link {
+        font-weight: bold;
+        color: $color-purple;
+    }
+}
+
+.page-overlay {
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.85);
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+    @include transition(.5s);
+    &--is-visible {
+        pointer-events: auto;
+        @include transition(.5s);
+        opacity: 1;
+    }
+}
+
+.search-results {
+    &__header {
+        padding: 30px;
+        border-radius: 3px;
+        border: 1px solid #eaeaea;
+        margin-bottom: 25px;
+        @include screen(tiny) {
+            padding: 20px 15px;
+        }
+    }
+    &__title {
+        font-size: 2.8rem;
+        font-family: $alternate-font;
+        // color: $color-grey-mid;
+    }
+    &__label {
+        display: inline-block;
+        color: $color-grey-mid;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+}
+
+.form-page__loading {
+    padding-bottom: 120px;
+}
+
+.loading-text {
+    margin-top: 45px;
+    text-align: center;
+}
+
+.loading-spinner {
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
+}
+
+.loading-spinner > .dot {
+    width: 18px;
+    height: 18px;
+    background-color: $color-purple;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.loading-spinner .dot:first-child {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.loading-spinner .dot:nth-child(2) {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
