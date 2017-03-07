@@ -6,9 +6,11 @@
  */
 
 var https = require('https');
+var isJSON = require('is-json');
 
 module.exports = {
 
+  // Generic request
   req: function(options) {
     return new Promise(function(resolve, reject) {
 
@@ -33,6 +35,7 @@ module.exports = {
 
         if ( options.session.temporaryStorage[path] ) {
           console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE`);
+          console.log(options.session.temporaryStorage[path])
           resolve(options.session.temporaryStorage[path])
         } else {
           httpRequest(method, requestOptions, data, options.session)
@@ -47,10 +50,19 @@ module.exports = {
       }
 
 
-
-
-
     }) // end Promise
+  },
+
+
+  // Repeated requests
+
+  posts: {
+
+    getSidebarPosts: function() {
+      "use strict";
+
+    }
+
   }
 
 
@@ -66,14 +78,22 @@ function httpRequest(method, requestOptions, data, session) {
         body += data;
       });
       response.on('end', function () {
-        body = JSON.parse(body);
 
-        if ( session ) {
-          const path = requestOptions.path.split(sails.config.globals.API.path)[1];
-          session.temporaryStorage[path] = body;
+        if (isJSON(body)) {
+          body = JSON.parse(body);
+          if ( session ) {
+            const path = requestOptions.path.split(sails.config.globals.API.path)[1];
+            session.temporaryStorage[path] = body;
+          }
+          resolve(body);
+        } else if (body == '[]') {
+          resolve([]);
+        } else {
+          console.log("IS NOT JSON =====")
+          console.log(body);
+          reject(body);
         }
 
-        resolve(body);
       });
     });
     newRequest.on('error', (e) => {

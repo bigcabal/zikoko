@@ -26,6 +26,8 @@ module.exports = {
       })
       .then(() => APIService.req({ path: `/posts?author=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
+        console.log("POSTS ==")
+        console.log(posts);
         return data.posts = posts
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
@@ -55,6 +57,7 @@ module.exports = {
       })
       .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
+        console.log(posts);
         return data.posts = posts
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))

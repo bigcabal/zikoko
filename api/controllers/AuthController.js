@@ -18,7 +18,7 @@ module.exports = {
     AuthService.signIn(user)
       .then((signedInUser) => {
         if ( !signedInUser ) return Promise.reject();
-        req.session.user = JSON.parse(signedInUser);
+        req.session.user = signedInUser;
         req.session.user.authorization = authorization;
         console.log(req.session.user);
         res.redirect('/new');
@@ -74,7 +74,7 @@ module.exports = {
       AuthService.signIn(user)
         .then((signedInUser) => {
           if ( !signedInUser ) return Promise.reject();
-          req.session.user = JSON.parse(signedInUser);
+          req.session.user = signedInUser;
           req.session.user.authorization = authorization;
           console.log(req.session.user);
           res.redirect('/me/profile');

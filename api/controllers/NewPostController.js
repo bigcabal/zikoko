@@ -25,7 +25,7 @@ module.exports = {
     }
 
     function handleSuccess(newPost) {
-      console.log(newPost);
+      console.log("Success");
       res.redirect(`/post/${newPost.slug}`)
     }
 
@@ -38,7 +38,12 @@ module.exports = {
       .then((imageUrl) => setupPost(req.body, imageUrl))
       .then((newPost) => post = newPost)
       .then(() => createTags(post.tags))
-      .then((tags) => post.tags = tags)
+      .then((tags) => {
+        "use strict";
+        post.tags = tags;
+        console.log(post);
+        return;
+      })
       .then(() => APIService.req({ path: '/posts', user: req.session.user, method: 'POST', data: post }))
       .then((newPost) => handleSuccess(newPost))
       .catch(() => handleError())

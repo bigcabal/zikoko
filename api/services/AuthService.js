@@ -5,62 +5,37 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var https = require('https');
-
 module.exports = {
 
   createUser: function (newUser) {
     return new Promise(function (resolve, reject) {
-      let options = {
-        host: sails.config.globals.API.host,
-        port: 443,
-        path: `${sails.config.globals.API.path}/register`,
-        method: 'POST'
-      }
-      let newRequest = https.request(options, function (response) {
-        let body = '';
-        response.on('data', function (data) {
-          data = data.toString();
-          body += data;
-        });
-        response.on('end', function () {
-          resolve(body);
-        });
-      });
-      newRequest.on('error', (e) => {
-        console.error("error: ", e);
-        reject(e);
-      });
-      newRequest.write( JSON.stringify(newUser) );
-      newRequest.end();
+
+      const options = {
+        path: '/register',
+        method: 'POST',
+        data: newUser
+      };
+
+      APIService.req(options)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err))
+
     })
   },
 
   signIn: function(login) {
     return new Promise(function (resolve, reject) {
-      let options = {
-        host: sails.config.globals.API.host,
-        port: 443,
-        path: `${sails.config.globals.API.path}/auth/local`,
-        method: 'POST'
-      }
 
-      let newRequest = https.request(options, function (response) {
-        let body = '';
-        response.on('data', function (data) {
-          data = data.toString();
-          body += data;
-        });
-        response.on('end', function () {
-          resolve(body);
-        });
-      });
-      newRequest.on('error', (e) => {
-        console.error("error: ", e);
-        reject(e);
-      });
-      newRequest.write( JSON.stringify(login) );
-      newRequest.end();
+      const options = {
+        path: '/auth/local',
+        method: 'POST',
+        data: login
+      };
+
+      APIService.req(options)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err))
+
     })
 
   }
