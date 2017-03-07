@@ -1,15 +1,12 @@
 /* MEDIA QUERIES ----------- */
 
-$breakpoint-tiny: 460px;
-$breakpoint-small: 600px;
-$breakpoint-med-small: 925px;
-$breakpoint-med: 960px;
-
-
+$breakpoint-tiny: 470px;
+$breakpoint-small: 500px;
+$breakpoint-med-small: 1100px;
+$breakpoint-med: 1280px;
 // $breakpoint-small: 600px;
 // $breakpoint-med-small: 750px;
 // $breakpoint-med: 960px;
-
 
 /* MIXINS FOR MEDIA QUERIES ----------- */
 
@@ -66,7 +63,7 @@ $breakpoint-med: 960px;
     }
 }
 
-@mixin transition($duration){
+@mixin transition($duration) {
     -webkit-transition: all $duration;
     -moz-transition: all $duration;
     -ms-transition: all $duration;

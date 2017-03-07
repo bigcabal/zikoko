@@ -1,177 +1,309 @@
-.post{
-	&-actions{
-		display: flex; 
-		align-items: center;
-	}
+// .post{
+// 	&-actions{
+// 		display: flex; 
+// 		align-items: center;
+// 	}
 
-	&-action{
-		margin-right: 30px;
-		display: inline-flex; 
-		align-items: center;
-		line-height: 24px;
-		color: $color-grey-mid;
-		cursor: pointer;
-		transition: color .3s;
-		position: relative;
+// 	&-action{
+// 		margin-right: 30px;
+// 		display: inline-flex; 
+// 		align-items: center;
+// 		line-height: 24px;
+// 		color: $color-grey-mid;
+// 		cursor: pointer;
+// 		transition: color .3s;
+// 		position: relative;
 		
 
-		&:hover{
-			color: $color-black;
-		}
+// 		&:hover{
+// 			color: $color-black;
+// 		}
 
-		@include screen(tiny){
-			margin-right: 15px;
-			&:last-child{
-				margin-right: 0;
-			}
-		}
+// 		@include screen(tiny){
+// 			margin-right: 15px;
+// 			&:last-child{
+// 				margin-right: 0;
+// 			}
+// 		}
 
-		.post &{
-			font-size: 1.6rem;
-		}
+// 		.post &{
+// 			font-size: 1.6rem;
+// 		}
 
-		&--toggle-like{
-			min-width: 50px;
-			padding-left: 36px;
-			justify-content: flex-start;
+// 		&--toggle-like{
+// 			min-width: 50px;
+// 			padding-left: 36px;
+// 			justify-content: flex-start;
 
-			.post &{
-				padding-left: 48px;
-			} 
-		}
-	}
+// 			.post &{
+// 				padding-left: 48px;
+// 			} 
+// 		}
+// 	}
 
 
 
-	&-action-icon{
-		height: 24px;
-		width: 24px;
-		margin-right: 10px;
-		background-size: contain;
-		background-position: center;
-		background-repeat: no-repeat;
-		transition: all .3s;
+// 	&-action-icon{
+// 		height: 24px;
+// 		width: 24px;
+// 		margin-right: 10px;
+// 		background-size: contain;
+// 		background-position: center;
+// 		background-repeat: no-repeat;
+// 		transition: all .3s;
 
-		&--like{
-			// background-image: url('../images/icons/like.svg');
-			.post-action--like &{
-				opacity: 1;
-			}
+// 		&--like{
+// 			// background-image: url('../images/icons/like.svg');
+// 			.post-action--like &{
+// 				opacity: 1;
+// 			}
 
-			.post-action--liked &{
-				opacity: 0;
-			}
-		}
+// 			.post-action--liked &{
+// 				opacity: 0;
+// 			}
+// 		}
 
-		&--liked{
-			// background-image: url('../images/icons/liked.svg');
-			.post-action--like &{
-				opacity: 0;
-			}
+// 		&--liked{
+// 			// background-image: url('../images/icons/liked.svg');
+// 			.post-action--like &{
+// 				opacity: 0;
+// 			}
 
-			.post-action--liked &{
-				opacity: 1;
-			}
-		}
+// 			.post-action--liked &{
+// 				opacity: 1;
+// 			}
+// 		}
 
-		.post-action--toggle-like &{
-			position: absolute;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-		}
+// 		.post-action--toggle-like &{
+// 			position: absolute;
+// 			left: 0;
+// 			top: 50%;
+// 			transform: translateY(-50%);
+// 		}
 
-		&--comment{
-			background-image: url('../images/icons/comment.svg');
-		}
+// 		&--comment{
+// 			background-image: url('../images/icons/comment.svg');
+// 		}
 
-		&--delete{
-			background-image: url('../images/icons/delete.svg');
-		}
+// 		&--delete{
+// 			background-image: url('../images/icons/delete.svg');
+// 		}
 
-		@include screen(tiny){
-			margin-right: 5px;
-		}
+// 		@include screen(tiny){
+// 			margin-right: 5px;
+// 		}
 
-		.post &{
-			height: 32px;
-			width: 32px;
-			margin-right: 10px;
-		}
+// 		.post &{
+// 			height: 32px;
+// 			width: 32px;
+// 			margin-right: 10px;
+// 		}
 
-		svg{
-			height: 100%;
-			width: 100%;
-		}
-	}
+// 		svg{
+// 			height: 100%;
+// 			width: 100%;
+// 		}
+// 	}
 
-	&-share{
-		@include screen(tiny){
-			display: flex;
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-		}
+// 	&-share{
+// 		@include screen(tiny){
+// 			display: flex;
+// 			position: absolute;
+// 			left: 0;
+// 			bottom: 0;
+// 			width: 100%;
+// 		}
 
-		.post &{
-			@include screen(tiny){
-				position: fixed;
-			}
-		}
-	}
+// 		.post &{
+// 			@include screen(tiny){
+// 				position: fixed;
+// 			}
+// 		}
+// 	}
 
-	&-share-item{
-		display: inline-flex;
-		margin-left: 3px;
-		height: 35px;
-		width: 35px;
-		border-radius: 3px;
-		font-size: 1.6rem;
-		justify-content: center;
-		align-items: center;
-		background-color: $color-grey-mid;
-		color: white;
+// 	&-share-item{
+// 		display: inline-flex;
+// 		margin-left: 3px;
+// 		height: 35px;
+// 		width: 35px;
+// 		border-radius: 3px;
+// 		font-size: 1.6rem;
+// 		justify-content: center;
+// 		align-items: center;
+// 		background-color: $color-grey-mid;
+// 		color: white;
 
-		.post &{
-			height: 40px;
-			width: 40px;
-		}
+// 		.post &{
+// 			height: 40px;
+// 			width: 40px;
+// 		}
 
-		@include screen(tiny){
-			margin-left: 0;
-			font-size: 2.1rem;
-			width: 25%;
-			flex-grow: 1;
-			border-radius: 0;
-			height: 48px;
-			margin: 0;
-		}
+// 		@include screen(tiny){
+// 			margin-left: 0;
+// 			font-size: 2.1rem;
+// 			width: 25%;
+// 			flex-grow: 1;
+// 			border-radius: 0;
+// 			height: 48px;
+// 			margin: 0;
+// 		}
 
-		&--twitter{
-			background-color: $color-twitter-blue;
-			border-color: $color-twitter-blue;
-		}
+// 		&--twitter{
+// 			background-color: $color-twitter-blue;
+// 			border-color: $color-twitter-blue;
+// 		}
 
-		&--facebook{
-			background-color: $color-facebook-blue;
-			border-color: $color-facebook-blue;
-		}
+// 		&--facebook{
+// 			background-color: $color-facebook-blue;
+// 			border-color: $color-facebook-blue;
+// 		}
 
-		&--pinterest{
-			background-color: $color-pinterest-red;
-			border-color: $color-pinterest-red;
-		}
+// 		&--pinterest{
+// 			background-color: $color-pinterest-red;
+// 			border-color: $color-pinterest-red;
+// 		}
 
-		&--google{
-			background-color: $color-google-red;
-			border-color: $color-google-red;
-		}
-	}
+// 		&--google{
+// 			background-color: $color-google-red;
+// 			border-color: $color-google-red;
+// 		}
+// 	}
+// }
+
+// .post-action--delete:hover{
+// 	color: $color-google-red;
+// }
+
+.post {
+    &-actions {
+        display: flex;
+        align-items: center;
+        // margin-bottom: 24px;
+    }
+    &-action {
+        margin-right: 36px;
+        display: inline-flex;
+        align-items: center;
+        color: $greyLight;
+        cursor: pointer;
+        transition: color .3s;
+        font-size: 1.5rem;
+        line-height: 27px;
+        &:hover {
+            color: $black;
+        }
+        @include screen(tiny){
+        	// margin-right: 15px;
+        	&:last-child{
+        		margin-right: 0;
+        	}
+        }
+        // .post & {
+        //     font-size: 1.6rem;
+        // }
+    }
+    &-action-icon {
+        height: 27px;
+        width: 27px;
+        margin-right: 12px;
+
+        svg{
+        	height: 100%;
+        	width: 100%;
+        	fill: #c4c4c4;
+        }
+
+        &--comment{
+        	height: 24px;
+        	width: 24px;
+        }
+
+        &--liked{
+        	svg{
+        		fill: $googleRed;
+        	}
+        }
+        
+        // @include screen(tiny){
+        // 	margin-right: 5px;
+        // }
+        // .post &{
+        // 	height: 32px;
+        // 	width: 32px;
+        // 	margin-right: 10px;
+        // }
+    }
+    &-share {
+        @include screen(tiny){
+        	display: flex;
+        	position: absolute;
+        	left: 0;
+        	bottom: 0;
+        	width: 100%;
+        }
+        // .post &{
+        // 	@include screen(tiny){
+        // 		position: fixed;
+        // 	}
+        // }
+    }
+    &-share-item {
+        display: inline-flex;
+        margin-left: -5px;
+        height: 36px;
+        width: 48px;
+        font-size: 1.6rem;
+        justify-content: center;
+        align-items: center;
+        background-color: lighten($black, 24%);
+        color: white;
+        .icon {
+            height: 18px;
+            width: 18px;
+            fill: white;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &:first-child {
+            border-radius: 3px 0 0 3px;
+        }
+        &:last-child {
+            border-radius: 0 3px 3px 0;
+        }
+        // .post &{
+        // 	height: 40px;
+        // 	width: 40px;
+        // }
+        @include screen(tiny){
+        	margin-left: 0;
+        	width: 25%;
+        	flex-grow: 1;
+        	border-radius: 0;
+        	height: 48px;
+        	margin: 0;
+
+        	&:first-child, &:last-child{
+				border-radius: 0;
+        	}
+        }
+        &--twitter {
+            background-color: $twitterBlue;
+            border-color: $twitterBlue;
+        }
+        &--facebook {
+            background-color: $facebookBlue;
+            border-color: $facebookBlue;
+        }
+        &--pinterest {
+            background-color: $googleRed;
+            border-color: $googleRed;
+        }
+    }
 }
 
-.post-action--delete:hover{
-	color: $color-google-red;
+.post-action--delete:hover {
+    // color: $color-google-red;
 }
-
 

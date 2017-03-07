@@ -1,22 +1,21 @@
-<article class="post-excerpt card">
-  <a href="/post/<%= post.slug %>">
-    <h3 class="post-excerpt__title"><%= post.title %></h3>
+<article class="post-excerpt">
+    <a href="/post/<%= post.slug %>">
+        <h3 class="post-excerpt__title"><%= post.title %></h3>
+        <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
+    </a>
+    <div class="post-excerpt__footer u-space-between">
+        <% if (post.author) { %>
+          <div class="post-excerpt__author u-flex u-vertical-align">
+            <% if (post.author.imageUrl) { %>
+            <%- ImageService.getDisplayImage(post.author.imageUrl, 'profile-excerpt') %>
+            <% } else { %>
+            <img src="<%= post.author.gravatarUrl %>" alt="" class="post-excerpt__author-img">
+            <% } %>
+            <a href="/user/<%= post.author.username %>" class="post-excerpt__author-name">@<%= post.author.username %></a>
+          </div>
+        <% } %>
 
-    <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
-  </a>
-  <div class="post-excerpt__footer u-flex u-space-between">
-
-    <% if (post.author) { %>
-    <div class="post-excerpt__author u-flex u-vertical-align">
-      <% if (post.author.imageUrl) { %>
-      <%- ImageService.getDisplayImage(post.author.imageUrl, 'profile-excerpt') %>
-      <% } else { %>
-      <img src="<%= post.author.gravatarUrl %>" alt="" class="post-excerpt__author-img">
-      <% } %>
-      <a href="/user/<%= post.author.username %>" class="post-excerpt__author-name">@<%= post.author.username %></a>
+        <%- partial('./actions.ejs') %>
+        <%- partial('./share.ejs') %>
     </div>
-    <% } %>
-
-    <%- partial('./actions.ejs') %>
-    <%- partial('./share.ejs') %>
 </article>

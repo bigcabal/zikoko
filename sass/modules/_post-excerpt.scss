@@ -1,71 +1,70 @@
 .post-excerpt{
+	padding: 0px 24px 20px;
 	width: 100%;
-	margin-bottom: 25px;
-	padding: 30px;
+	border: 1px solid $borderColor;
+	float: left;
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+	margin-bottom: 24px;
 	position: relative;
 
-	@include screen(tiny){
-		padding: 20px 15px 64px;
-		border-left: none;
+	@include screen(med-small){
+		margin-right: 0;
+	}
+
+	@include screen(small){
+		padding-left: 12px;
+		padding-right: 12px;
+		border-radius: 0;
 		border-right: none;
+		border-left: none;
+		box-shadow: none;
+	}
+
+	@include screen(tiny){
+		padding-bottom: 64px;
 	}
 
 	&__title{
-		font-size: 2.8rem;
-		line-height: 1.2;
-		font-weight: bold;
-		margin-bottom: 15px;
-		color: $color-black;
-		@include transition(.3s);
+		margin-top: 22px;
+	    margin-bottom: 15px;
+	    font-size: 2.7rem;
+	    line-height: 3.6rem;
+	    font-weight: bold;
+	    text-transform: capitalize;
 
-		.post-excerpt--sm &{
+	    .post-excerpt--sm &{
 			font-size: 1.6rem;
-			font-weight: normal;
+			line-height: 1.5;
+			// font-weight: normal;
 			margin-bottom: 0;
-			line-height: 1.4;
-			font-family: $alternate-font;
-			color: $color-black-alt;
-		}
-
-		.profile-posts &{
-			color: $color-black-alt;
-		}
-
-		.post-excerpt:hover &{
-			color: $color-black;
-		}
-
-		@include screen(tiny){
-			font-size: 2.4rem;
-			color: $color-black;
+			margin-top: 0;
 		}
 	}
 
 	&__img{
 		width: 100%;
 		height: auto;
+		object-fit: contain;
 		border-radius: 3px;
 		margin-bottom: 10px;
-		object-fit: cover;
-		object-position: center;
-
-		min-height: 100px;
-		background-color: #eee;
 
 		.post-excerpt--sm &{
-			max-height: 150px;
-			margin-bottom: 5px;
-			// border-radius: 0;
+			max-height: 144px;
+			margin-bottom: 0px;
+			width: 100%;
+			object-fit: cover;
 		}
 	}
 
-	&__author, &__delete{
-		margin-bottom: 15px;
-		padding-bottom: 15px;
-		border-bottom: 1px solid #ddd;
+	&__author{
+		margin-bottom: 17px;
+		padding-bottom: 18px;
+		border-bottom: 1px solid $borderColor;
 		width: 100%;
-
-		font-family: $alternate-font;
+		display: flex;
+		align-items: center;
 
 		@include screen(tiny){
 			width: auto;
@@ -73,37 +72,23 @@
 			padding-bottom: 0;
 			margin-bottom: 0;
 		}
+
+		&-img{
+			height: 36px;
+			width: 36px;
+			object-fit: cover;
+			object-position: center;
+			border-radius: 3px;
+			margin-right: 16px;
+		}
 	}
 
-	&__author-img{
-		height: 30px;
-		width: 30px;
-		object-fit: cover;
-		object-position: center;
-		border-radius: 3px;
-		margin-right: 10px;
-	}
-
-	&__author-name{
-		color: $color-purple;
-		font-size: 1.4rem;
-		font-weight: 500;
-		font-family: $regular-font;
-	}
-
-	&__footer{
-		color: $color-grey;
-		font-size: 1.4rem;
-		flex-flow: wrap;
-		font-family: $alternate-font;
-		align-items: center;
-	}
 
 	&--sm{
-		padding: 20px;
+		padding: 24px 24px 0;
 		box-shadow: none;
-		margin-bottom: 0px;
+		background-color: transparent;
+		border: none;
+		margin-bottom: 12px;
 	}
 }
-
-

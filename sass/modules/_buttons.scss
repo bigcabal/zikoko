@@ -123,3 +123,19 @@
 }
 
 
+.upload-button{
+	height: 36px;
+	min-width: 120px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $purple;
+	border-radius: 3px;
+	color: white;
+
+	@include screen(tiny){
+		min-width: 84px;
+	}
+}
+
+
