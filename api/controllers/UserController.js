@@ -14,9 +14,10 @@ module.exports = {
     data.currentUser = req.session.user;
     data.activeTab = 'posts';
 
-    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
-      .then((users) => {
-        data.user = users[0];
+    APIService.req({ path: `/users?username=${username}` })
+      .then((users) => APIService.req({ path: `/users/${users[0].id}`, user: data.currentUser }))
+      .then((user) => {
+        data.user = user;
         data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 
@@ -26,9 +27,8 @@ module.exports = {
       })
       .then(() => APIService.req({ path: `/posts?author=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
-        console.log("POSTS ==")
         console.log(posts);
-        return data.posts = posts
+        return data.posts = Array.isArray(posts) ? posts : [posts];
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
@@ -44,21 +44,21 @@ module.exports = {
     data.activeTab = 'likes';
 
 
-    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
-      .then((users) => {
-        data.user = users[0];
+    APIService.req({ path: `/users?username=${username}` })
+      .then((users) => APIService.req({ path: `/users/${users[0].id}`, user: data.currentUser }))
+      .then((user) => {
+        data.user = user;
         data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
-
         return;
       })
       .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((posts) => {
         console.log(posts);
-        return data.posts = posts
+        return data.posts = Array.isArray(posts) ? posts : [posts];
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
