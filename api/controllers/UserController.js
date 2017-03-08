@@ -133,6 +133,8 @@ module.exports = {
 };
 
 
+
+
 function checkIfFileUploaded( file ) {
   return new Promise((resolve) => {
     file.upload(function (err, uploadedFiles) {
@@ -143,4 +145,5 @@ function checkIfFileUploaded( file ) {
     });
   })
 }
+
 
