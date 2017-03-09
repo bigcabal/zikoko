@@ -1,29 +1,3 @@
-// .clear {
-//     clear: both;
-// }
-
-// .container {
-//     margin: 0 auto;
-//     max-width: 925px;
-//     width: 100%;
-//     position: relative;
-
-//     @include screen(med){
-//         max-width: 100%;
-//         position: relative;
-//         padding: 0 15px;
-//     }
-
-//     &--full{
-//         max-width: 100%;
-//         padding: 0 20px;
-
-//         @include screen(tiny){
-//         	padding: 0 15px;
-//         }
-//     }
-// }
-
 .clear {
     clear: both;
 }
@@ -56,5 +30,8 @@
         @include screen(med) {
             padding: 0;
         }
+    }
+    &--no-pad{
+        padding: 0;
     }
 }

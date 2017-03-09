@@ -10,19 +10,6 @@
     left: 0;
     z-index: 2;
     font-size: 1.5rem;
-    @include screen(custom, max, 1100) {
-        border-bottom: 1px solid $borderColor;
-        &:after {
-            content: '';
-            width: 100%;
-            height: $headerHeight;
-            background-color: white;
-            position: fixed;
-            left: 0;
-            top: $headerHeight;
-            border-bottom: 1px solid $borderColor;
-        }
-    }
     &__left {
         height: 30px;
         z-index: 2;
@@ -47,32 +34,69 @@
     }
 }
 
+.header--has-filter {
+    @include screen(custom, max, 1100) {
+        border-bottom: 1px solid $borderColor;
+        &:after {
+            content: '';
+            width: 100%;
+            height: $headerHeight;
+            background-color: white;
+            position: fixed;
+            left: 0;
+            top: $headerHeight;
+            border-bottom: 1px solid $borderColor;
+        }
+    }
+}
+
+.header--logo-centered {
+    text-align: center;
+    .logo {
+        margin-bottom: -8px;
+    }
+}
+
 .logo {
     height: 30px;
     width: 140px;
     overflow: hidden;
     display: inline-block;
     @include screen(small) {
-        width: 36px;
+        width: 34px;
+    }
+    .header--logo-centered &{
+        @include screen(small) {
+            width: auto;
+        }
     }
     &__icon {
         height: 100%;
         width: 145px;
         display: inline-block;
         margin-left: -10px;
-        @include screen(med) {
-            #fullIcon path {
-                fill: transparent;
+        .header--has-filter & {
+            @include screen(med) {
+                #fullIcon path {
+                    fill: transparent;
+                }
             }
-        }
-        @include screen(custom, max, 1100) {
-            #fullIcon path {
-                fill: $purple;
+            @include screen(custom, max, 1100) {
+                #fullIcon path {
+                    fill: $purple;
+                }
             }
         }
         @include screen(small) {
             #fullIcon path {
                 fill: transparent;
+            }
+        }
+        .header--logo-centered &{
+            @include screen(small) {
+                #fullIcon path {
+                    fill: $purple;
+                }
             }
         }
     }
@@ -92,10 +116,9 @@
         transition: all .3s;
         cursor: pointer;
         padding: 0 3px;
-        // color: $grey;
-        &:focus {
-            background-color: #f4f4f4;
+        &:focus{
             outline: none;
+            background-color: #f4f4f4;
         }
         &__text {
             margin-right: 10px;
@@ -107,8 +130,10 @@
             svg {
                 height: 100%;
                 width: 100%;
-                // fill: $grey;
             }
+        }
+        .filter__categories--active & {
+            background-color: #f4f4f4;
         }
     }
     &-dropdown {
@@ -139,22 +164,21 @@
             width: 0;
         }
         &__item {
-            padding: 10px 30px;
+            padding: 8px 24px;
             transition: all .3s;
             &:hover {
                 opacity: 0.5;
             }
         }
+        .filter__categories--active & {
+            opacity: 1;
+            pointer-events: auto;
+            top: $headerHeight;
+        }
         @include screen(custom, max, 1000) {
             left: 10px;
         }
     }
-}
-
-.category-toggle:focus + .category-dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    top: $headerHeight;
 }
 
 .filter {
@@ -198,10 +222,7 @@
     display: inline-flex;
     align-items: center;
     height: 24px;
-    &:focus {
-        background-color: #f4f4f4;
-        outline: none;
-    }
+
     &-toggle {
         display: inline-flex;
         align-items: center;
@@ -229,6 +250,11 @@
                 display: none;
             }
         }
+        &:focus{
+            outline: none;
+            border: 1px solid $greyLight;
+            border-radius: 3px;
+        }
     }
 }
 
@@ -255,6 +281,11 @@
         background-color: transparent;
         display: none;
         padding: 0 8px;
+        &:focus{
+            outline: none;
+            border: 1px solid $greyLight;
+            border-radius: 3px;
+        }
         @include screen(med) {
             display: inline-flex;
             margin-left: 20px;
@@ -262,16 +293,12 @@
         &__icon {
             height: 24px;
             width: 24px;
-            svg,
-            g {
-                // fill: $grey;
-            }
         }
     }
     &__links {
         @include screen(med) {
             position: absolute;
-            min-width: 175px;
+            min-width: 150px;
             top: $headerHeight - 12px;
             background-color: lighten($black, 8%);
             border-radius: 3px;
@@ -291,7 +318,7 @@
                 content: " ";
                 height: 0;
                 left: 50%;
-                margin-left: -6px;
+                margin-left: 3px;
                 pointer-events: none;
                 position: absolute;
                 width: 0;
@@ -305,20 +332,19 @@
     &__link {
         display: inline-flex;
         margin-left: 30px;
-        @include screen(med-small) {
+        @include screen(med) {
             margin-left: 0;
             text-align: left;
             justify-content: flex-start;
             color: white;
-            padding: 10px 30px;
+            padding: 8px 24px;
             width: 100%;
         }
     }
 }
 
 .user-profile {
-    align-items: center;
-    justify-content: center;
+    display: inline-flex;
     border: none;
     background-color: transparent;
     align-items: center;
@@ -326,6 +352,10 @@
     transition: all .3s;
     cursor: pointer;
     margin-right: 24px;
+    height: 36px;
+    @include screen(small){
+        margin-right: 12px;
+    }
     &-toggle {
         height: 100%;
         border: none;
@@ -333,14 +363,26 @@
         height: 36px;
         width: 36px;
         border-radius: 3px;
-        display: inline-flex;
-        margin-left: 20px;
+        display: inline-block;
+        margin-left: 36px;
+        padding: 0;
+        cursor: pointer;
+        img {
+            height: 36px;
+            width: 36px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 3px;
+        }
+        @include screen(small) {
+            margin-left: 20px;
+        }
     }
     &__links {
         position: absolute;
         min-width: 120px;
         top: $headerHeight - 6px;
-        left: -40%;
+        left: -6px;
         background-color: lighten($black, 8%);
         border-radius: 3px;
         padding: 10px 0;
@@ -359,10 +401,13 @@
             content: " ";
             height: 0;
             left: 50%;
-            margin-left: -6px;
+            margin-left: -8px;
             pointer-events: none;
             position: absolute;
             width: 0;
+            @include screen(small){
+                margin-left: -20px;
+            }
         }
         .user-profile--active & {
             opacity: 1;
@@ -373,8 +418,12 @@
         text-align: left;
         justify-content: flex-start;
         color: white;
-        padding: 10px 30px;
+        padding: 8px 25px;
         width: 100%;
+        transition: all .3s;
+        &:hover {
+            opacity: 0.6;
+        }
     }
 }
 

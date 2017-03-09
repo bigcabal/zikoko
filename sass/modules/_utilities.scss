@@ -1,34 +1,11 @@
-// .u-flex{
-// 	display: flex;
-// }
-
-// .u-row-wrap{
-// 	flex-flow: row wrap;
-// }
-
-// .u-inline-block{
-// 	display: inline-block;
-// }
-
-// .u-space-between{
-// 	justify-content: space-between;
-// }
-
-// .u-center-align{
-// 	justify-content: center;
-// }
-
-// .u-vertical-align{
-// 	align-items: center;
-// }
-
-// .u-clear{
-// 	clear: both;
-// }
-
 .u-space-between{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-flow: row wrap;
+}
+
+.u-flex{
+	display: flex;
 	flex-flow: row wrap;
 }

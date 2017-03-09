@@ -1,57 +1,46 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
-
-<div class="zkk-site-wrap u-flex u-center-align u-row-wrap">
-
-  <div class="zkk-main">
-
-    <div class="profile-edit card">
-      <nav class="profile__tabs">
-        <a href="/me/profile" class="profile__tab profile__tab--active">Edit Profile</a>
-        <a href="/me/password" class="profile__tab">Change Password</a>
-      </nav>
-
-      <form action="/me/profile" method="post" enctype="multipart/form-data" class="profile-edit__form form">
-
-        <div class="form__group u-flex">
-
-          <% if (currentUser.imageUrl) { %>
-          <%- ImageService.getDisplayImage(currentUser.imageUrl, 'profile') %>
-          <% } else { %>
-          <img src="<%= currentUser.gravatarUrl %>" alt="">
-          <% } %>
-
-          <div>
-            <input type="file" name="profileImage" id="profileImage">
-            <p class="form__hint">PNG, JPG or GIF with size 2MB or less</p>
-          </div>
-        </div>
-
-        <div class="form__group">
-          <label class="form__label" for="username">Username *</label>
-          <input type="text" id="username" name="username" class="form__field" value="<%= currentUser.username %>" required>
-        </div>
-
-        <div class="form__group">
-          <label class="form__label" for="email">Email Address *</label>
-          <input type="email" id="email" name="email" class="form__field" value="<%= currentUser.email %>" required>
-        </div>
-
-        <div class="form__group">
-          <label class="form__label" for="first_name">First Name</label>
-          <input type="text" id="first_name" name="first_name" class="form__field" value="<%= currentUser.first_name || '' %>">
-        </div>
-
-        <div class="form__group">
-          <label class="form__label" for="last_name">Last Name</label>
-          <input type="text" id="last_name" name="last_name" class="form__field" value="<%= currentUser.last_name || '' %>">
-        </div>
-
-        <div class="form__action">
-          <button type="submit" class="button button--form button--md">Update Profile</button>
-        </div>
-      </form>
+<div class="content">
+    <div class="container container--no-pad container--flex">
+        <main>
+            <div class="profile-edit card">
+                <nav class="profile__tabs">
+                    <a href="/me/profile" class="profile__tab profile__tab--active">Edit Profile</a>
+                    <a href="/me/password" class="profile__tab">Change Password</a>
+                </nav>
+                <form action="/me/profile" method="post" enctype="multipart/form-data" class="profile-edit__form form">
+                    <div class="form__group u-flex">
+                        <% if (currentUser.imageUrl) { %>
+                            <%- ImageService.getDisplayImage(currentUser.imageUrl, 'profile') %>
+                        <% } else { %>
+                            <img src="<%= currentUser.gravatarUrl %>" alt="" class="profile__img">
+                        <% } %>
+                        <div>
+                            <input type="file" name="profileImage" id="profileImage">
+                            <p class="form__hint">PNG, JPG or GIF with size 2MB or less</p>
+                        </div>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="username">Username *</label>
+                        <input type="text" id="username" name="username" class="form__field" value="<%= currentUser.username %>" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form__field" value="<%= currentUser.email %>" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form__field" value="<%= currentUser.first_name || '' %>">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form__field" value="<%= currentUser.last_name || '' %>">
+                    </div>
+                    <div class="form__action">
+                        <button type="submit" class="button button--form button--md">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <%- partial('./partials/sidebar.ejs') %>
     </div>
-  </div>
-
-  <%- partial('./partials/sidebar.ejs') %>
 </div>

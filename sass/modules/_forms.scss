@@ -1,126 +1,110 @@
-.form{
-
-	&__field{
-		display: block;
-		width: 100%;
-		border-radius: 3px;
-		outline: none;
-		border: 1px solid $color-grey-light;
-		font-size: 1.5rem;
-		padding: 12px 15px;
-		transition: border-color .3s;
-		font-family: $alternate-font;
-
-		&--sm{
-			font-size: 1.4rem;
-			padding: 8px 10px;
-		}
-
-		&:focus{
-			border-color: $color-purple;
-		}
-
-		.search-header-form &{
-			border: none;
-			border-radius: 0;
-			border-bottom: 2px solid $color-black;
-			font-size: 2.8rem;
-			padding-top: 40px;
-			padding-bottom: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
-		}
-	}
-
-	&__group{
-		margin-bottom: 30px;
-
-		.form--no-label &{
-			margin-bottom: 15px; 
-		}
-
-		.form--spacing-sm &{
-			margin-bottom: 10px; 
-		}
-	}
-
-	&__hint{
-		margin-top: 15px;
-		color: $color-grey-mid;
-		font-size: 1.4rem;
-	}
-
-	&__label{
-		color: $color-grey-mid;
-		display: block;
-		margin-bottom: 5px;
-		font-size: 1.4rem;
-	}
+.form {
+    &__field {
+        display: block;
+        width: 100%;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid $greyLight;
+        font-size: 1.5rem;
+        padding: 12px 15px;
+        transition: border-color .3s;
+        font-family: $font;
+        &--sm {
+            font-size: 1.4rem;
+            padding: 8px 10px;
+        }
+        &:focus {
+            border-color: $purple;
+        }
+        .search-header-form & {
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid $black;
+            font-size: 2.8rem;
+            padding-top: 40px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+    &__group {
+        margin-bottom: 30px;
+        .form--no-label & {
+            margin-bottom: 15px;
+        }
+        .form--spacing-sm & {
+            margin-bottom: 10px;
+        }
+    }
+    &__hint {
+        margin-top: 15px;
+        color: $grey;
+        font-size: 1.4rem;
+    }
+    &__label {
+        color: $grey;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.4rem;
+    }
 }
 
-.form__image{
-	&-field{
-		height: 250px;
-		background-color: #f9f9fc;
-		border-radius: 3px;
-		border: 1px solid $color-grey-light;
-		position: relative;
-		width: 100%;
-
-		overflow: hidden;
-		
-	}
-	&-file-and-label, &-prompt, &-uploaded{
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		position: absolute;
-	}
-
-	&-uploaded{
-		object-fit: cover;
-		object-position: center;
-	}
-
-	&-prompt{
-		text-align: center;
-		padding-top: 45px;
-		&-icon{
-			font-size: 8rem;
-			color: $color-grey-light;
-		}
-		&-text{
-			color: $color-grey-mid;
-			font-weight: bold;
-			margin-top: 10px;
-			display: inline-block;
-		}
-	}
-
-	&-file{
-		width: 0.1px;
-		height: 0.1px;
-		opacity: 0;
-		overflow: hidden;
-		position: absolute;
-		z-index: -1;
-	}
-
-	&-label{
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		display: block;
-		cursor: pointer;
-		z-index: 1;
-	}	
+.form__image {
+    &-field {
+        height: 250px;
+        background-color: #f9f9fc;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+    &-file-and-label,
+    &-prompt,
+    &-uploaded {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+    &-uploaded {
+        object-fit: cover;
+        object-position: center;
+    }
+    &-prompt {
+        text-align: center;
+        padding-top: 45px;
+        &-icon {
+            font-size: 8rem;
+            color: $grey;
+        }
+        &-text {
+            color: $grey;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    }
+    &-file {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+    &-label {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: block;
+        cursor: pointer;
+        z-index: 1;
+    }
 }
 
-.form__image-file:focus + .form__image-label{
-	// outline: 1px dotted #000;
-	// outline: -webkit-focus-ring-color auto 5px;
-	border: 1px solid $color-purple;
+.form__image-file:focus + .form__image-label {
+    border: 1px solid $purple;
 }
-

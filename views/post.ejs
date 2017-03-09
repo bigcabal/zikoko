@@ -1,46 +1,39 @@
 <%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
-
-<div class="zkk-site-wrap zkk-site-wrap--white u-flex u-center-align u-row-wrap">
-
+<div class="content content--white">
   <%- partial('./partials/ad.ejs', { adType: 'leaderboard' })  %>
-
-  <div class="zkk-main">
-    <article class="post">
-      <header>
-        <%- partial('./post/header.ejs') %>
-      </header>
-      <div class="post__items">
-        <%- partial('./post/content-'+ post.post_type +'.ejs') %>
+      <div class="container container--flex container--no-pad">
+          <main>
+              <article class="post">
+                  <header>
+                      <%- partial('./post/header.ejs') %>
+                  </header>
+                  <div class="post__items">
+                      <%- partial('./post/content-'+ post.post_type +'.ejs') %>
+                  </div>
+                  <% if (post.tags.length > 0) { %>
+                  <div class="post-tags">
+                      <h2 class="post-tags__title">Tags</h2>
+                      <ul>
+                          <% post.tags.forEach(function(tag) { %>
+                              <li class="post-tag"><a href="/search?term=<%= tag.name %>">#<%= tag.name %></a></li>
+                          <% }) %>
+                      </ul>
+                  </div>
+                  <% } %>
+                  <div class="post__footer u-flex u-space-between">
+                      <%- partial('./post/actions-single.ejs') %>
+                      <%- partial('./post/share.ejs') %>
+                  </div>
+                  <!-- @todo Comments -->
+                  <%- partial('./post/comments.ejs') %>
+                  <div class="u-flex u-space-between">
+                      <a href="/" class="button button--md button--full-width">
+                          <span class="button__text">Next Post</span>
+                      </a>
+                  </div>
+              </article>
+          </main>
+          <%- partial('./partials/sidebar.ejs') %>
       </div>
-
-      <% if (post.tags.length > 0) { %>
-      <div class="post-tags">
-        <h2 class="post-tags__title">Tags</h2>
-        <ul>
-          <% post.tags.forEach(function(tag) { %>
-          <li class="post-tag"><a href="/search?term=<%= tag.name %>">#<%= tag.name %></a></li>
-          <% }) %>
-        </ul>
-      </div>
-      <% } %>
-
-      <div class="post__footer u-flex u-space-between">
-        <%- partial('./post/actions-single.ejs') %>
-        <%- partial('./post/share.ejs') %>
-      </div>
-
-      <!-- @todo Comments -->
-      <%- partial('./post/comments.ejs') %>
-
-      <div class="u-flex u-space-between">
-          <a href="/" class="button button--md button--icon-right button--full-width">
-              <span class="button__text">Next Post</span>
-              <span class="button__icon"><i class="ion-ios-arrow-right"></i></span>
-          </a>
-      </div>
-    </article>
-  </div>
-  <%- partial('./partials/sidebar.ejs') %>
 </div>
-
 <%- partial('./partials/footer.ejs') %>

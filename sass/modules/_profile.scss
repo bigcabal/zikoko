@@ -1,102 +1,79 @@
-.profile{
-	padding: 30px 30px 0;
-	margin-bottom: 45px;
-
-	@include screen(tiny){
-		padding: 15px 15px 0;
-	}
-
-	&__name{
-		font-size: 3.5rem;
-		font-weight: bold;
-		margin-bottom: 20px;
-	}
-
-	&__role{
-		font-size: 1.6rem;
-		color: $color-grey-mid;
-		margin-bottom: 3px;
-	}
-
-	&__edit{
-		color: $color-purple;
-		font-family: $alternate-font;
-	}
-
-	&__img{
-		height: 100px;
-		width: 100px;
-		border-radius: 3px;
-		object-fit: cover;
-		object-position: center;
-
-		.profile-edit &{
-			margin-right: 20px;
-		}
-	}
-
-	&__stat{
-		text-align: right;
-
-		&:first-child{
-			margin-bottom: 15px;
-		}
-	}
-
-	&__stat-number{
-		// font-size: 2.1rem;
-		font-weight: bold;
-		display: inline-block;	
-	}
-
-	&__tabs{
-		border-top: 1px solid #eaeaea;
-		margin-top: 30px;
-
-		.profile-edit &{
-			margin-top: 0;
-			border-top: none;
-			border-bottom: 1px solid #eaeaea;
-			margin-bottom: 45px;
-		}
-	}
-
-	&__tab{
-		display: inline-block;
-		padding: 15px 30px 15px 0;
-		font-size: 1.6rem;
-		font-family: $alternate-font;
-		color: $color-grey-mid;
-
-		&--active{
-			color: $color-black;
-		}
-	}
+.profile {
+    padding: 30px 30px 0;
+    margin-bottom: 24px;
+    @include screen(tiny) {
+        padding: 15px 15px 0;
+    }
+    &__name {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    &__role {
+        font-size: 1.5rem;
+        line-height: 25px;
+        color: $greyLight;
+        margin-bottom: 8px;
+    }
+    &__edit {
+        color: $purple;
+    }
+    &__img {
+        height: 100px;
+        width: 100px;
+        border-radius: 3px;
+        object-fit: cover;
+        object-position: center;
+        .profile-edit & {
+            margin-right: 20px;
+        }
+    }
+    &__stat {
+        text-align: right;
+        &:first-child {
+            margin-bottom: 15px;
+        }
+    }
+    &__stat-number {
+        font-weight: bold;
+        display: inline-block;
+    }
+    &__tabs {
+        border-top: 1px solid $borderColor;
+        margin-top: 30px;
+        .profile-edit & {
+            margin-top: 0;
+            border-top: none;
+            border-bottom: 1px solid $borderColor;
+            margin-bottom: 45px;
+        }
+    }
+    &__tab {
+        display: inline-block;
+        padding: 15px 30px 15px 0;
+        font-size: 1.6rem;
+        color: $grey;
+        &--active {
+            color: $black;
+        }
+    }
 }
 
-.profile-posts{
-	&__title{
-		font-size: 1.8rem;
-		font-weight: normal;
-		margin-bottom: 20px;
-		margin-left: 32px;
-		color: $color-grey;
-		display: none;
-	}
+.profile-posts {
+    &__title {
+        font-size: 1.8rem;
+        font-weight: normal;
+        margin-bottom: 20px;
+        margin-left: 32px;
+        color: $grey;
+        display: none;
+    }
 }
 
-.profile-edit{
-	padding: 5px 30px 30px;
-	margin-bottom: 30px;
-
-	@include screen(tiny){
-		padding: 5px 15px 30px;
-	}
+.profile-edit {
+    padding: 5px 30px 30px;
+    margin-bottom: 30px;
+    @include screen(tiny) {
+        padding: 5px 15px 30px;
+    }
 }
-
-
-
-
-
-
-
