@@ -1,9 +1,9 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
-<div class="zkk-site-wrap u-flex u-center-align u-row-wrap">
+<div class="content">
   <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-  <div class="zkk-main">
-
+  <div class="container container--flex container--no-pad">
+    <main>
     <div class="card profile">
       <div class="u-flex u-space-between">
         <div>
@@ -39,7 +39,7 @@
       <%- partial('./post/excerpt.ejs', { post: post }) %>
       <% }) %>
     </div>
+    </main>
+    <%- partial('./partials/sidebar.ejs') %>
   </div>
-
-  <%- partial('./partials/sidebar.ejs') %>
 </div>

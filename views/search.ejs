@@ -1,17 +1,17 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
-
-<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align u-row-wrap">
-  <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-  <div class="zkk-main">
-    <div class="search-results__header">
-      <span class="search-results__label"><%= posts.length %> Results for:</span>
-      <h2 class="search-results__title">"<%= term %>"</h2>
+<div class="content">
+    <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
+    <div class="container container--flex container-no-pad">
+        <main>
+            <div class="search-results__header">
+                <span class="search-results__label"><%= posts.length %> Results for:</span>
+                <h2 class="search-results__title">"<%= term %>"</h2>
+            </div>
+            <% posts.forEach(function(post) { %>
+                <%- partial('./post/excerpt.ejs', { post: post }) %>
+            <% }) %>
+        </main>
+        <%- partial('./partials/sidebar.ejs') %>
     </div>
-    <% posts.forEach(function(post) { %>
-    <%- partial('./post/excerpt.ejs', { post: post }) %>
-    <% }) %>
-  </div>
-  <%- partial('./partials/sidebar.ejs') %>
 </div>
-
 <%- partial('./partials/footer.ejs') %>

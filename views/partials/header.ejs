@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header <% if (includeFeedFilter) { %>header--has-filter<% } %>">
     <div class="container container--full u-space-between">
         <div class="header__left">
             <a href="/">
@@ -8,10 +8,9 @@
                 </span>
             </a>
         </div>
-
         <% if (includeFeedFilter) { %>
-        <div class="heaeder__center">
-            <div class="container container--no-pad">
+        <div class="header__center">
+            <div class="container">
                 <div class="filter u-space-between">
                     <div class="filter__categories">
                         <button class="category-toggle">
@@ -34,7 +33,6 @@
             </div>
         </div>
         <% } %>
-
         <div class="header__right">
             <ul class="nav">
                 <li class="search">
@@ -58,17 +56,17 @@
                     </ul>
                 </li>
                 <% } else { %>
-                <li class="user-profile user-profile--active">
+                <li class="user-profile">
                     <button class="user-profile-toggle">
-
+                        <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>">
                     </button>
                     <ul class="user-profile__links">
-                        <li class="user-profile__link"><a href="/login">Profile</a></li>
-                        <li class="user-profile__link"><a href="/register">Logout</a></li>
+                        <li class="user-profile__link"><a href="/user/<%= currentUser.username %>">Profile</a></li>
+                        <li class="user-profile__link"><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
                 <% } %>
-                <li><a href="#" class="upload-button">Upload</a></li>
+                <li><a href="/new" class="upload-button">Upload</a></li>
             </ul>
         </div>
     </div>

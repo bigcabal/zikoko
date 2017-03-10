@@ -1,60 +1,8 @@
-// body, html{
-//     height: 100%;
-//     position: relative;
-//     overflow-x: hidden;
-//     background-color: #f9f9fc;
-// }
-// .zkk-site-wrap{
-// 	padding-top: 80px;
-// 	background-color: #f9f9fc;
-// 	z-index: 1;
-// 	position: relative;
-// 	min-height: 100%;
-// 	&--white{
-// 		background-color: white;
-// 	}
-// 	&--with-mobile-feed-filter{
-// 		@include screen(med-small){
-// 			padding-top: 120px;
-// 		}
-// 	}
-// }
-// .zkk-main{
-// 	width: $main-column-width;
-// 	margin-right: $main-column-margin;
-// 	@include screen(med){
-// 		margin: 0 auto;
-// 	}
-// 	@include screen(small){
-// 		width: 100%;
-// 	}
-// 	&--full-width{
-// 		width: 100%;
-// 		max-width: $full-page-width;
-// 		margin: 0 auto;
-// 		margin-top: -30px;
-// 		margin-bottom: 60px;
-// 		@include screen(med){
-// 			margin-top: -30px;
-// 		}
-// 	}
-// }
-// .card{
-// 	background-color: white;
-// 	border: 1px solid #eaeaea;
-// 	border-radius: 3px;
-// 	position: relative;
-// 	.zkk-site-wrap--white &{
-// 		box-shadow: none;
-// 	}
-// }
-
 body,
 html {
-    height: 100%;
     position: relative;
+    background-color: #f4f6f5;
     overflow-x: hidden;
-    background-color: #F4F6F5;
 }
 
 main {
@@ -66,10 +14,17 @@ main {
     }
 }
 
+p {
+    margin-bottom: 24px;
+}
+
 .content {
     padding-top: $headerHeight + 24px;
     min-width: 100%;
     width: 100%;
+    &--white {
+        background-color: white;
+    }
     &--extra-pad {
         @include screen(med-small) {
             padding-top: ($headerHeight * 2) + 24px;
@@ -77,11 +32,16 @@ main {
     }
 }
 
+.card {
+    background-color: white;
+    border: 1px solid #eaeaea;
+    border-radius: 3px;
+    position: relative;
+}
 
 .form-page {
     padding: 60px 0 60px;
-    font-size: 1.4rem;
-    font-family: $alternate-font;
+    font-size: 1.6rem;
     transition: all .3s;
     &--padding-top-lg {
         padding: 100px 0 120px;
@@ -108,22 +68,23 @@ main {
         margin-bottom: 30px;
     }
     &__title {
-        font-size: 2.4rem;
+        font-size: 2.7rem;
         font-weight: bold;
-        margin-bottom: 5px;
-        font-family: $regular-font;
+        margin-bottom: 18px;
     }
     &__subtitle {
-        color: $color-grey-mid;
-        line-height: 1.5;
-        font-family: $alternate-font;
+        color: $grey;
+        font-size: 1.5rem;
+        line-height: 25px;
     }
     &__form {
         margin-bottom: 45px;
     }
     &__footer {
         text-align: center;
-        color: $color-grey-mid;
+        color: $grey;
+        font-size: 1.5rem;
+        line-height: 25px;
     }
     &__footer-divider {
         margin-bottom: 15px;
@@ -142,7 +103,7 @@ main {
     }
     &__link {
         font-weight: bold;
-        color: $color-purple;
+        color: $purple;
     }
 }
 
@@ -166,21 +127,19 @@ main {
     &__header {
         padding: 30px;
         border-radius: 3px;
-        border: 1px solid #eaeaea;
-        margin-bottom: 25px;
+        border: 1px solid $borderColor;
+        margin-bottom: 24px;
         @include screen(tiny) {
             padding: 20px 15px;
         }
     }
     &__title {
-        font-size: 2.8rem;
-        font-family: $alternate-font;
-        // color: $color-grey-mid;
+        font-size: 2.7rem;
     }
     &__label {
         display: inline-block;
-        color: $color-grey-mid;
-        font-size: 1.5rem;
+        color: $grey;
+        font-size: 1.4rem;
         margin-bottom: 5px;
     }
 }
@@ -203,7 +162,7 @@ main {
 .loading-spinner > .dot {
     width: 18px;
     height: 18px;
-    background-color: $color-purple;
+    background-color: $purple;
     border-radius: 100%;
     display: inline-block;
     -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;

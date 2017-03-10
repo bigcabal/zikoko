@@ -1,46 +1,29 @@
-
-
 <aside class="sidebar">
 
-  <!-- Follow Zikoko -->
-  <div class="sidebar__section">
-    <a href="http://facebook.com/zikokomag" target="_blank"
-       class="button button--icon-right button--md button--facebook button--full-width">
-      <span class="button__text">Like Zikoko on Facebook</span>
-      <span class="button__icon"><i class="ion-social-facebook"></i></span>
-    </a>
-  </div>
-  <div class="sidebar__section">
-    <a href="http://twitter.com/zikokomag" target="_blank"
-       class="button button--icon-right button--md button--twitter button--full-width">
-      <span class="button__text">Follow Zikoko on Twitter</span>
-      <span class="button__icon"><i class="ion-social-twitter"></i></span>
-    </a>
-  </div>
+    <!-- Follow Zikoko -->
+    <div class="sidebar__section sidebar__section--card sidebar__section--wrap">
+        <div class="sidebar__section">
+            <a href="http://facebook.com/zikokomag" target="_blank" class="button button--md button--facebook button--full-width">
+                <span class="button__text">Like Zikoko on Facebook</span>
+            </a>
+        </div>
+        <div class="sidebar__section">
+            <a href="http://twitter.com/zikokomag" target="_blank" class="button button--twitter button--md button--full-width">
+                <span class="button__text">Follow Zikoko on Twitter</span>
+            </a>
+        </div>
+    </div>
+    <div class="sidebar__section sidebar__section--card sidebar__section--ad">
+        <%- partial('./ad.ejs', { adType: 'sidebar' }) %>
+    </div>
+    <!-- Featured Posts -->
+    <div class="sidebar__section sidebar__section--card">
+      <% sidebarPosts.forEach(function(post) { %>
+      <%- partial('../post/excerpt-min.ejs', { post: post }) %>
+      <% }) %>
+      <div class="clear"></div>
+    </div>
 
-  <div class="sidebar__section">
-    <%- partial('./ad.ejs', { adType: 'sidebar' }) %>
-  </div>
-
-  <!-- Featured Posts -->
-  <div class="card sidebar__section">
-    <% sidebarPosts.forEach(function(post) { %>
-    <%- partial('../post/excerpt-min.ejs', { post: post }) %>
-    <% }) %>
-  </div>
-
-    <article class="post-excerpt post-excerpt--sm">
-          <a href="post.html">
-              <figure>
-                  <img class="post-excerpt__img" src="https://media.giphy.com/media/139foopOcMG1IA/giphy-facebook_s.jpg">
-              </figure>
-              <h3 class="post-excerpt__title">All The Times Girls Wish They Could Have Been Boys</h3>
-          </a>
-      </article>
-    <div class="clear"></div>
-  </div>
-
-  <!-- Subscribe -->
-  <%- partial('../components/newsletter.ejs') %>
-
+    <!-- Subscribe -->
+    <%- partial('../components/newsletter.ejs') %>
 </aside>
