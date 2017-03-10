@@ -9,7 +9,7 @@ module.exports = {
 
   single: function (req, res) {
 
-    console.log("===================");
+    console.log("SINGLE POST ===================");
 
     const postSlug = req.params.slug;
 
