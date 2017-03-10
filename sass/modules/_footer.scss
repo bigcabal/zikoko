@@ -1,11 +1,10 @@
-
 .footer{
 	background-color: whitesmoke;
-	border-top: 1px solid $color-grey-light;
+	border-top: 1px solid $borderColor;
 	display: none;
 	box-shadow:0 -2px 2px -2px rgba(0,0,0,.15);
 	font-size: 1.4rem;
-	font-family: $alternate-font;
+	margin-top: 24px;
 
 	&__tabs{
 		display: flex;

@@ -1,9 +1,11 @@
 .pagination{
 	margin-top: 15px;
 	margin-bottom: 30px;
-	padding: 30px;
+	padding: 24px;
 	display: flex;
 	justify-content: center;
+	background-color: white;
+	border: 1px solid $borderColor;
 
 	@include screen(small){
 		margin-bottom: 0;

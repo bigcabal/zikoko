@@ -1,15 +1,17 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: true }) %>
 
-<div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align u-row-wrap">
+<!-- <div class="zkk-site-wrap zkk-site-wrap--with-mobile-feed-filter u-flex u-center-align u-row-wrap"> -->
+<div class="content content--extra-pad">
   <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-  <div class="zkk-main">
-
-    <% posts.forEach(function(post) { %>
-      <%- partial('./post/excerpt.ejs', { post: post }) %>
-    <% }) %>
-    <%- partial('./partials/pagination.ejs') %>
-  </div>
+  <div class="container container--flex container--no-pad">
+	<main>
+	    <% posts.forEach(function(post) { %>
+	      <%- partial('./post/excerpt.ejs', { post: post }) %>
+	    <% }) %>
+	    <%- partial('./partials/pagination.ejs') %>
+	  </main>
   <%- partial('./partials/sidebar.ejs') %>
+  </div>
 </div>
 
 <%- partial('./partials/footer-posts.ejs') %>
