@@ -14,10 +14,9 @@ module.exports = {
     data.currentUser = req.session.user;
     data.activeTab = 'posts';
 
-    APIService.req({ path: `/users?username=${username}` })
-      .then((users) => APIService.req({ path: `/users/${users[0].id}`, user: data.currentUser }))
-      .then((user) => {
-        data.user = user;
+    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
+      .then((users) => {
+        data.user = users[0];
         data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 
@@ -44,10 +43,9 @@ module.exports = {
     data.activeTab = 'likes';
 
 
-    APIService.req({ path: `/users?username=${username}` })
-      .then((users) => APIService.req({ path: `/users/${users[0].id}`, user: data.currentUser }))
-      .then((user) => {
-        data.user = user;
+    APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
+      .then((users) => {
+        data.user = users[0];
         data.user.role = RolesService.getHighestRole(data.user.roles);
         console.log(data.user);
 

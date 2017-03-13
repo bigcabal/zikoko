@@ -17,7 +17,6 @@ module.exports = {
     data.currentUser = req.session.user;
 
     APIService.req({ path: `/posts?slug=${postSlug}` })
-      .then((post) => APIService.req({ path: `/posts/${post.id}`, user: req.session.user }))
       .then((post) => {
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);

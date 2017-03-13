@@ -35,7 +35,6 @@ module.exports = {
 
         if ( options.session.temporaryStorage[path] ) {
           console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE`);
-          console.log(options.session.temporaryStorage[path])
           resolve(options.session.temporaryStorage[path])
         } else {
           httpRequest(method, requestOptions, data, options.session)
