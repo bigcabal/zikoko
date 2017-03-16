@@ -23,11 +23,16 @@ module.exports = {
         data.metaData = MetaDataService.pageMeta('post', post);
         return data.post = post;
       })
-      .then(() => APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user }))
-      .then((users) => {
-        // @todo fix role
-        //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
-        return data.post.author.role = 'Tingz Fam';
+      .then(() => {
+        if ( data.post.show_post_author ) {
+          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user }).then((users) => {
+            // @todo fix role
+            //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
+            return data.post.author.role = 'Tingz Fam';
+          })
+        } else {
+          return;
+        }
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
@@ -35,7 +40,7 @@ module.exports = {
       .catch((err) => {
         "use strict";
         console.log("ERR", err);
-        res.redirect('/')
+        res.redirect('/?error=single')
       })
 
   },

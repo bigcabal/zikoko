@@ -42,7 +42,7 @@ module.exports = {
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
       .then(() => res.view('posts', data))
-      .catch((err) => res.redirect('/?error=list'));
+      .catch((err) => res.redirect('/login?error=list'));
 
   },
 
