@@ -1,16 +1,5 @@
 <% currentUser = currentUser || {} %>
-<% if ( currentUser.id === post.author.id ) { %>
-<form action="/post/delete" method="post" class="post__actions">
-
-  <!-- Hidden field, don't touch -->
-  <input type="hidden" name="post_id" value="<%= post.id %>">
-
-  <button type="submit" class="post-action post-action--delete button button--no-pad button--clear" class="post-action">
-    <span class="post-action-icon post-action-icon--delete"></span> Delete this post
-  </button>
-
-</form>
-<% } else { %>
+<div class="u-flex">
 <form action="/post/like" method="post" class="post__actions js-likePostForm">
 
   <!-- Hidden fields, don't touch -->
@@ -25,4 +14,21 @@
   </button>
 
 </form>
+
+<% if ( currentUser.id === post.author.id ) { %>
+<form action="/post/delete" method="post" class="post__actions">
+
+  <!-- Hidden field, don't touch -->
+  <input type="hidden" name="post_id" value="<%= post.id %>">
+
+  <button type="submit" class="post-action post-action--delete button button--no-pad button--clear" class="post-action">
+    <span class="post-action-icon post-action-icon--delete">
+      <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns"><title>delete</title><desc>Created using Figma</desc><g id="Canvas" figma:type="canvas"><g id="delete" style="mix-blend-mode:normal" figma:type="frame"><g id="Vector" style="mix-blend-mode:normal" figma:type="vector" transform="matrix(.48 0 0 .48 7.2 2.4)"><use xlink:href="#path0_fill" style="mix-blend-mode:normal"/><use xlink:href="#path1_fill" style="mix-blend-mode:normal"/></g></g></g><defs><path id="path0_fill" d="M 64.0735 25.7647C 67.6216 24.7059 70.1053 21.5294 70.1053 17.6471C 70.1053 12.8824 66.2023 9.17647 61.5898 9.17647L 49.3488 9.17647L 49.3488 5.64706C 49.3488 2.47059 46.6877 0 43.6718 0L 26.4634 0C 23.2701 0 20.7864 2.64706 20.7864 5.64706L 20.7864 8.82353L 8.90024 8.82353C 4.28769 8.82353 0.384755 12.1765 0.0299432 16.7647C -0.324869 21 2.51362 24.5294 6.41655 25.5882L 64.0735 25.5882L 64.0735 25.7647ZM 26.4634 7.05882C 26.4634 6.35294 27.173 5.64706 27.8827 5.64706L 42.0751 5.64706C 42.7848 5.64706 43.4944 6.35294 43.4944 7.05882L 43.4944 8.82353L 26.286 8.82353L 26.286 7.05882L 26.4634 7.05882Z"/><path id="path1_fill" d="M 6.63158 33L 6.63158 82.9412C 6.63158 86.8235 9.82488 90 13.7278 90L 56.66 90C 60.563 90 63.7563 86.8235 63.7563 82.9412L 63.7563 33L 6.63158 33Z"/></defs></svg>
+
+    </span> 
+    <span>Delete</span>
+  </button>
+
+</form>
 <% } %>
+</div>

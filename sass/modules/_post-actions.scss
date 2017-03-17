@@ -37,7 +37,7 @@
         &--comment {
             height: 24px;
             width: 24px;
-            @include screen(small){
+            @include screen(small) {
                 height: 21px;
                 width: 21px;
             }
@@ -47,16 +47,11 @@
                 fill: $googleRed;
             }
         }
-        @include screen(small){
+        @include screen(small) {
             margin-right: 8px;
             height: 24px;
             width: 24px;
         }
-        // .post &{
-        //  height: 32px;
-        //  width: 32px;
-        //  margin-right: 10px;
-        // }
     }
     &-share {
         @include screen(small) {
