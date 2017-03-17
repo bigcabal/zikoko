@@ -17,9 +17,9 @@
             transition: all .3s
         }
         &:hover {
-            color: $purple;
+            color: $grey;
             svg {
-                fill: $purple;
+                fill: $grey;
             }
         }
         @include screen(small) {
