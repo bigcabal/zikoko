@@ -31,7 +31,7 @@
         <!-- @todo Comments -->
         <%- partial('./post/comments.ejs') %>
         <div class="u-flex u-space-between">
-          <a href="/" class="button button--md button--full-width">
+          <a href="/post/<%= post.next_post_slug %>" class="button button--md button--full-width">
             <span class="button__text">Next Post</span>
           </a>
         </div>
