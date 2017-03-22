@@ -81,7 +81,7 @@ function httpRequest(method, requestOptions, data, session) {
         if (isJSON(body)) {
           body = JSON.parse(body);
           if ( session ) {
-            const path = requestOptions.path.split(sails.config.globals.API.path)[1];
+            const path = requestOptions.path.split(sails.config.API.path)[1];
             session.temporaryStorage[path] = body;
           }
           resolve(body);
