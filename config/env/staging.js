@@ -13,7 +13,7 @@
 module.exports = {
 
   API: {
-    host: 'formation-api-staging.herokuapp.com',
+    host: process.env.API_HOST || 'formation-api-staging.herokuapp.com',
     path: '/api'
   }
 

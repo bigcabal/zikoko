@@ -70,6 +70,13 @@ module.exports.routes = {
   'get /logout': 'AuthController.logout',
   'get /register': 'AuthController.registerView',
   'post /register': 'AuthController.register',
-  'get /reset-password': 'AuthController.resetPasswordView'
+  'get /reset-password': 'AuthController.resetPasswordView',
+
+
+  'get /ENV': {
+    fn: function(req, res) {
+      return res.send(sails.config.API.host);
+    }
+  }
 
 };
