@@ -14,3 +14,10 @@ See [Deployment/Contribution Process on Formation](https://github.com/bigcabal/f
 - `develop/dev` triggers a deployment to [zikoko-dev.herokuapp.com](https://zikoko-dev.herokuapp.com)
 - `develop/staging` triggers a deployment to [zikoko-staging.herokuapp.com](https://zikoko-staging.herokuapp.com)
 - `develop/live` triggers a deployment to [zikoko-live.herokuapp.com](https://zikoko-live.herokuapp.com)
+
+
+## Notes for Kachi
+
+You should read the [Deployment/Contribution Process on Formation](https://github.com/bigcabal/formation/blob/develop/README.md) for an overview of how deploying will work from now on. 
+
+When you're working locally, you should start the application by running `npm run dev`. 
