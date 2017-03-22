@@ -12,6 +12,11 @@
 
 module.exports = {
 
+  API: {
+    host: 'formation-api-live.herokuapp.com',
+    path: '/api'
+  }
+
   /***************************************************************************
    * Set the default database connection for models in the production        *
    * environment (see config/connections.js and config/models.js )           *

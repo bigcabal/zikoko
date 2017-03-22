@@ -10,11 +10,6 @@
  */
 module.exports.globals = {
 
-  API: {
-    host: 'formation-api.herokuapp.com',
-    path: '/api'
-  }
-
   /****************************************************************************
   *                                                                           *
   * Expose the lodash installed in Sails core as a global variable. If this   *
@@ -53,7 +48,7 @@ module.exports.globals = {
   *                                                                           *
   ****************************************************************************/
 
-	// services: true,
+	services: true,
 
   /****************************************************************************
   *                                                                           *

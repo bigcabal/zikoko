@@ -1,5 +1,5 @@
 /**
- * Development environment settings
+ * Staging environment settings
  *
  * This file can include shared settings for a development team,
  * such as API keys or remote database passwords.  If you're using
@@ -13,7 +13,7 @@
 module.exports = {
 
   API: {
-    host: 'formation-api-dev.herokuapp.com',
+    host: 'formation-api-staging.herokuapp.com',
     path: '/api'
   }
 

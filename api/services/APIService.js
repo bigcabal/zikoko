@@ -21,9 +21,9 @@ module.exports = {
       const saveDataToSession = options.session || false;
 
       const requestOptions = {
-        host: sails.config.globals.API.host,
+        host: sails.config.API.host,
         port: 443,
-        path: `${sails.config.globals.API.path}${path}`,
+        path: `${sails.config.API.path}${path}`,
         method: method
       }
       if (user) requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
