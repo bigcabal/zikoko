@@ -12,7 +12,6 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-    data.activeTab = 'posts';
 
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
@@ -31,7 +30,7 @@ module.exports = {
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
-      .then(() =>  res.view('user', data));
+      .then(() =>  res.view('user-posts', data));
 
   },
 
@@ -40,7 +39,6 @@ module.exports = {
     const username = req.params.username;
     let data = {};
     data.currentUser = req.session.user;
-    data.activeTab = 'likes';
 
 
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
@@ -54,13 +52,13 @@ module.exports = {
         return;
       })
       .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
-      .then((posts) => {
-        console.log(posts);
-        return data.posts = Array.isArray(posts) ? posts : [posts];
+      .then((likes) => {
+        console.log(likes);
+        return data.likes = Array.isArray(likes) ? likes : [likes];
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
       .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
-      .then(() =>  res.view('user', data));
+      .then(() =>  res.view('user-likes', data));
 
   },
 
