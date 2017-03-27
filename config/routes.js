@@ -45,8 +45,12 @@ module.exports.routes = {
   ***************************************************************************/
 
   'get /': 'PostsController.list',
+  'get /page/:page_number': 'PostsController.list',
   'get /category/:category_slug': 'PostsController.list',
+  'get /category/:category_slug/page/:page_number': 'PostsController.list',
+
   'get /search': 'PostsController.search',
+
   'get /feed/instant-articles': 'PostsController.instant_articles',
 
   'get /new': 'NewPostController.view',

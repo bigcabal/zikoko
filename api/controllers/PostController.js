@@ -17,7 +17,8 @@ module.exports = {
     data.currentUser = req.session.user;
 
     APIService.req({ path: `/posts?slug=${postSlug}` })
-      .then((post) => {
+      .then((APIResponse) => {
+        const post = APIResponse.data;
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         data.metaData = MetaDataService.pageMeta('post', post);
@@ -25,7 +26,8 @@ module.exports = {
       })
       .then(() => {
         if ( data.post.show_post_author ) {
-          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user }).then((users) => {
+          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user })
+            .then((APIResponse) => {
             // @todo fix role
             //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
             return data.post.author.role = 'Tingz Fam';
@@ -35,7 +37,7 @@ module.exports = {
         }
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";

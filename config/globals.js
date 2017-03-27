@@ -15,6 +15,10 @@ module.exports.globals = {
     password: 'ultimateguestuserpassword'
   },
 
+  settings: {
+    postsPerPage: 5
+  },
+
   /****************************************************************************
   *                                                                           *
   * Expose the lodash installed in Sails core as a global variable. If this   *

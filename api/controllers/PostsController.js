@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+const postsPerPage = sails.config.globals.settings.postsPerPage;
+
 module.exports = {
 
   list: function (req, res) {
@@ -13,6 +15,7 @@ module.exports = {
 
     // Request parameters
     const categorySlug = req.params.category_slug || null;
+    const page = req.params.page_number || 1;
 
     // Default view data
     let data = {};
@@ -22,25 +25,37 @@ module.exports = {
     data.title = MetaDataService.pageTitle();
     data.metaData = MetaDataService.pageMeta();
 
-    let query = '/posts?sort=publishedAt%20DESC';
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
+
+    // Default query
+    let query = `/posts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
+
 
     APIService.req({ path: '/categories', user: data.currentUser, session: req.session })
-      .then((categories) => data.categories = categories)
+      .then((APIResponse) => data.categories = APIResponse.data)
       .then(() => {
         if ( data.feed === 'Everything' ) return;
         const category = data.categories.find((category) => { return category.slug === categorySlug });
-        query = `/categories/${category.id}/populatedposts`;
+        query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
         data.title = MetaDataService.pageTitle(category.name);
         data.metaData = MetaDataService.pageMeta('category', category);
         return data.feed = category.name;
       })
       .then(() => APIService.req({ path: query, user: data.currentUser }))
-      .then((posts) => {
-        console.log(posts[0]);
-        return data.posts = posts;
+      .then((APIResponse) => {
+        data.pagination = {
+          page: page,
+          total: APIResponse.headers.total,
+          pageBase: ''
+        }
+        console.log(APIResponse.headers);
+        return APIResponse.data;
       })
+      .then((posts) => data.posts = posts)
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('posts', data))
       .catch((err) => res.redirect('/login?error=list'));
 
@@ -62,11 +77,11 @@ module.exports = {
     let query = '/posts?sort=publishedAt%20DESC';
 
     APIService.req({ path: query, user: data.currentUser })
-      .then((posts) => data.posts = posts)
+      .then((APIResponse) => data.posts = APIResponse.data)
       .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
-      .then((categories) => data.categories = categories)
+      .then((APIResponse) => data.categories = APIResponse.data)
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => {
         console.log(data.posts);
         res.view('search', data)
@@ -78,13 +93,13 @@ module.exports = {
   instant_articles: function (req, res) {
 
     APIService.req({ path: query })
-      .then((posts) => {
-        console.log(posts);
+      .then((APIResponse) => {
+        console.log(APIResponse.data);
         res.set('Content-Type', 'application/rss+xml');
         res.type('application/rss+xml');
         res.view('feed-ia', {
           layout: null,
-          posts: posts
+          posts: APIResponse.data
         });
       })
       .catch(() => res.redirect('/'))

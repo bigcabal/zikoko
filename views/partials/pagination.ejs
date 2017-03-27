@@ -1,11 +1,51 @@
+<%
+ // Pagination
+  const currentPage = parseInt(pagination.page);
+  const previousPage = currentPage - 1;
+  const nextPage = currentPage + 1;
+  const totalPages = Math.ceil(pagination.total / sails.config.globals.settings.postsPerPage);
+  const pageBase = pagination.pageBase;
+ %>
+
+
 <ul class="pagination">
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">Prev</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">1</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">...</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">4</a></li> 
-    <li class="pagination__item pagination__item--active"><a href="#" class="button button--sm">5</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">6</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">...</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">12</a></li> 
-    <li class="pagination__item"><a href="#" class="button button--clear button--sm">Next</a></li> 
+
+  <% if (previousPage > 0) { %>
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/<%= previousPage %>" class="button button--clear button--sm">Prev</a>
+  </li>
+
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/1" class="button button--clear button--sm">1</a>
+  </li>
+
+  <% if (previousPage > 1) { %>
+  <li class="pagination__item"><span class="button button--clear button--sm">...</span></li>
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/<%= previousPage %>" class="button button--clear button--sm"><%= previousPage %></a>
+  </li>
+  <% } %>
+  <% } %>
+
+  <li class="pagination__item pagination__item--active">
+    <span class="button button--sm"><%= currentPage %></span>
+  </li>
+
+  <% if (currentPage !== totalPages) { %>
+
+  <% if (nextPage !== totalPages) { %>
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/<%= nextPage %>" class="button button--clear button--sm"><%= nextPage %></a>
+  </li>
+  <li class="pagination__item"><span class="button button--clear button--sm">...</span></li>
+  <% } %>
+
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/<%= totalPages %>" class="button button--clear button--sm"><%= totalPages %></a>
+  </li>
+
+  <li class="pagination__item">
+    <a href="<%= pageBase %>/page/<%= nextPage %>" class="button button--clear button--sm">Next</a>
+  </li>
+  <% } %>
 </ul>
