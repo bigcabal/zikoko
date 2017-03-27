@@ -1,0 +1,180 @@
+
+
+
+.post--archived {
+
+  img {
+    max-width: 100%;
+  }
+
+
+  .watermark-img {
+    // border: 2px solid blue;
+    position: relative;
+    padding-bottom: 35px;
+
+    em {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      padding-right: 80px;
+    }
+  }
+
+  .watermark-img:after {
+    content: "";
+
+    height: 25px;
+    width: 70px;
+
+    background-image: url('inc/img/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+
+  }
+
+
+
+  .wp-caption-text {
+    font-size: 1.2rem;
+
+    text-transform: uppercase;
+  }
+
+  small {
+    font-size: 1.4rem;
+  }
+
+
+  .fluid-width-video-wrapper {
+    width: 100%;
+    position: relative;
+    padding: 0;
+  }
+
+
+  hr {
+    opacity: 0.5;
+  }
+
+
+
+  /* POST CONTENT BLOCK - These are the listicle blocks */
+
+  .pcblock {
+    margin-bottom: 50px;
+
+    .pcblock__headline {
+      padding: 0;
+      margin-bottom: 20px;
+
+      @extend .post__item-title;
+
+    }
+  }
+
+
+
+
+  /* Image */
+
+  .pcblock__image {
+    position: relative;
+
+  }
+
+  .pcblock__image--credit {
+    display: block;
+    min-height: 30px;
+  }
+
+  .pcblock__image--zkklogo {
+
+    display: none;
+  }
+
+
+  /* Embed */
+
+
+  .pcblock__embed {
+
+    iframe[id^='twitter-widget-'] {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    iframe[src^="https://www.youtube.com/"] {
+      width: 100% !important;
+      height: 400px;
+
+      @include screen(small) {
+        height: 250px;
+      }
+    }
+
+  }
+
+
+
+  /* Quote */
+
+
+
+  .pcblock__quote--text {
+    quotes: "\201C""\201D""\2018""\2019";
+    border-left: 10px solid #ccc;
+    margin-bottom: 1rem;
+    padding: 15px 0 15px 15px;
+
+  }
+
+  .pcblock__quote--text:before {
+    color: $purple;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  .pcblock__quote--text:after {
+    content: close-quote;
+    visibility: hidden;
+  }
+
+  .pcblock__quote--text p {
+    display: inline;
+  }
+
+  .pcblock__quote--from {
+    display: block;
+    text-align: right;
+    font-style: italic;
+
+  }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+

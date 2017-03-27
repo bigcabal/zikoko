@@ -111,7 +111,6 @@ module.exports = {
 
 
   loginView: function(req, res) {
-    console.log( sails.config.API );
     const data = {
       title: MetaDataService.pageTitle('Login'),
       metaData: MetaDataService.pageMeta()

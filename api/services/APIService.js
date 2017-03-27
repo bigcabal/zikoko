@@ -26,7 +26,13 @@ module.exports = {
         path: `${sails.config.API.path}${path}`,
         method: method
       }
-      if (user) requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
+
+      if (user) {
+        requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
+      } else {
+        const defaultAuth = new Buffer(`${sails.config.globals.defaultAuth.email}:${sails.config.globals.defaultAuth.password}`).toString('base64');
+        requestOptions.headers = {'Authorization': `Basic ${defaultAuth}`};
+      }
 
 
       if ( saveDataToSession ) {

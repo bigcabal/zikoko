@@ -3,7 +3,7 @@
   <%- partial('./partials/ad.ejs', {adType: 'leaderboard'}) %>
   <div class="container container--flex container--no-pad">
     <main>
-      <article class="post">
+      <article class="post post--<%= post.post_type %>">
         <header>
           <%- partial('./post/header.ejs') %>
         </header>

@@ -10,6 +10,11 @@
  */
 module.exports.globals = {
 
+  defaultAuth: {
+    email: 'timi@helloworld.ng',
+    password: 'ultimateproductionpassword'
+  },
+
   /****************************************************************************
   *                                                                           *
   * Expose the lodash installed in Sails core as a global variable. If this   *

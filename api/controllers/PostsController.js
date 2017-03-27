@@ -27,7 +27,7 @@ module.exports = {
     APIService.req({ path: '/categories', user: data.currentUser, session: req.session })
       .then((categories) => data.categories = categories)
       .then(() => {
-        if ( data.feed === 'Everything' ) return Promise.resolve();
+        if ( data.feed === 'Everything' ) return;
         const category = data.categories.find((category) => { return category.slug === categorySlug });
         query = `/categories/${category.id}/populatedposts`;
         data.title = MetaDataService.pageTitle(category.name);
