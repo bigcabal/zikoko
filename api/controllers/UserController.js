@@ -40,12 +40,11 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
 
-
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((users) => {
         data.user = users[0];
         data.user.role = RolesService.getHighestRole(data.user.roles);
-        console.log(data.user);
+        //console.log(data.user);
 
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
@@ -53,7 +52,7 @@ module.exports = {
       })
       .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
       .then((likes) => {
-        console.log(likes);
+        console.log(likes[0]);
         return data.likes = Array.isArray(likes) ? likes : [likes];
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
