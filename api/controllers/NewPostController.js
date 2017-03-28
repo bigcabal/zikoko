@@ -45,7 +45,7 @@ module.exports = {
         return;
       })
       .then(() => APIService.req({ path: '/posts', user: req.session.user, method: 'POST', data: post }))
-      .then((newPost) => handleSuccess(newPost))
+      .then((APIResponse) => handleSuccess(APIResponse.data))
       .catch(() => handleError())
 
   }

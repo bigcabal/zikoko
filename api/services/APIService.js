@@ -60,7 +60,6 @@ module.exports = {
 
 
   // Repeated requests
-
   posts: {
 
     getSidebarPosts: function() {
@@ -77,30 +76,35 @@ module.exports = {
 function httpRequest(method, requestOptions, data, session) {
   return new Promise((resolve, reject) => {
     let newRequest = https.request(requestOptions, function (response) {
+
+      const RESPONSE = { headers: response.headers };
       let body = '';
+
       response.on('data', function (data) {
         data = data.toString();
         body += data;
       });
-      response.on('end', function () {
 
+      response.on('end', function () {
         if (isJSON(body)) {
           body = JSON.parse(body);
+          RESPONSE.data = body;
           if ( session ) {
             const path = requestOptions.path.split(sails.config.API.path)[1];
-            session.temporaryStorage[path] = body;
+            session.temporaryStorage[path] = RESPONSE;
           }
-          resolve(body);
+          resolve(RESPONSE);
         } else if (body == '[]') {
-          resolve([]);
+          RESPONSE.data = [];
+          resolve(RESPONSE);
         } else {
           console.log("IS NOT JSON =====")
           console.log(body);
           reject(body);
         }
-
       });
     });
+
     newRequest.on('error', (e) => {
       console.error(e);
       reject(e);

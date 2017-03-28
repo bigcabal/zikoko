@@ -40,9 +40,9 @@ module.exports = {
       return new Promise((resolve, reject) => {
         const data = { username: user.username };
         APIService.req({ path: '/users/checkUsername', method: 'POST', data: data })
-          .then((response) => {
-            console.log(response);
-            if ( response.available ) {
+          .then((APIResponse) => {
+            console.log(APIResponse.data);
+            if ( APIResponse.data.available ) {
               resolve(user)
             } else {
               user.username = user.username + Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
@@ -93,7 +93,7 @@ module.exports = {
     }
 
     APIService.req({ path: '/roles' })
-      .then((roles) => setupUser(roles))
+      .then((APIResponse) => setupUser(APIResponse.data))
       .then((newUser) => getUsername(newUser))
       .then((newUser) => AuthService.createUser(newUser))
       .then((registeredUser) => {

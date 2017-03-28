@@ -13,6 +13,10 @@
             </a>
         </div>
     </div>
+
+    <!-- Subscribe -->
+    <%- partial('../components/newsletter.ejs') %>
+
     <div class="sidebar__section sidebar__section--card sidebar__section--ad">
         <%- partial('./ad.ejs', { adType: 'sidebar' }) %>
     </div>
@@ -23,7 +27,4 @@
       <% }) %>
       <div class="clear"></div>
     </div>
-
-    <!-- Subscribe -->
-    <%- partial('../components/newsletter.ejs') %>
 </aside>

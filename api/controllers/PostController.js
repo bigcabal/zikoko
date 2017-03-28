@@ -16,8 +16,10 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
 
+
     APIService.req({ path: `/posts?slug=${postSlug}` })
-      .then((post) => {
+      .then((APIResponse) => {
+        const post = APIResponse.data;
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         data.metaData = MetaDataService.pageMeta('post', post);
@@ -25,7 +27,8 @@ module.exports = {
       })
       .then(() => {
         if ( data.post.show_post_author ) {
-          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user }).then((users) => {
+          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user })
+            .then((APIResponse) => {
             // @todo fix role
             //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
             return data.post.author.role = 'Tingz Fam';
@@ -35,7 +38,7 @@ module.exports = {
         }
       })
       .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";
@@ -47,6 +50,19 @@ module.exports = {
 
   amp: function (req, res) {
     res.view('post-amp');
+  },
+
+
+  archived: function (req, res) {
+
+    const archivedPostCategory = req.params.archived_category;
+    const archivedPostSlug = req.params.archived_slug;
+    const archivedPostUrl = `zikoko.com/${archivedPostCategory}/${archivedPostSlug}`;
+
+    APIService.req({ path: `/posts?where={"old_url":{"contains":"${archivedPostUrl}"}}` })
+      .then((APIResponse) => res.redirect(`/post/${APIResponse.data.slug}`))
+      .catch(() => res.redirect('/?error=archived'))
+
   },
 
 

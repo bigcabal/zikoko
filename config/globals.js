@@ -11,8 +11,12 @@
 module.exports.globals = {
 
   defaultAuth: {
-    email: 'timi@helloworld.ng',
-    password: 'ultimateproductionpassword'
+    email: 'guest@bigcabal.com',
+    password: 'ultimateguestuserpassword'
+  },
+
+  settings: {
+    postsPerPage: 5
   },
 
   /****************************************************************************
