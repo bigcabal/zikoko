@@ -81,6 +81,15 @@ module.exports.routes = {
     fn: function(req, res) {
       return res.send(sails.config.API.host);
     }
+  },
+
+
+  'get /:archived_category/:archived_slug': {
+    skipAssets: true,
+    controller: 'PostController',
+    action: 'archived'
   }
+
+
 
 };
