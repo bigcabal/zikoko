@@ -16,6 +16,7 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
 
+
     APIService.req({ path: `/posts?slug=${postSlug}` })
       .then((APIResponse) => {
         const post = APIResponse.data;
@@ -49,6 +50,19 @@ module.exports = {
 
   amp: function (req, res) {
     res.view('post-amp');
+  },
+
+
+  archived: function (req, res) {
+
+    const archivedPostCategory = req.params.archived_category;
+    const archivedPostSlug = req.params.archived_slug;
+    const archivedPostUrl = `zikoko.com/${archivedPostCategory}/${archivedPostSlug}`;
+
+    APIService.req({ path: `/posts?where={"old_url":{"contains":"${archivedPostUrl}"}}` })
+      .then((APIResponse) => res.redirect(`/post/${APIResponse.data.slug}`))
+      .catch(() => res.redirect('/?error=archived'))
+
   },
 
 

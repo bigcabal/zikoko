@@ -50,7 +50,7 @@ module.exports = {
           total: APIResponse.headers.total,
           pageBase: ''
         }
-        console.log(APIResponse.headers);
+        //console.log(APIResponse.headers);
         return APIResponse.data;
       })
       .then((posts) => data.posts = posts)
