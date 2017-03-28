@@ -1,6 +1,6 @@
 <%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
 <div class="content content--white">
-  <%- partial('./partials/ad.ejs', {adType: 'leaderboard'}) %>
+  <%- partial('./components/ad-leaderboard.ejs') %>
   <div class="container container--flex container--no-pad">
     <main>
       <article class="post post--<%= post.post_type %>">

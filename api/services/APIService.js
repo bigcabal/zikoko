@@ -59,13 +59,44 @@ module.exports = {
   },
 
 
-  // Repeated requests
-  posts: {
+  /*
+   * REPEATED REQUESTS
+   * ==================
+   * Most requests are made using the APIService.req() method because they are only called once.
+   * The following methods are for requests that are made in multiple locations
+   */
 
-    getSidebarPosts: function() {
-      "use strict";
+  getSidebarPosts: function(options) {
+    "use strict";
 
-    }
+  },
+
+  getPostsNavigation: function(options) {
+
+    const defaultNavigation = [
+      {
+        url: '/',
+        label: 'Everything'
+      },
+      {
+        url: '/category/list',
+        label: 'List'
+      },
+      {
+        url: '/category/gist',
+        label: 'Gist'
+      },
+      {
+        url: '/category/story',
+        label: 'Story'
+      },
+      {
+        url: '/category/news',
+        label: 'News'
+      }
+    ];
+
+    return Promise.resolve(defaultNavigation);
 
   }
 
