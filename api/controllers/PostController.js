@@ -16,7 +16,6 @@ module.exports = {
     let data = {};
     data.currentUser = req.session.user;
 
-    console.log(postSlug);
 
     APIService.req({ path: `/posts?slug=${postSlug}` })
       .then((APIResponse) => {
