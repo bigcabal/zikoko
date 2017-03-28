@@ -33,15 +33,22 @@ module.exports = {
     let query = `/posts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
 
 
-    APIService.req({ path: '/categories', user: data.currentUser, session: req.session })
-      .then((APIResponse) => data.categories = APIResponse.data)
+    function setCategory() {
+      return APIService.req({ path: `/categories?slug=${categorySlug}` })
+        .then((APIResponse) => {
+          const category = APIResponse.data[0];
+          query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
+          data.title = MetaDataService.pageTitle(category.name);
+          data.metaData = MetaDataService.pageMeta('category', category);
+          return data.feed = category.name;
+        })
+    }
+
+    APIService.getPostsNavigation({ session: req.session })
+      .then((postsNavigation) => data.postsNavigation = postsNavigation)
       .then(() => {
         if ( data.feed === 'Everything' ) return;
-        const category = data.categories.find((category) => { return category.slug === categorySlug });
-        query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
-        data.title = MetaDataService.pageTitle(category.name);
-        data.metaData = MetaDataService.pageMeta('category', category);
-        return data.feed = category.name;
+        return setCategory();
       })
       .then(() => APIService.req({ path: query, user: data.currentUser }))
       .then((APIResponse) => {

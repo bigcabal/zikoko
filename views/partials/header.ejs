@@ -20,8 +20,8 @@
                             </span>
                         </button>
                         <ul class="category-dropdown">
-                            <% categories.forEach(function(category) { %>
-                              <li class="category-dropdown__item"><a href="/category/<%= category.slug %>"><%= category.name %></a></li>
+                            <% postsNavigation.forEach(function(item) { %>
+                              <li class="category-dropdown__item"><a href="<%= item.url %>"><%= item.label %></a></li>
                             <% }) %>
                         </ul>
                     </div>
