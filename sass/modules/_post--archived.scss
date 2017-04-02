@@ -103,7 +103,8 @@
     }
     .pcblock__quote--from {
         display: block;
-        text-align: right;
         font-style: italic;
+        margin-left: 50px;
+        color: $greyLight;
     }
 }
