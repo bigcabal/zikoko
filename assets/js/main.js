@@ -1,37 +1,65 @@
-// Search Bar
+/*
+  Current user
+  ========================
+ */
 
-document.querySelector('.toggle--open-search').addEventListener('click', function() {
-    document.querySelector('.search-header').classList.add('search-header--is-opened');
-    document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
-    document.querySelector('.search-header__field').focus();
-    return false;
-});
-
-
-document.querySelector('.toggle--close-search').addEventListener('click', function() {
-    closeSearchHeader();
-    return false;
-});
-
-document.querySelector('.page-overlay').addEventListener('click', function() {
-    closeSearchHeader();
-    closeDeletePost();
-    return false;
-});
-
-function closeSearchHeader() {
-    document.querySelector('.search-header').classList.remove('search-header--is-opened');
-    document.querySelector('.page-overlay').classList.remove('page-overlay--is-visible');
-    document.querySelector('.search-header__field').value = '';
+let currentUser = null;
+if ( document.cookie.indexOf('zikokoUserAuth') > -1 ) {
+  let zikokoUserAuth = document.cookie.split('zikokoUserAuth=')[1].split(';')[0];
+  let zikokoUserId = document.cookie.split('zikokoUserId=')[1].split(';')[0];
+  currentUser = {
+    id: zikokoUserId,
+    auth: zikokoUserAuth
+  };
+  console.log(currentUser);
 }
 
-document.querySelector('.page-overlay').addEventListener('click', function() {
-    closeSearchHeader();
-    return false;
-});
 
 
-// Dropdowns
+/*
+ Search Bar
+ ========================
+ */
+
+var toggleOpenSearchEl = document.querySelector('.toggle--open-search');
+
+if ( toggleOpenSearchEl ) {
+
+  toggleOpenSearchEl.addEventListener('click', function() {
+      document.querySelector('.search-header').classList.add('search-header--is-opened');
+      document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
+      document.querySelector('.search-header__field').focus();
+      return false;
+  });
+
+  document.querySelector('.toggle--close-search').addEventListener('click', function() {
+      closeSearchHeader();
+      return false;
+  });
+
+  document.querySelector('.page-overlay').addEventListener('click', function() {
+      closeSearchHeader();
+      closeDeletePost();
+      return false;
+  });
+
+  function closeSearchHeader() {
+      document.querySelector('.search-header').classList.remove('search-header--is-opened');
+      document.querySelector('.page-overlay').classList.remove('page-overlay--is-visible');
+      document.querySelector('.search-header__field').value = '';
+  }
+
+  document.querySelector('.page-overlay').addEventListener('click', function() {
+      closeSearchHeader();
+      return false;
+  });
+}
+
+/*
+ Dropdowns
+ ========================
+ */
+
 function setDropdownListeners() {
     if (document.querySelector('.user-profile-toggle')) {
         document.querySelector('.user-profile-toggle').addEventListener('click', function() {
@@ -76,7 +104,13 @@ if (categoryToggleEl) {
 
 }
 
-// Delete post
+
+
+/*
+ Delete Post
+ ========================
+ */
+
 function openDeletePost(e) {
   e.preventDefault();
   document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
@@ -96,45 +130,78 @@ function closeDeletePost() {
 
 
 /*
- * LIKE POST
- *
+ Like Post
+ ========================
  */
 
+function APIRequest(options) {
+  return new Promise(function(resolve, reject) {
+    options.method = options.method || "GET";
+    options.params = options.params || null;
+    var url = "https://formation-api-dev.herokuapp.com/api/" + options.path;
 
+    var req = new XMLHttpRequest();
+    req.open(options.method, url, true);
 
-var likePostForms = Array.from(document.querySelectorAll('.js-likePostForm'));
+    if ( options.params ) {
+      req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    }
+    req.setRequestHeader("Authorization", "Basic " + currentUser.auth);
+
+    req.onreadystatechange = function () {
+      if (req.readyState == XMLHttpRequest.DONE && req.status == 200) { resolve(req.response) }
+    }
+    req.onerror = function(err) { reject(err) };
+
+    if ( options.params ) {
+      req.send(options.params);
+    } else {
+      req.send();
+    }
+
+  });
+}
 
 function likePost(e) {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    var postId = e.target[0].value;
-    var userId = '5897941e9bc4d71100448c21';
-    var userAuth = 'aXJlQGJpZ2NhYmFsLmNvbTpwYXNzd29yZA==';
 
-    console.log("STARTING====")
+  function handleSuccess(res) {
+    res = JSON.parse(res);
+    if ( !res.post ) return handleError();
 
-    //
+    var postActionIcon = e.target.querySelector('.post-action-icon');
+    postActionIcon.classList.remove('post-action-icon--like');
+    postActionIcon.classList.add('post-action-icon--liked');
 
-    var xhr = new XMLHttpRequest();
-    var url = "https://formation-api.herokuapp.com/api/likes";
-    var formData = { post: postId, user: userId };
+    var postLikesEl = postActionIcon.nextElementSibling;
+    var postLikesCount = postLikesEl.textContent === 'Like' ? 0 : parseInt(postLikesEl.textContent);
+    postLikesEl.textContent = postLikesCount + 1;
+  }
 
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.setRequestHeader("Authorization", "Basic " + userAuth);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            // Request finished. Do processing here.
-            console.log("done ==========")
-            console.log(xhr);
-        }
-    }
-    xhr.send(formData);
+  function handleError(err) {
+    console.log("err")
+    console.log(err);
+  }
 
+  var postId = e.target[0].value;
+  var requestOptions = {
+    path: "likes",
+    method: "POST",
+    params: "post="+postId
+  }
+
+  APIRequest(requestOptions)
+    .then(handleSuccess)
+    .catch(handleError)
 
 }
 
-likePostForms.forEach(function(form) {
-    //form.addEventListener('submit', likePost);
-})
+
+if ( currentUser ) {
+  var likePostForms = Array.from(document.querySelectorAll('.js-likePostForm'));
+  likePostForms.forEach(function(form) {
+    form.addEventListener('submit', likePost);
+  })
+}
