@@ -60,7 +60,11 @@ function setDropdownListeners() {
 
 setDropdownListeners();
 
-document.querySelector('.category-toggle').addEventListener('click', function() {
+var categoryToggleEl = document.querySelector('.category-toggle');
+
+if (categoryToggleEl) {
+
+  categoryToggleEl.addEventListener('click', function() {
     var categories = document.querySelector('.filter__categories');
     if (categories.classList.contains('filter__categories--active')) {
         categories.classList.remove('filter__categories--active')
@@ -70,10 +74,18 @@ document.querySelector('.category-toggle').addEventListener('click', function() 
     return false;
 });
 
+}
+
 // Delete post
-function openDeletePost() {
-    document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
-    document.querySelector('.post-modal--delete').classList.add('post-modal--is-visible');
+function openDeletePost(e) {
+  e.preventDefault();
+  document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
+  document.querySelector('.post-modal--delete').classList.add('post-modal--is-visible');
+  return false;
+}
+var deletePostButton = document.querySelector('.post-action--delete');
+if ( deletePostButton ) {
+  deletePostButton.addEventListener('click', openDeletePost)
 }
 
 function closeDeletePost() {

@@ -1,7 +1,12 @@
 <%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
+
+<% currentUser = currentUser || {}
+   post.author = post.author || {} %>
+
 <% if ( currentUser.id === post.author.id ) {  %>
-  <%- partial('./post/delete-modal.ejs')%>
+  <%- partial('./post/delete-modal.ejs') %>
 <% } %>
+
 <div class="content content--white">
   <%- partial('./components/ad-leaderboard.ejs') %>
   <div class="container container--flex container--no-pad">
@@ -24,11 +29,7 @@
         </div>
         <% } %>
         <div class="post__footer u-flex u-space-between">
-
-          <% if (post.author) { %>
-            <%- partial('./post/actions-single.ejs')  %>
-          <% } %>
-
+          <%- partial('./post/actions-single.ejs')  %>
           <%- partial('./post/share.ejs') %>
         </div>
         <!-- @todo Comments -->

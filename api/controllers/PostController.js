@@ -88,7 +88,7 @@ module.exports = {
 
     APIService.req({ path: `/posts/${postId}`, user: req.session.user, method: 'DELETE' })
       .then(() => res.redirect('/'))
-      .catch((err) => res.redirect('/?error=deletePost'))
+      .catch((err) => res.redirect('/'))
   }
 
 };

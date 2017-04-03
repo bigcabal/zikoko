@@ -1,8 +1,13 @@
 <div class="post-modal post-modal--delete">
 	<h3 class="post-modal__title">Delete Post</h3>
 	<p class="post-modal__body">Are you sure you want to delete this post ?</p>
-	<div>
-		<button class="button button--md button--google" onclick="closeDeletePost()">Delete</button>
-		<button class="button button--md button--clear" onclick="closeDeletePost()">Cancel</button>
-	</div>
+
+  <form action="/post/delete" method="post">
+    <!-- Hidden field, don't touch -->
+    <input type="hidden" name="post_id" value="<%= post.id %>">
+    <button type="submit" class="button button--md button--google">Delete</button>
+    <button type="button" class="button button--md button--clear" onclick="closeDeletePost()">Cancel</button>
+  </form>
 </div>
+
+
