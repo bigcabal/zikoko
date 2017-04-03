@@ -21,6 +21,10 @@ module.exports = {
         req.session.user = signedInUser;
         req.session.user.authorization = authorization;
         console.log(req.session.user);
+
+        res.cookie('zikokoUserId', signedInUser.id);
+        res.cookie('zikokoUserAuth', authorization);
+
         res.redirect('/new');
       })
       .catch(() => {
