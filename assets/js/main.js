@@ -15,6 +15,7 @@ document.querySelector('.toggle--close-search').addEventListener('click', functi
 
 document.querySelector('.page-overlay').addEventListener('click', function() {
     closeSearchHeader();
+    closeDeletePost();
     return false;
 });
 
@@ -69,7 +70,16 @@ document.querySelector('.category-toggle').addEventListener('click', function() 
     return false;
 });
 
+// Delete post
+function openDeletePost() {
+    document.querySelector('.page-overlay').classList.add('page-overlay--is-visible');
+    document.querySelector('.post-modal--delete').classList.add('post-modal--is-visible');
+}
 
+function closeDeletePost() {
+    document.querySelector('.page-overlay').classList.remove('page-overlay--is-visible');
+    document.querySelector('.post-modal--delete').classList.remove('post-modal--is-visible');
+}
 
 
 

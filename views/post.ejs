@@ -1,4 +1,7 @@
 <%- partial('./partials/header.ejs', {includeFeedFilter: false}) %>
+<% if ( currentUser.id === post.author.id ) {  %>
+  <%- partial('./post/delete-modal.ejs')%>
+<% } %>
 <div class="content content--white">
   <%- partial('./components/ad-leaderboard.ejs') %>
   <div class="container container--flex container--no-pad">
