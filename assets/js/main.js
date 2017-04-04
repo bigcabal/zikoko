@@ -3,10 +3,10 @@
   ========================
  */
 
-let currentUser = null;
+var currentUser = null;
 if ( document.cookie.indexOf('zikokoUserAuth') > -1 ) {
-  let zikokoUserAuth = document.cookie.split('zikokoUserAuth=')[1].split(';')[0];
-  let zikokoUserId = document.cookie.split('zikokoUserId=')[1].split(';')[0];
+  var zikokoUserAuth = document.cookie.split('zikokoUserAuth=')[1].split(';')[0];
+  var zikokoUserId = document.cookie.split('zikokoUserId=')[1].split(';')[0];
   currentUser = {
     id: zikokoUserId,
     auth: zikokoUserAuth
