@@ -50,6 +50,7 @@ module.exports.routes = {
   'get /category/:category_slug/page/:page_number': 'PostsController.list',
 
   'get /search': 'PostsController.search',
+  'get /search/page/:page_number': 'PostsController.search',
 
   'get /feed/instant-articles': 'PostsController.instant_articles',
 
