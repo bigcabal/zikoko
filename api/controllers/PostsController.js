@@ -57,7 +57,7 @@ module.exports = {
         data.pagination = {
           page: page,
           total: APIResponse.headers.total,
-          pageBase: categorySlug ? '' : `/categories/${categorySlug}`
+          pageBase: data.feed === 'Everything' ? '' : `/categories/${categorySlug}`
         }
         return APIResponse.data;
       })
