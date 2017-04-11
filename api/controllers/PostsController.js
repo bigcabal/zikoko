@@ -40,6 +40,8 @@ module.exports = {
           query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
           data.title = MetaDataService.pageTitle(category.name);
           data.metaData = MetaDataService.pageMeta('category', category);
+
+          console.log(query);
           return data.feed = category.name;
         })
     }
@@ -55,13 +57,12 @@ module.exports = {
         data.pagination = {
           page: page,
           total: APIResponse.headers.total,
-          pageBase: ''
+          pageBase: data.feed === 'Everything' ? '' : `/categories/${categorySlug}`
         }
-        //console.log(APIResponse.headers);
         return APIResponse.data;
       })
       .then((posts) => data.posts = posts)
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('posts', data))
       .catch((err) => res.redirect('/login?error=list'));
@@ -70,9 +71,10 @@ module.exports = {
 
   search: function (req, res) {
 
-    // Search term
+    // Request parameters
     const term = req.param('term') || null;
     if ( !term ) res.redirect('/');
+    const page = req.params.page_number || 1;
 
     // Default view data
     let data = {};
@@ -81,18 +83,49 @@ module.exports = {
     data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
     data.metaData = MetaDataService.pageMeta('search', term);
 
-    let query = '/posts?sort=publishedAt%20DESC';
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
 
-    APIService.req({ path: query, user: data.currentUser })
-      .then((APIResponse) => data.posts = APIResponse.data)
-      .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
-      .then((APIResponse) => data.categories = APIResponse.data)
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
-      .then(() => {
-        console.log(data.posts);
-        res.view('search', data)
+    // Default query
+    let query = `/posts/search?query=${ encodeURI(term) }${queryLimit}${queryPagination}`;
+
+
+    function cleanPost(post) {
+      post.sharing = post.sharing_;
+      post.media = post.media_;
+      post.author = post.author_;
+      post.categories = post.categories_;
+      post.tags = post.tags_;
+      post.blocks = post.blocks_;
+      delete post['sharing_'];
+      delete post['media_'];
+      delete post['author_'];
+      delete post['categories_'];
+      delete post['tags_'];
+      delete post['blocks_'];
+      return post;
+    }
+
+    APIService.getPostsNavigation({ session: req.session })
+      .then((postsNavigation) => data.postsNavigation = postsNavigation)
+      .then(() => APIService.req({ path: query, user: data.currentUser }))
+      .then((APIResponse) => {
+        data.pagination = {
+          page: page,
+          total: APIResponse.data.hits.total,
+          pageBase: '/search',
+          query: `?term=${term}`
+        }
+        return APIResponse.data.hits.hits;
       })
+      .then((uglyPosts) => {
+        const posts = uglyPosts.map((uglyPost) => cleanPost(uglyPost._source));
+        data.posts = posts;
+      })
+      .then(() => APIService.getSidebarPosts(req.session))
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
+      .then(() => res.view('search', data))
       .catch(() => res.redirect('/'))
 
   },

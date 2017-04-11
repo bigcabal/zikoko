@@ -5,31 +5,49 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+const postsPerPage = sails.config.globals.settings.postsPerPage;
+
 module.exports = {
 
   posts: function (req, res) {
 
+    // Request parameters
     const username = req.params.username;
+    const page = req.params.page_number || 1;
+
+    // Default view data
     let data = {};
     data.currentUser = req.session.user;
+
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
+
 
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((APIResponse) => {
         data.user = APIResponse.data[0];
         data.user.role = RolesService.getHighestRole(data.user.roles);
-        console.log(data.user);
-
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
         return;
       })
-      .then(() => APIService.req({ path: `/posts?author=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
+      .then(() => {
+        let query = `/posts?author=${data.user.id}&sort=publishedAt%20DESC${queryLimit}${queryPagination}`
+        return APIService.req({ path: query, user: data.currentUser });
+      })
       .then((APIResponse) => {
-        const posts = APIResponse.data;
-        console.log(posts);
+        data.pagination = {
+          page: page,
+          total: data.user.posts_count,
+          pageBase: `/user/${data.user.username}`
+        }
+        return APIResponse.data;
+      })
+      .then((posts) => {
         return data.posts = Array.isArray(posts) ? posts : [posts];
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() =>  res.view('user-posts', data));
 
@@ -37,27 +55,46 @@ module.exports = {
 
   likes: function (req, res) {
 
+
+    // Request parameters
     const username = req.params.username;
+    const page = req.params.page_number || 1;
+
+    // Default view data
     let data = {};
     data.currentUser = req.session.user;
+
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
+
+
 
     APIService.req({ path: `/users?username=${username}`, user: data.currentUser })
       .then((APIResponse) => {
         data.user = APIResponse.data[0];
         data.user.role = RolesService.getHighestRole(data.user.roles);
-        //console.log(data.user);
-
         data.title = MetaDataService.pageTitle(`@${data.user.username}`);
         data.metaData = MetaDataService.pageMeta('user-likes', data.user);
         return;
       })
-      .then(() => APIService.req({ path: `/likes?user=${data.user.id}&sort=publishedAt%20DESC`, user: data.currentUser }))
+      .then(() => {
+        let query = `/likes?user=${data.user.id}&sort=publishedAt%20DESC${queryLimit}${queryPagination}`
+        return APIService.req({ path: query, user: data.currentUser });
+      })
       .then((APIResponse) => {
-        const likes = APIResponse.data;
+        data.pagination = {
+          page: page,
+          total: data.user.likes_count,
+          pageBase: `/user/${data.user.username}`
+        }
+        return APIResponse.data;
+      })
+      .then((likes) => {
         console.log(likes[0]);
         return data.likes = Array.isArray(likes) ? likes : [likes];
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() =>  res.view('user-likes', data));
 

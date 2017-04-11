@@ -50,6 +50,7 @@ module.exports.routes = {
   'get /category/:category_slug/page/:page_number': 'PostsController.list',
 
   'get /search': 'PostsController.search',
+  'get /search/page/:page_number': 'PostsController.search',
 
   'get /feed/instant-articles': 'PostsController.instant_articles',
 
@@ -62,7 +63,9 @@ module.exports.routes = {
   'post /post/delete': 'PostController.delete',
 
   'get /user/:username': 'UserController.posts',
+  'get /user/:username/page/:page_number': 'UserController.posts',
   'get /user/:username/likes': 'UserController.likes',
+  'get /user/:username/likes/page/:page_number': 'UserController.likes',
 
   'get /me/profile': 'UserController.updateProfileView',
   'post /me/profile': 'UserController.updateProfile',

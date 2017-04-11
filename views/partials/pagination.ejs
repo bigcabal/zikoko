@@ -5,6 +5,7 @@
   const nextPage = currentPage + 1;
   const totalPages = Math.ceil(pagination.total / sails.config.globals.settings.postsPerPage);
   const pageBase = pagination.pageBase;
+  const pageQuery = pagination.query || '';
  %>
 
 
@@ -12,17 +13,17 @@
 
   <% if (previousPage > 0) { %>
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= previousPage %>" class="button button--clear button--sm">Prev</a>
+    <a href="<%= pageBase %>/page/<%= previousPage %><%= pageQuery %>" class="button button--clear button--sm">Prev</a>
   </li>
 
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/1" class="button button--clear button--sm">1</a>
+    <a href="<%= pageBase %>/page/1<%= pageQuery %>" class="button button--clear button--sm">1</a>
   </li>
 
   <% if (previousPage > 1) { %>
   <li class="pagination__item"><span class="button button--clear button--sm">...</span></li>
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= previousPage %>" class="button button--clear button--sm"><%= previousPage %></a>
+    <a href="<%= pageBase %>/page/<%= previousPage %><%= pageQuery %>" class="button button--clear button--sm"><%= previousPage %></a>
   </li>
   <% } %>
   <% } %>
@@ -35,17 +36,17 @@
 
   <% if (nextPage !== totalPages) { %>
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= nextPage %>" class="button button--clear button--sm"><%= nextPage %></a>
+    <a href="<%= pageBase %>/page/<%= nextPage %><%= pageQuery %>" class="button button--clear button--sm"><%= nextPage %></a>
   </li>
   <li class="pagination__item"><span class="button button--clear button--sm">...</span></li>
   <% } %>
 
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= totalPages %>" class="button button--clear button--sm"><%= totalPages %></a>
+    <a href="<%= pageBase %>/page/<%= totalPages %><%= pageQuery %>" class="button button--clear button--sm"><%= totalPages %></a>
   </li>
 
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= nextPage %>" class="button button--clear button--sm">Next</a>
+    <a href="<%= pageBase %>/page/<%= nextPage %><%= pageQuery %>" class="button button--clear button--sm">Next</a>
   </li>
   <% } %>
 </ul>

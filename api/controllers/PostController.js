@@ -37,7 +37,7 @@ module.exports = {
           return;
         }
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('post', data))
       .catch((err) => {
