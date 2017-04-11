@@ -40,6 +40,8 @@ module.exports = {
           query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
           data.title = MetaDataService.pageTitle(category.name);
           data.metaData = MetaDataService.pageMeta('category', category);
+
+          console.log(query);
           return data.feed = category.name;
         })
     }
@@ -55,10 +57,10 @@ module.exports = {
         data.pagination = {
           page: page,
           total: APIResponse.headers.total,
-          pageBase: ''
+          pageBase: categorySlug ? '' : `/categories/${categorySlug}`
         }
         //console.log(APIResponse.headers);
-        console.log(APIResponse)
+        console.log(data.pagination)
         return APIResponse.data;
       })
       .then((posts) => data.posts = posts)

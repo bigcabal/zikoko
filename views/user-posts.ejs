@@ -38,6 +38,11 @@
       <% posts.forEach(function(post) { %>
       <%- partial('./post/excerpt.ejs', { post: post }) %>
       <% }) %>
+
+      <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+      <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+      <%- partial('./partials/pagination.ejs') %>
     </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>
