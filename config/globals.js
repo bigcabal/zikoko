@@ -10,9 +10,14 @@
  */
 module.exports.globals = {
 
+  // defaultAuth: {
+  //   email: 'guest@bigcabal.com',
+  //   password: 'ultimateguestuserpassword'
+  // },
+
   defaultAuth: {
-    email: 'guest@bigcabal.com',
-    password: 'ultimateguestuserpassword'
+    email: 'timi@helloworld.ng',
+    password: 'ultimateproductionpassword'
   },
 
   settings: {

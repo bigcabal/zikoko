@@ -29,7 +29,7 @@ module.exports = {
         console.log(posts);
         return data.posts = Array.isArray(posts) ? posts : [posts];
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() =>  res.view('user-posts', data));
 
@@ -57,7 +57,7 @@ module.exports = {
         console.log(likes[0]);
         return data.likes = Array.isArray(likes) ? likes : [likes];
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() =>  res.view('user-likes', data));
 

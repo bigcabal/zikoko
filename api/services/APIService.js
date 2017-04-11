@@ -66,8 +66,30 @@ module.exports = {
    * The following methods are for requests that are made in multiple locations
    */
 
-  getSidebarPosts: function(options) {
-    "use strict";
+  getSidebarPosts: function(session) {
+    return new Promise((resolve, reject) => {
+      const path = '/posts?limit=4';
+      const defaultAuth = new Buffer(`${sails.config.globals.defaultAuth.email}:${sails.config.globals.defaultAuth.password}`).toString('base64');
+      session.temporaryStorage = session.temporaryStorage || {};
+
+      const requestOptions = {
+        host: sails.config.API.host,
+        port: 443,
+        path: `${sails.config.API.path}${path}`,
+        method: 'GET',
+        headers: {'Authorization': `Basic ${defaultAuth}`}
+      }
+
+      if (session.temporaryStorage[path]) {
+        console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE (sidebarPosts)`);
+        resolve(session.temporaryStorage[path])
+      } else {
+        httpRequest('GET', requestOptions, null, session)
+          .then((response) => resolve(response))
+          .catch((err) => reject(err));
+      }
+
+    });
 
   },
 
