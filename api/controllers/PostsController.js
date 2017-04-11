@@ -58,10 +58,11 @@ module.exports = {
           pageBase: ''
         }
         //console.log(APIResponse.headers);
+        console.log(APIResponse)
         return APIResponse.data;
       })
       .then((posts) => data.posts = posts)
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('posts', data))
       .catch((err) => res.redirect('/login?error=list'));
@@ -87,7 +88,7 @@ module.exports = {
       .then((APIResponse) => data.posts = APIResponse.data)
       .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
       .then((APIResponse) => data.categories = APIResponse.data)
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
+      .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => {
         console.log(data.posts);
