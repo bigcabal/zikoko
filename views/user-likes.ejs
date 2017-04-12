@@ -25,24 +25,27 @@
 
         <div class="profile__tabs">
           <a href="/user/<%= user.username %>" class="profile__tab">
-            <div class="profile__stat-number"><%= user.posts_count %></div> Posts
+            <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.posts_count) %></div> Posts
           </a>
           <a href="/user/<%= user.username %>/likes" class="profile__tab profile__tab--active">
-            <div class="profile__stat-number"><%= user.likes_count %></div> Likes
+            <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.likes_count) %></div> Likes
           </a>
         </div>
       </div>
 
       <div class="profile-posts">
         <h3 class="profile-posts__title">Posts</h3>
-        <% likes.forEach(function(like) { %>
-        <%- partial('./post/excerpt.ejs', { post: like.post }) %>
-        <% }) %>
 
-        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
-        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+        <div id="is-postsContent">
+          <% likes.forEach(function(like) { %>
+          <%- partial('./post/excerpt.ejs', { post: like.post }) %>
+          <% }) %>
 
-        <%- partial('./partials/pagination.ejs') %>
+          <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+          <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+          <%- partial('./partials/pagination.ejs') %>
+        </div>
       </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>

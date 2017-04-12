@@ -7,14 +7,17 @@
                 <span class="search-results__label"><%= pagination.total %> Results for:</span>
                 <h2 class="search-results__title">"<%= term %>"</h2>
             </div>
-            <% posts.forEach(function(post) { %>
-            <%- partial('./post/excerpt.ejs', { post: post }) %>
-            <% }) %>
 
-            <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
-            <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+            <div id="is-postsContent">
+              <% posts.forEach(function(post) { %>
+              <%- partial('./post/excerpt.ejs', { post: post }) %>
+              <% }) %>
 
-            <%- partial('./partials/pagination.ejs') %>
+              <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+              <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+              <%- partial('./partials/pagination.ejs') %>
+            </div>
         </main>
         <%- partial('./partials/sidebar.ejs') %>
     </div>
