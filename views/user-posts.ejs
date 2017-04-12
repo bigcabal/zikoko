@@ -35,14 +35,17 @@
 
     <div class="profile-posts">
       <h3 class="profile-posts__title">Posts</h3>
-      <% posts.forEach(function(post) { %>
-      <%- partial('./post/excerpt.ejs', { post: post }) %>
-      <% }) %>
 
-      <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
-      <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+      <div id="is-postsContent">
+        <% posts.forEach(function(post) { %>
+        <%- partial('./post/excerpt.ejs', { post: post }) %>
+        <% }) %>
 
-      <%- partial('./partials/pagination.ejs') %>
+        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+        <%- partial('./partials/pagination.ejs') %>
+      </div>
     </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>

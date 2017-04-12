@@ -9,7 +9,7 @@
  %>
 
 
-<ul class="pagination">
+<ul class="pagination is-nav">
 
   <% if (previousPage > 0) { %>
   <li class="pagination__item">
@@ -46,7 +46,7 @@
   </li>
 
   <li class="pagination__item">
-    <a href="<%= pageBase %>/page/<%= nextPage %><%= pageQuery %>" class="button button--clear button--sm">Next</a>
+    <a href="<%= pageBase %>/page/<%= nextPage %><%= pageQuery %>" class="is-nextPage button button--clear button--sm">Next</a>
   </li>
   <% } %>
 </ul>

@@ -35,14 +35,17 @@
 
       <div class="profile-posts">
         <h3 class="profile-posts__title">Posts</h3>
-        <% likes.forEach(function(like) { %>
-        <%- partial('./post/excerpt.ejs', { post: like.post }) %>
-        <% }) %>
 
-        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
-        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+        <div id="is-postsContent">
+          <% likes.forEach(function(like) { %>
+          <%- partial('./post/excerpt.ejs', { post: like.post }) %>
+          <% }) %>
 
-        <%- partial('./partials/pagination.ejs') %>
+          <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+          <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+          <%- partial('./partials/pagination.ejs') %>
+        </div>
       </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>
