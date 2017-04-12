@@ -4,14 +4,16 @@
   <%- partial('./components/ad-leaderboard.ejs') %>
   <div class="container container--flex container--no-pad">
 	<main>
-	    <% posts.forEach(function(post) { %>
-	      <%- partial('./post/excerpt.ejs', { post: post }) %>
-	    <% }) %>
+      <div id="is-postsContent">
+        <% posts.forEach(function(post) { %>
+          <%- partial('./post/excerpt.ejs', { post: post }) %>
+        <% }) %>
 
-      <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
-      <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
 
-	    <%- partial('./partials/pagination.ejs') %>
+        <%- partial('./partials/pagination.ejs') %>
+      </div>
 	  </main>
   <%- partial('./partials/sidebar.ejs') %>
   </div>
