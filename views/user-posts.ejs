@@ -25,10 +25,10 @@
 
       <div class="profile__tabs">
         <a href="/user/<%= user.username %>" class="profile__tab profile__tab--active">
-          <div class="profile__stat-number"><%= user.posts_count %></div> Posts
+          <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.posts_count) %></div> Posts
         </a>
         <a href="/user/<%= user.username %>/likes" class="profile__tab">
-          <div class="profile__stat-number"><%= user.likes_count %></div> Likes
+          <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.likes_count) %></div> Likes
         </a>
       </div>
     </div>
