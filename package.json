@@ -32,7 +32,11 @@
 
     "dev": "NODE_ENV=development node app.js",
     "staging": "NODE_ENV=staging node app.js",
-    "live": "NODE_ENV=production node app.js"
+    "live": "NODE_ENV=production node app.js",
+
+    "logs:dev": "heroku logs --app zikoko-dev -t",
+    "logs:staging": "heroku logs --app zikoko-staging -t",
+    "logs:live": "heroku logs --app zikoko-live -t"
   },
   "main": "app.js",
   "repository": {
