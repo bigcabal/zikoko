@@ -198,7 +198,7 @@ function likePost(e) {
   }
 
   APIRequest(requestOptions)
-    .then((res) => {
+    .then(function(res) {
       res = JSON.parse(res);
       if ( !res.post ) return Promise.reject();
 
@@ -207,7 +207,7 @@ function likePost(e) {
 
       // @todo Check if liking or unliking and update post
     })
-    .catch((err) => {
+    .catch(function(err) {
       console.log("err")
       console.log(err);
     })
