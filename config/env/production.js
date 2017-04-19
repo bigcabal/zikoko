@@ -15,6 +15,10 @@ module.exports = {
   API: {
     host: process.env.API_HOST || 'formation-api-live.herokuapp.com',
     path: '/api'
+  },
+
+  SITE: {
+    url: 'https://zikoko-live.herokuapp.com'
   }
 
   /***************************************************************************
