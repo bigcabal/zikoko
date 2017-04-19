@@ -57,6 +57,18 @@ module.exports = {
     }
 
 
+  },
+
+  commentsPermalink: function(post) {
+    switch(post.post_type) {
+      case 'archived':
+        return post.old_url;
+        break;
+      default:
+        return `${sails.config.SITE.url}/post/${post.slug}`
+        break;
+    }
+
   }
 
 };
