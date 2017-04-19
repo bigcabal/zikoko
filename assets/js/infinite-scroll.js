@@ -63,7 +63,7 @@ InfiniteScroll.prototype.start = function(e) {
   var windowScrollTop = e.target.scrollingElement.scrollTop;
   var navElDistanceFromTop = navEl.offsetTop;
   var difference = navElDistanceFromTop - windowScrollTop;
-  var windowHeight = e.target.scrollingElement.clientHeight
+  var windowHeight = window.innerHeight;
 
   if ( difference < (windowHeight * 2) ) {
     this.loadNextPage();
@@ -79,3 +79,5 @@ if ( document.querySelector('.is-nextPage') ) {
     nextSelector: '.is-nextPage'
   });
 }
+
+

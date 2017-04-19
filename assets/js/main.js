@@ -166,11 +166,7 @@ function likePost(e) {
 
   e.preventDefault();
 
-
-  function handleSuccess(res) {
-    res = JSON.parse(res);
-    if ( !res.post ) return handleError();
-
+  function like() {
     var postActionIcon = e.target.querySelector('.post-action-icon');
     postActionIcon.classList.remove('post-action-icon--like');
     postActionIcon.classList.add('post-action-icon--liked');
@@ -180,9 +176,18 @@ function likePost(e) {
     postLikesEl.textContent = postLikesCount + 1;
   }
 
-  function handleError(err) {
-    console.log("err")
-    console.log(err);
+  function unlike() {
+    var postActionIcon = e.target.querySelector('.post-action-icon');
+    postActionIcon.classList.add('post-action-icon--like');
+    postActionIcon.classList.remove('post-action-icon--liked');
+
+    var postLikesEl = postActionIcon.nextElementSibling;
+    var postLikesCount = postLikesEl.textContent === 'Like' ? 0 : parseInt(postLikesEl.textContent);
+    if ( postLikesCount < 2 ) {
+      postLikesEl.textContent = 'Like';
+    } else {
+      postLikesEl.textContent = postLikesCount - 1;
+    }
   }
 
   var postId = e.target[0].value;
@@ -193,8 +198,19 @@ function likePost(e) {
   }
 
   APIRequest(requestOptions)
-    .then(handleSuccess)
-    .catch(handleError)
+    .then((res) => {
+      res = JSON.parse(res);
+      if ( !res.post ) return Promise.reject();
+
+      console.log(res);
+      like();
+
+      // @todo Check if liking or unliking and update post
+    })
+    .catch((err) => {
+      console.log("err")
+      console.log(err);
+    })
 
 }
 
