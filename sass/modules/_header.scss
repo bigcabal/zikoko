@@ -65,7 +65,7 @@
     @include screen(small) {
         width: 34px;
     }
-    .header--logo-centered &{
+    .header--logo-centered & {
         @include screen(small) {
             width: auto;
         }
@@ -75,6 +75,7 @@
         width: 145px;
         display: inline-block;
         margin-left: -10px;
+        fill: $purple;
         .header--has-filter & {
             @include screen(med) {
                 #fullIcon path {
@@ -92,7 +93,7 @@
                 fill: transparent;
             }
         }
-        .header--logo-centered &{
+        .header--logo-centered & {
             @include screen(small) {
                 #fullIcon path {
                     fill: $purple;
@@ -116,7 +117,7 @@
         transition: all .3s;
         cursor: pointer;
         padding: 0 3px;
-        &:focus{
+        &:focus {
             outline: none;
             background-color: #f4f4f4;
         }
@@ -222,7 +223,6 @@
     display: inline-flex;
     align-items: center;
     height: 24px;
-
     &-toggle {
         display: inline-flex;
         align-items: center;
@@ -250,7 +250,7 @@
                 display: none;
             }
         }
-        &:focus{
+        &:focus {
             outline: none;
             border: 1px solid $greyLight;
             border-radius: 3px;
@@ -281,7 +281,7 @@
         background-color: transparent;
         display: none;
         padding: 0 8px;
-        &:focus{
+        &:focus {
             outline: none;
             border: 1px solid $greyLight;
             border-radius: 3px;
@@ -353,7 +353,7 @@
     cursor: pointer;
     margin-right: 24px;
     height: 36px;
-    @include screen(small){
+    @include screen(small) {
         margin-right: 12px;
     }
     &-toggle {
@@ -405,7 +405,7 @@
             pointer-events: none;
             position: absolute;
             width: 0;
-            @include screen(small){
+            @include screen(small) {
                 margin-left: -20px;
             }
         }
