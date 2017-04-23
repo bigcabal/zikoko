@@ -25,6 +25,7 @@
     }
     &--flex{
         display: flex;
+        display: -webkit-box;
         justify-content: center;
         flex-flow: row wrap;
         @include screen(med) {
