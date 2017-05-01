@@ -48,11 +48,11 @@
                 </li>
                 <% if (!currentUser) { %>
                 <li class="account">
-                    <button class="account-toggle">
+                    <a class="account-toggle" href="#">
                         <span class="account-toggle__icon">
                             <%- partial('../components/icons/header/account.ejs') %>
                         </span>
-                    </button>
+                    </a>
                     <ul class="account__links">
                         <li class="account__link"><a href="/login">Login</a></li>
                         <li class="account__link"><a href="/register">Create account</a></li>

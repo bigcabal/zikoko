@@ -138,34 +138,20 @@
         }
     }
     &-dropdown {
-        background-color: lighten($black, 8%);
-        color: white;
+        background-color: white;
         position: absolute;
         left: -15px;
         min-width: 144px;
         border-radius: 3px;
+        border: 1px solid #c8cdcf;
         padding: 10px 0;
-        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08);
         opacity: 0;
         pointer-events: none;
         transition: all .3s;
         top: $headerHeight + 6px;
-        &:before {
-            border: solid transparent;
-            border-color: none;
-            border-bottom-color: lighten($black, 8%);
-            border-width: 6px;
-            bottom: 100%;
-            content: " ";
-            height: 0;
-            left: 50%;
-            margin-left: -6px;
-            pointer-events: none;
-            position: absolute;
-            width: 0;
-        }
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         &__item {
-            padding: 8px 24px;
+            padding: 5px 16px;
             transition: all .3s;
             &:hover {
                 opacity: 0.5;
@@ -291,17 +277,19 @@
             margin-left: 20px;
         }
         &__icon {
-            height: 24px;
-            width: 24px;
+            height: 20px;
+            width: 20px;
         }
     }
     &__links {
         @include screen(med) {
             position: absolute;
             min-width: 150px;
-            top: $headerHeight - 12px;
-            background-color: lighten($black, 8%);
+            top: $headerHeight - 14px;
+            background-color: white;
+            border: 1px solid #c8cdcf;
             border-radius: 3px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             padding: 10px 0;
             justify-content: flex-start;
             display: inline-flex;
@@ -309,20 +297,6 @@
             opacity: 0;
             pointer-events: none;
             transition: all .3s;
-            &:before {
-                border: solid transparent;
-                border-color: none;
-                border-bottom-color: lighten($black, 8%);
-                border-width: 6px;
-                bottom: 100%;
-                content: " ";
-                height: 0;
-                left: 50%;
-                margin-left: 3px;
-                pointer-events: none;
-                position: absolute;
-                width: 0;
-            }
             .account--active & {
                 opacity: 1;
                 pointer-events: auto;
@@ -336,8 +310,7 @@
             margin-left: 0;
             text-align: left;
             justify-content: flex-start;
-            color: white;
-            padding: 8px 24px;
+            padding: 5px 16px;
             width: 100%;
         }
     }
@@ -381,10 +354,12 @@
     &__links {
         position: absolute;
         min-width: 120px;
-        top: $headerHeight - 6px;
+        top: $headerHeight - 12px;
         left: -6px;
-        background-color: lighten($black, 8%);
+        background-color: white;
+        border: 1px solid #c8cdcf;
         border-radius: 3px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         padding: 10px 0;
         justify-content: flex-start;
         display: inline-flex;
@@ -392,23 +367,6 @@
         opacity: 0;
         pointer-events: none;
         transition: all .3s;
-        &:before {
-            border: solid transparent;
-            border-color: none;
-            border-bottom-color: lighten($black, 8%);
-            border-width: 6px;
-            bottom: 100%;
-            content: " ";
-            height: 0;
-            left: 50%;
-            margin-left: -8px;
-            pointer-events: none;
-            position: absolute;
-            width: 0;
-            @include screen(small) {
-                margin-left: -20px;
-            }
-        }
         .user-profile--active & {
             opacity: 1;
             pointer-events: auto;
@@ -417,8 +375,7 @@
     &__link {
         text-align: left;
         justify-content: flex-start;
-        color: white;
-        padding: 8px 25px;
+        padding: 5px 16px;
         width: 100%;
         transition: all .3s;
         &:hover {
