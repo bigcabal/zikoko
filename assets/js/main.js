@@ -62,7 +62,8 @@ if ( toggleOpenSearchEl ) {
 
 function setDropdownListeners() {
     if (document.querySelector('.user-profile-toggle')) {
-        document.querySelector('.user-profile-toggle').addEventListener('click', function() {
+        document.querySelector('.user-profile-toggle').addEventListener('click', function(e) {
+            e.preventDefault()
             var userProfile = document.querySelector('.user-profile');
             if (userProfile.classList.contains('user-profile--active')) {
                 userProfile.classList.remove('user-profile--active')
@@ -74,7 +75,8 @@ function setDropdownListeners() {
     }
 
     if (document.querySelector('.account-toggle')) {
-        document.querySelector('.account-toggle').addEventListener('click', function() {
+        document.querySelector('.account-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
             var account = document.querySelector('.account');
             if (account.classList.contains('account--active')) {
                 account.classList.remove('account--active')

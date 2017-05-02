@@ -9,7 +9,7 @@
       <span class="post-action-icon post-action-icon--<%= post.has_liked ? 'liked': 'like'%>">
           <%- partial('../components/icons/post/like.ejs') %>
       </span>
-      <span><%= post.likes_count === 0 ? 'Like' : UtilsService.truncatedCount(post.likes_count) %></span>
+      <span class="post-action-text"><%= post.likes_count === 0 ? 'Like' : UtilsService.truncatedCount(post.likes_count) %></span>
   </button>
 
 </form>
@@ -24,7 +24,7 @@
     <span class="post-action-icon post-action-icon--delete">
       <%- partial('../components/icons/post/delete.ejs') %>
     </span>
-    <span>Delete</span>
+    <span class="post-action-text">Delete</span>
   </button>
 
 </form>

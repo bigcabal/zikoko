@@ -2,8 +2,8 @@
 
 <div class="content content--extra-pad">
   <%- partial('./components/ad-leaderboard.ejs') %>
-  <div class="container container--flex container--no-pad">
-	<main>
+  <div class="container container--no-pad">
+	<main class="u-float-left">
       <div id="is-postsContent">
         <% posts.forEach(function(post) { %>
           <%- partial('./post/excerpt.ejs', { post: post }) %>

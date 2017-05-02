@@ -1,10 +1,12 @@
 <footer class="footer">
 
-  <div class="footer__tabs">
-    <a href="/" class="footer__tab footer__tab--active">Everything</a>
-    <% postsNavigation.forEach(function(item) { %>
-    <li class="category-dropdown__item"><a href="<%= item.url %>"><%= item.label %></a></li>
-    <% }) %>
+  <div>
+    <ul class="footer__tabs">
+      <!-- <li><a href="/" class="footer__tab footer__tab--active">Everything</a> -->
+      <% postsNavigation.forEach(function(item) { %>
+      <li class="footer__tab"><a href="<%= item.url %>"><%= item.label %></a></li>
+      <% }) %>
+    </ul>
   </div>
 
   <div class="footer__bottom">
