@@ -9,3 +9,15 @@
 	display: flex;
 	flex-flow: row wrap;
 }
+
+.u-float-left {
+	float: left;
+	@include screen(custom, max, 1000) {
+		float: none;
+		margin: auto;
+	}
+}
+
+.u-float-right {
+	float: right;
+}
