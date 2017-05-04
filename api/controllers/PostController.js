@@ -19,7 +19,7 @@ module.exports = {
 
     APIService.req({ path: `/posts?slug=${postSlug}` })
       .then((APIResponse) => {
-        const post = APIResponse.data[0];
+        const post = APIResponse.data;
         console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         data.metaData = MetaDataService.pageMeta('post', post);
