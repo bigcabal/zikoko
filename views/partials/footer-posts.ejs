@@ -16,9 +16,11 @@
       </form>
     </div>
 
+    <% if (sails.config.globals.settings.allowPublicAccounts) { %>
     <div class="footer__links">
       <a href="/login" class="footer__link">Login</a>
       <a href="/register" class="footer__link">Create Account</a>
     </div>
+    <% } %>
   </div>
 </footer>

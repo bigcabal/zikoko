@@ -21,7 +21,8 @@ module.exports.globals = {
   },
 
   settings: {
-    postsPerPage: 5
+    postsPerPage: 5,
+    allowPublicAccounts: false
   },
 
   /****************************************************************************

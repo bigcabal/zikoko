@@ -1,3 +1,4 @@
+<% if (sails.config.globals.settings.allowPublicAccounts) { %>
 <div class="post__actions u-flex">
 <form action="/post/like" method="post" class="js-likePostForm">
 
@@ -30,3 +31,4 @@
 </form>
 <% } %>
 </div>
+<% } %>
