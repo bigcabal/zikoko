@@ -9,8 +9,8 @@
 
 <div class="content content--white">
   <%- partial('./components/ad-leaderboard.ejs') %>
-  <div class="container container--flex container--no-pad">
-    <main>
+  <div class="container container--no-pad">
+    <main class="u-float-left">
       <article class="post post--<%= post.post_type %>">
         <header>
           <%- partial('./post/header.ejs') %>
@@ -43,5 +43,6 @@
     </main>
     <%- partial('./partials/sidebar.ejs') %>
   </div>
+  <div class="clear"></div>
 </div>
 <%- partial('./partials/footer.ejs') %>
