@@ -46,30 +46,33 @@
                         <span class="search-toggle__text">Search</span>
                     </a>
                 </li>
-                <% if (!currentUser) { %>
-                <li class="account">
-                    <a class="account-toggle" href="#">
-                        <span class="account-toggle__icon">
-                            <%- partial('../components/icons/header/account.ejs') %>
-                        </span>
-                    </a>
-                    <ul class="account__links">
-                        <li class="account__link"><a href="/login">Login</a></li>
-                        <li class="account__link"><a href="/register">Create account</a></li>
-                    </ul>
-                </li>
-                <% } else { %>
-                <li class="user-profile">
-                    <button class="user-profile-toggle">
-                        <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>">
-                    </button>
-                    <ul class="user-profile__links">
-                        <li class="user-profile__link"><a href="/user/<%= currentUser.username %>">Profile</a></li>
-                        <li class="user-profile__link"><a href="/logout">Logout</a></li>
-                    </ul>
-                </li>
+
+                <% if (sails.config.globals.settings.allowPublicAccounts) { %>
+                  <% if (!currentUser) { %>
+                  <li class="account">
+                      <a class="account-toggle" href="#">
+                          <span class="account-toggle__icon">
+                              <%- partial('../components/icons/header/account.ejs') %>
+                          </span>
+                      </a>
+                      <ul class="account__links">
+                          <li class="account__link"><a href="/login">Login</a></li>
+                          <li class="account__link"><a href="/register">Create account</a></li>
+                      </ul>
+                  </li>
+                  <% } else { %>
+                  <li class="user-profile">
+                      <button class="user-profile-toggle">
+                          <img src="<%= currentUser.imageUrl || currentUser.gravatarUrl %>">
+                      </button>
+                      <ul class="user-profile__links">
+                          <li class="user-profile__link"><a href="/user/<%= currentUser.username %>">Profile</a></li>
+                          <li class="user-profile__link"><a href="/logout">Logout</a></li>
+                      </ul>
+                  </li>
+                  <% } %>
+                  <li><a href="/new" class="upload-button">Upload</a></li>
                 <% } %>
-                <li><a href="/new" class="upload-button">Upload</a></li>
             </ul>
         </div>
     </div>

@@ -1,3 +1,4 @@
+<% if (sails.config.globals.settings.allowPublicAccounts) { %>
 <form action="/post/like" method="post" class="post-actions js-likePostForm">
 
   <!-- Hidden fields, don't touch -->
@@ -17,4 +18,15 @@
       </span>
       <span class="post-action-text">Comment</span>
   </a>
+
 </form>
+<% } else { %>
+<div class="post-actions">
+  <a href="/post/<%= post.slug %>#comments" class="post-action button button--no-pad button--clear">
+      <span class="post-action-icon post-action-icon--comment">
+         <%- partial('../components/icons/post/comment.ejs') %>
+      </span>
+    <span class="post-action-text">Comment</span>
+  </a>
+</div>
+<% } %>
