@@ -29,9 +29,7 @@ module.exports = {
         if ( data.post.show_post_author ) {
           return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user })
             .then((APIResponse) => {
-            // @todo fix role
-            //return data.post.author.role = RolesService.getHighestRole(users[0].roles)
-            return data.post.author.role = 'Tingz Fam';
+            return data.post.author.role = RolesService.getHighestRole(APIResponse.data[0].roles)
           })
         } else {
           return;
