@@ -43,6 +43,9 @@
     /* POST CONTENT BLOCK - These are the listicle blocks */
     .pcblock {
         margin-bottom: 50px;
+         @include screen(small){
+            margin-bottom: 20px;
+        }
         .pcblock__headline {
             padding: 0;
             margin-bottom: 20px;

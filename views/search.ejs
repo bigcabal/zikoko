@@ -1,8 +1,8 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 <div class="content">
     <%- partial('./components/ad-leaderboard.ejs') %>
-    <div class="container container--flex container-no-pad">
-        <main>
+    <div class="container container-no-pad">
+        <main class="u-float-left">
             <div class="search-results__header">
                 <span class="search-results__label"><%= pagination.total %> Results for:</span>
                 <h2 class="search-results__title">"<%= term %>"</h2>

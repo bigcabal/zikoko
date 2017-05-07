@@ -10,6 +10,7 @@
         .post & {
             @include screen(small) {
                 position: fixed;
+                z-index: 4;
             }
         }
     }
