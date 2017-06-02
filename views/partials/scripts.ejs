@@ -20,6 +20,42 @@
 <!-- END GOOGLE ANALYTICS -->
 
 
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P9S3FB');
+</script>
+<!-- End Google Tag Manager -->
+
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    var zkk_leaderboard_1 = googletag.sizeMapping().
+      addSize([992, 0], [[728, 280], [728, 90], [1, 1]]). //desktop
+      addSize([768, 0], [[728, 280], [728, 90], [1, 1]]). //tablet
+      addSize([320, 0], [[320, 50], [320, 100], [1, 1]]). //mobile
+      addSize([0, 0], [[320, 50], [1, 1]]). //other
+      build();
+
+    googletag.defineSlot('/24669334/zkk_bottom', [300, 250], 'div-gpt-ad-1496408391672-0').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_leaderboard_1', [[300, 250], [728, 90]], 'div-gpt-ad-1496408391672-1').defineSizeMapping(zkk_leaderboard_1).addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_sidebar', [[300, 250], [300, 600]], 'div-gpt-ad-1496408391672-2').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_rectangle_1', [300, 250], 'div-gpt-ad-1496408391672-3').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_mobile_top', [300, 250], 'div-gpt-ad-1496408391672-4').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+
 <!-- HEAP ANALYTICS (DEVELOPMENT) -->
 <script>
   window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
