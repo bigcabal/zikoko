@@ -30,6 +30,31 @@
 </script>
 <!-- End Google Tag Manager -->
 
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    var zkk_leaderboard_1 = googletag.sizeMapping().
+      addSize([992, 0], [[728, 280], [728, 90], [1, 1]]). //desktop
+      addSize([768, 0], [[728, 280], [728, 90], [1, 1]]). //tablet
+      addSize([320, 0], [[320, 50], [320, 100], [1, 1]]). //mobile
+      addSize([0, 0], [[320, 50], [1, 1]]). //other
+      build();
+
+    googletag.defineSlot('/24669334/zkk_bottom', [300, 250], 'div-gpt-ad-1496408391672-0').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_leaderboard_1', [[300, 250], [728, 90]], 'div-gpt-ad-1496408391672-1').defineSizeMapping(zkk_leaderboard_1).addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_sidebar', [[300, 250], [300, 600]], 'div-gpt-ad-1496408391672-2').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_rectangle_1', [300, 250], 'div-gpt-ad-1496408391672-3').addService(googletag.pubads());
+    googletag.defineSlot('/24669334/zkk_mobile_top', [300, 250], 'div-gpt-ad-1496408391672-4').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
 
 <!-- HEAP ANALYTICS (DEVELOPMENT) -->
 <script>
