@@ -44,27 +44,24 @@ function getOptimizedUrl(url, placement) {
   let transformation;
   switch (placement) {
     case 'post':
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
     case 'excerpt':
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
     case 'profile':
-      transformation = 'w_100,f_auto,fl_lossy,q_auto/';
+      transformation = '100/';
       break;
     case 'profile-excerpt':
-      transformation = 'w_50,f_auto,fl_lossy,q_auto/';
+      transformation = '50/';
       break;
     default:
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
   }
 
-  const string = 'upload/';
-  const index = url.indexOf(string) + string.length;
-  const optimizedUrl = url.slice(0, index) + transformation + url.slice(index);
+  const filenameIndex = url.lastIndexOf('/') + 1;
+  const optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
 
   return optimizedUrl;
 }
-
-
