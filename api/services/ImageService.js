@@ -61,8 +61,7 @@ function getOptimizedUrl(url, placement) {
   }
 
   const filenameIndex = url.lastIndexOf('/') + 1;
-  //const optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
-  const optimizedUrl = 'http://bc-image-test.s3-website-us-east-1.amazonaws.com/' + transformation + url.slice(filenameIndex);
+  const optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
 
   return optimizedUrl;
 }
