@@ -13,10 +13,10 @@ module.exports = {
       return `<img class="${imageClass}" src="${ url }" alt="">`;
     } else {
       const base = url.split('.gif')[0];
-      return `<video class="${imageClass}" width="600" style="width: 100%;" poster="${base}.gif" autoplay loop muted playsinline>
-              <source type="video/mp4" src="${base}.mp4">
-              <source type="video/webm" src="${base}.webm">
-              <img src="${base}.jpg" alt="" />
+      return `<video class="${imageClass}" width="600" style="width: 100%;" poster="${url}" autoplay loop muted playsinline>
+              <source type="video/mp4" src="${url}">
+              <source type="video/webm" src="${url}">
+              <img src="${url}" alt="" />
             </video>`;
     }
 
