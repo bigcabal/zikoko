@@ -1,9 +1,9 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 
 <div class="content">
-  <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-  <div class="container container--flex container--no-pad">
-    <main>
+  <%- partial('./components/ad-leaderboard.ejs') %>
+  <div class="container container--no-pad">
+    <main class="u-float-left">
     <div class="card profile">
       <div class="u-flex u-space-between">
         <div>
@@ -24,20 +24,31 @@
       </div>
 
       <div class="profile__tabs">
-        <a href="/user/<%= user.username %>" class="profile__tab <% if (activeTab === 'posts') { %>profile__tab--active<% }%>">
-          <div class="profile__stat-number"><%= user.posts_count %></div> Posts
+        <a href="/user/<%= user.username %>" class="profile__tab profile__tab--active">
+          <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.posts_count) %></div> Posts
         </a>
-        <a href="/user/<%= user.username %>/likes" class="profile__tab <% if (activeTab === 'likes') { %>profile__tab--active<% }%>">
-          <div class="profile__stat-number"><%= user.likes_count %></div> Likes
+
+        <% if (sails.config.globals.settings.allowPublicAccounts) { %>
+        <a href="/user/<%= user.username %>/likes" class="profile__tab">
+          <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.likes_count) %></div> Likes
         </a>
+        <% } %>
       </div>
     </div>
 
     <div class="profile-posts">
       <h3 class="profile-posts__title">Posts</h3>
-      <% posts.forEach(function(post) { %>
-      <%- partial('./post/excerpt.ejs', { post: post }) %>
-      <% }) %>
+
+      <div id="is-postsContent">
+        <% posts.forEach(function(post) { %>
+        <%- partial('./post/excerpt.ejs', { post: post }) %>
+        <% }) %>
+
+        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+        <%- partial('./partials/pagination.ejs') %>
+      </div>
     </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>

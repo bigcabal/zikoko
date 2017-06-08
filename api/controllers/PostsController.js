@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+const postsPerPage = sails.config.globals.settings.postsPerPage;
+
 module.exports = {
 
   list: function (req, res) {
@@ -13,6 +15,7 @@ module.exports = {
 
     // Request parameters
     const categorySlug = req.params.category_slug || null;
+    const page = req.params.page_number || 1;
 
     // Default view data
     let data = {};
@@ -22,25 +25,46 @@ module.exports = {
     data.title = MetaDataService.pageTitle();
     data.metaData = MetaDataService.pageMeta();
 
-    let query = '/posts?sort=publishedAt%20DESC';
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
 
-    APIService.req({ path: '/categories', user: data.currentUser, session: req.session })
-      .then((categories) => data.categories = categories)
+    // Default query
+    let query = `/posts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
+
+
+    function setCategory() {
+      return APIService.req({ path: `/categories?slug=${categorySlug}` })
+        .then((APIResponse) => {
+          const category = APIResponse.data[0];
+          query = `/categories/${category.id}/populatedposts?sort=publishedAt%20DESC${queryLimit}${queryPagination}`;
+          data.title = MetaDataService.pageTitle(category.name);
+          data.metaData = MetaDataService.pageMeta('category', category);
+
+          console.log(query);
+          return data.feed = category.name;
+        })
+    }
+
+    APIService.getPostsNavigation({ session: req.session })
+      .then((postsNavigation) => data.postsNavigation = postsNavigation)
       .then(() => {
-        if ( data.feed === 'Everything' ) return Promise.resolve();
-        const category = data.categories.find((category) => { return category.slug === categorySlug });
-        query = `/categories/${category.id}/populatedposts`;
-        data.title = MetaDataService.pageTitle(category.name);
-        data.metaData = MetaDataService.pageMeta('category', category);
-        return data.feed = category.name;
+        if ( data.feed === 'Everything' ) return;
+        return setCategory();
       })
       .then(() => APIService.req({ path: query, user: data.currentUser }))
-      .then((posts) => {
-        console.log(posts[0]);
-        return data.posts = posts;
+      .then((APIResponse) => {
+        data.pagination = {
+          page: page,
+          total: APIResponse.headers.total,
+          pageBase: data.feed === 'Everything' ? '' : `/category/${categorySlug}`
+        }
+        console.log(data.pagination);
+        return APIResponse.data;
       })
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
+      .then((posts) => data.posts = posts)
+      .then(() => APIService.getSidebarPosts(req.session))
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
       .then(() => res.view('posts', data))
       .catch((err) => res.redirect('/login?error=list'));
 
@@ -48,9 +72,10 @@ module.exports = {
 
   search: function (req, res) {
 
-    // Search term
+    // Request parameters
     const term = req.param('term') || null;
     if ( !term ) res.redirect('/');
+    const page = req.params.page_number || 1;
 
     // Default view data
     let data = {};
@@ -59,18 +84,49 @@ module.exports = {
     data.title = MetaDataService.pageTitle(`Search Results for "${term}"`);
     data.metaData = MetaDataService.pageMeta('search', term);
 
-    let query = '/posts?sort=publishedAt%20DESC';
+    // Pagination
+    let queryLimit = `&limit=${postsPerPage}`;
+    let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
 
-    APIService.req({ path: query, user: data.currentUser })
-      .then((posts) => data.posts = posts)
-      .then(() => APIService.req({ path: '/categories', user: data.currentUser }))
-      .then((categories) => data.categories = categories)
-      .then(() => APIService.req({ path: '/posts?limit=4', session: req.session }))
-      .then((sidebarPosts) => data.sidebarPosts = sidebarPosts)
-      .then(() => {
-        console.log(data.posts);
-        res.view('search', data)
+    // Default query
+    let query = `/posts/search?query=${ encodeURI(term) }${queryLimit}${queryPagination}`;
+
+
+    function cleanPost(post) {
+      post.sharing = post.sharing_;
+      post.media = post.media_;
+      post.author = post.author_;
+      post.categories = post.categories_;
+      post.tags = post.tags_;
+      post.blocks = post.blocks_;
+      delete post['sharing_'];
+      delete post['media_'];
+      delete post['author_'];
+      delete post['categories_'];
+      delete post['tags_'];
+      delete post['blocks_'];
+      return post;
+    }
+
+    APIService.getPostsNavigation({ session: req.session })
+      .then((postsNavigation) => data.postsNavigation = postsNavigation)
+      .then(() => APIService.req({ path: query, user: data.currentUser }))
+      .then((APIResponse) => {
+        data.pagination = {
+          page: page,
+          total: APIResponse.data.hits.total,
+          pageBase: '/search',
+          query: `?term=${term}`
+        }
+        return APIResponse.data.hits.hits;
       })
+      .then((uglyPosts) => {
+        const posts = uglyPosts.map((uglyPost) => cleanPost(uglyPost._source));
+        data.posts = posts;
+      })
+      .then(() => APIService.getSidebarPosts(req.session))
+      .then((APIResponse) => data.sidebarPosts = APIResponse.data)
+      .then(() => res.view('search', data))
       .catch(() => res.redirect('/'))
 
   },
@@ -78,13 +134,13 @@ module.exports = {
   instant_articles: function (req, res) {
 
     APIService.req({ path: query })
-      .then((posts) => {
-        console.log(posts);
+      .then((APIResponse) => {
+        console.log(APIResponse.data);
         res.set('Content-Type', 'application/rss+xml');
         res.type('application/rss+xml');
         res.view('feed-ia', {
           layout: null,
-          posts: posts
+          posts: APIResponse.data
         });
       })
       .catch(() => res.redirect('/'))

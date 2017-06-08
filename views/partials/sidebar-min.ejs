@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar u-float-right">
 
   <!-- Follow Zikoko -->
   <div class="sidebar__section sidebar__section--card sidebar__section--wrap">
@@ -13,10 +13,11 @@
       </a>
     </div>
   </div>
-  <div class="sidebar__section sidebar__section--card sidebar__section--ad">
-    <%- partial('./ad.ejs', { adType: 'sidebar' }) %>
-  </div>
 
   <!-- Subscribe -->
-  <%- partial('../components/newsletter.ejs') %>
+  <!-- <%- partial('../components/newsletter.ejs') %> -->
+
+  <div class="sidebar__section sidebar__section--card sidebar__section--ad">
+    <%- partial('../components/ad-sidebar.ejs') %>
+  </div>
 </aside>

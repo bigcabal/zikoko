@@ -1,13 +1,19 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: true }) %>
 
 <div class="content content--extra-pad">
-  <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-  <div class="container container--flex container--no-pad">
-	<main>
-	    <% posts.forEach(function(post) { %>
-	      <%- partial('./post/excerpt.ejs', { post: post }) %>
-	    <% }) %>
-	    <%- partial('./partials/pagination.ejs') %>
+  <%- partial('./components/ad-leaderboard.ejs') %>
+  <div class="container container--no-pad">
+	<main class="u-float-left">
+      <div id="is-postsContent">
+        <% posts.forEach(function(post) { %>
+          <%- partial('./post/excerpt.ejs', { post: post }) %>
+        <% }) %>
+
+        <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+        <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+        <%- partial('./partials/pagination.ejs') %>
+      </div>
 	  </main>
   <%- partial('./partials/sidebar.ejs') %>
   </div>

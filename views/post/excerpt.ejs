@@ -4,7 +4,7 @@
         <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
     </a>
     <div class="post-excerpt__footer u-space-between">
-        <% if (post.author) { %>
+        <% if (post.show_post_author === true && post.author) { %>
           <div class="post-excerpt__author u-flex u-vertical-align">
             <% if (post.author.imageUrl) { %>
             <%- ImageService.getDisplayImage(post.author.imageUrl, 'profile-excerpt') %>
@@ -19,3 +19,4 @@
         <%- partial('./share.ejs') %>
     </div>
 </article>
+

@@ -27,10 +27,46 @@
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/main.css">
     <!--STYLES END-->
-  </head>
 
+    <%- partial('./partials/scripts.ejs') %>
   <body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9S3FB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <script type="text/javascript">
+      var _sf_async_config = { uid: 65234, domain: 'zikoko.com', useCanonical: true };
+      (function() {
+        function loadChartbeat() {
+          window._sf_endpt = (new Date()).getTime();
+          var e = document.createElement('script');
+          e.setAttribute('language', 'javascript');
+          e.setAttribute('type', 'text/javascript');
+          e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
+          document.body.appendChild(e);
+        };
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+          loadChartbeat : function() { oldonload(); loadChartbeat(); };
+      })();
+    </script>
+
+    <!-- FACEBOOK SDK -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- PAGE BODY -->
     <%- body %>
+    <!-- END PAGE BODY -->
 
     <!--TEMPLATES-->
     
@@ -39,8 +75,10 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/infinite-scroll.js"></script>
     <script src="/js/main.js"></script>
     <!--SCRIPTS END-->
+
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
   </body>

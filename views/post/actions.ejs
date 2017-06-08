@@ -1,20 +1,32 @@
+<% if (sails.config.globals.settings.allowPublicAccounts) { %>
 <form action="/post/like" method="post" class="post-actions js-likePostForm">
 
   <!-- Hidden fields, don't touch -->
   <input type="hidden" name="post_id" value="<%= post.id %>">
   <input type="hidden" name="post_slug" value="<%= post.slug %>">
 
-  <button class="post-action button button--no-pad button--clear" href="#" class="post-action">
+  <button class="post-action post-action--margin-right button button--no-pad button--clear" href="#" class="post-action">
       <span class="post-action-icon post-action-icon--<%= post.has_liked ? 'liked': 'like'%>">
-          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512"><g><g><path d="M378.435,33.391c-64.782,0-103.119,45.201-122.435,78.098c-19.316-32.897-57.652-78.098-122.435-78.098 C57.419,33.391,0,94.511,0,175.559c0,102.434,105.592,179.468,245.136,299.028c3.125,2.679,6.994,4.021,10.864,4.021 s7.739-1.342,10.864-4.021C406.427,355.011,512,277.985,512,175.559C512,94.511,454.581,33.391,378.435,33.391z"/></g></g></svg>
+          <%- partial('../components/icons/post/like.ejs') %>
       </span>
-      <span><%= post.likes_count === 0 ? 'Like' : post.likes_count %></span>
+      <span class="post-action-text"><%= post.likes_count === 0 ? 'Like' : UtilsService.truncatedCount(post.likes_count) %></span>
   </button>
 
   <a href="/post/<%= post.slug %>#comments" class="post-action button button--no-pad button--clear">
       <span class="post-action-icon post-action-icon--comment">
-         <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 330 330" enable-background="new 0 0 330 330"><g id="XMLID_479_"><path id="XMLID_481_" d="M0.222,312.431c-0.836,4.809,0.72,9.725,4.172,13.176C7.231,328.444,11.057,330.001,15,330 c0.853,0,1.713-0.073,2.569-0.222l80.38-13.974C119.078,325.227,141.61,330,165,330c90.982,0,165-74.019,165-165S255.983,0,165,0 C74.02,0,0,74.019,0,165c0,23.389,4.773,45.92,14.195,67.05L0.222,312.431z"/></g></svg>
+         <%- partial('../components/icons/post/comment.ejs') %>
       </span>
-      <span>Comment</span>
+      <span class="post-action-text">Comment</span>
   </a>
+
 </form>
+<% } else { %>
+<div class="post-actions">
+  <a href="/post/<%= post.slug %>#comments" class="post-action button button--no-pad button--clear">
+      <span class="post-action-icon post-action-icon--comment">
+         <%- partial('../components/icons/post/comment.ejs') %>
+      </span>
+    <span class="post-action-text">Comment</span>
+  </a>
+</div>
+<% } %>

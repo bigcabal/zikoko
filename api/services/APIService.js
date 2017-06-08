@@ -26,7 +26,13 @@ module.exports = {
         path: `${sails.config.API.path}${path}`,
         method: method
       }
-      if (user) requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
+
+      if (user) {
+        requestOptions.headers = {'Authorization': `Basic ${user.authorization}`}
+      } else {
+        const defaultAuth = new Buffer(`${sails.config.globals.defaultAuth.email}:${sails.config.globals.defaultAuth.password}`).toString('base64');
+        requestOptions.headers = {'Authorization': `Basic ${defaultAuth}`};
+      }
 
 
       if ( saveDataToSession ) {
@@ -53,14 +59,66 @@ module.exports = {
   },
 
 
-  // Repeated requests
+  /*
+   * REPEATED REQUESTS
+   * ==================
+   * Most requests are made using the APIService.req() method because they are only called once.
+   * The following methods are for requests that are made in multiple locations
+   */
 
-  posts: {
+  getSidebarPosts: function(session) {
+    return new Promise((resolve, reject) => {
+      const path = '/posts?limit=4';
+      const defaultAuth = new Buffer(`${sails.config.globals.defaultAuth.email}:${sails.config.globals.defaultAuth.password}`).toString('base64');
+      session.temporaryStorage = session.temporaryStorage || {};
 
-    getSidebarPosts: function() {
-      "use strict";
+      const requestOptions = {
+        host: sails.config.API.host,
+        port: 443,
+        path: `${sails.config.API.path}${path}`,
+        method: 'GET',
+        headers: {'Authorization': `Basic ${defaultAuth}`}
+      }
 
-    }
+      if (session.temporaryStorage[path]) {
+        console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE (sidebarPosts)`);
+        resolve(session.temporaryStorage[path])
+      } else {
+        httpRequest('GET', requestOptions, null, session)
+          .then((response) => resolve(response))
+          .catch((err) => reject(err));
+      }
+
+    });
+
+  },
+
+  getPostsNavigation: function(options) {
+
+    const defaultNavigation = [
+      {
+        url: '/',
+        label: 'Everything'
+      },
+      {
+        url: '/category/list',
+        label: 'List'
+      },
+      {
+        url: '/category/gist',
+        label: 'Gist'
+      },
+      {
+        url: '/category/story',
+        label: 'Story'
+      },
+      {
+        url: '/category/news',
+        label: 'News'
+      }
+    ];
+
+    return Promise.resolve(defaultNavigation);
 
   }
 
@@ -71,30 +129,35 @@ module.exports = {
 function httpRequest(method, requestOptions, data, session) {
   return new Promise((resolve, reject) => {
     let newRequest = https.request(requestOptions, function (response) {
+
+      const RESPONSE = { headers: response.headers };
       let body = '';
+
       response.on('data', function (data) {
         data = data.toString();
         body += data;
       });
-      response.on('end', function () {
 
+      response.on('end', function () {
         if (isJSON(body)) {
           body = JSON.parse(body);
+          RESPONSE.data = body;
           if ( session ) {
             const path = requestOptions.path.split(sails.config.API.path)[1];
-            session.temporaryStorage[path] = body;
+            session.temporaryStorage[path] = RESPONSE;
           }
-          resolve(body);
+          resolve(RESPONSE);
         } else if (body == '[]') {
-          resolve([]);
+          RESPONSE.data = [];
+          resolve(RESPONSE);
         } else {
           console.log("IS NOT JSON =====")
           console.log(body);
           reject(body);
         }
-
       });
     });
+
     newRequest.on('error', (e) => {
       console.error(e);
       reject(e);

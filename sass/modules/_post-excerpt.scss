@@ -14,13 +14,11 @@
     @include screen(small) {
         padding-left: 12px;
         padding-right: 12px;
+        padding-bottom: 52px;
         border-radius: 0;
         border-right: none;
         border-left: none;
         box-shadow: none;
-    }
-    @include screen(small) {
-        padding-bottom: 64px;
     }
     &__title {
         margin-top: 22px;
@@ -29,6 +27,10 @@
         line-height: 3.6rem;
         font-weight: bold;
         text-transform: capitalize;
+        @include screen(small) {
+            font-size: 2.4rem;
+            line-height: 1.3;
+        }
         .post-excerpt--sm & {
             font-size: 1.6rem;
             line-height: 1.5;
@@ -57,11 +59,18 @@
         width: 100%;
         display: flex;
         align-items: center;
+        font-size: 1.6rem;
         @include screen(small) {
             width: auto;
             border-bottom: 0;
-            padding-bottom: 0;
+            padding-bottom: 12px;
             margin-bottom: 0;
+        }
+        @include screen(custom, max, 400) {
+            width: 100%;
+            border-bottom: 1px solid lighten($borderColor, 3%);
+            padding-bottom: 12px;
+            margin-bottom: 4px;
         }
         &-img {
             height: 36px;
@@ -70,8 +79,14 @@
             object-position: center;
             border-radius: 3px;
             margin-right: 16px;
-            @include screen(small){
-                margin-right: 8px;
+            // @include screen(small) {
+            //     margin-right: 8px;
+            //     height: px;
+            //     width: 64px;
+            // }
+            @include screen(custom, max, 400) {
+                height: 64px;
+                width: 64px;
             }
         }
     }

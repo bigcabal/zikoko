@@ -45,8 +45,13 @@ module.exports.routes = {
   ***************************************************************************/
 
   'get /': 'PostsController.list',
+  'get /page/:page_number': 'PostsController.list',
   'get /category/:category_slug': 'PostsController.list',
+  'get /category/:category_slug/page/:page_number': 'PostsController.list',
+
   'get /search': 'PostsController.search',
+  'get /search/page/:page_number': 'PostsController.search',
+
   'get /feed/instant-articles': 'PostsController.instant_articles',
 
   'get /new': 'NewPostController.view',
@@ -58,7 +63,9 @@ module.exports.routes = {
   'post /post/delete': 'PostController.delete',
 
   'get /user/:username': 'UserController.posts',
+  'get /user/:username/page/:page_number': 'UserController.posts',
   'get /user/:username/likes': 'UserController.likes',
+  'get /user/:username/likes/page/:page_number': 'UserController.likes',
 
   'get /me/profile': 'UserController.updateProfileView',
   'post /me/profile': 'UserController.updateProfile',
@@ -77,6 +84,15 @@ module.exports.routes = {
     fn: function(req, res) {
       return res.send(sails.config.API.host);
     }
+  },
+
+
+  'get /:archived_category/:archived_slug': {
+    skipAssets: true,
+    controller: 'PostController',
+    action: 'archived'
   }
+
+
 
 };

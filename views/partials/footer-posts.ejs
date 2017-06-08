@@ -1,10 +1,12 @@
 <footer class="footer">
 
-  <div class="footer__tabs">
-    <a href="/" class="footer__tab footer__tab--active">Everything</a>
-    <% categories.forEach(function(category) { %>
-    <a href="/category/<%= category.slug %>" class="footer__tab"><%= category.name %></a>
-    <% }) %>
+  <div>
+    <ul class="footer__tabs">
+      <!-- <li><a href="/" class="footer__tab footer__tab--active">Everything</a> -->
+      <% postsNavigation.forEach(function(item) { %>
+      <li class="footer__tab"><a href="<%= item.url %>"><%= item.label %></a></li>
+      <% }) %>
+    </ul>
   </div>
 
   <div class="footer__bottom">
@@ -14,9 +16,11 @@
       </form>
     </div>
 
+    <% if (sails.config.globals.settings.allowPublicAccounts) { %>
     <div class="footer__links">
       <a href="/login" class="footer__link">Login</a>
       <a href="/register" class="footer__link">Create Account</a>
     </div>
+    <% } %>
   </div>
 </footer>

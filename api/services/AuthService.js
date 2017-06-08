@@ -17,7 +17,7 @@ module.exports = {
       };
 
       APIService.req(options)
-        .then((res) => resolve(res))
+        .then((APIResponse) => resolve(APIResponse.data))
         .catch((err) => reject(err))
 
     })
@@ -33,7 +33,7 @@ module.exports = {
       };
 
       APIService.req(options)
-        .then((res) => resolve(res))
+        .then((APIResponse) => resolve(APIResponse.data))
         .catch((err) => reject(err))
 
     })

@@ -1,15 +1,23 @@
 <%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
 <div class="content">
-    <%- partial('./partials/ad.ejs', { adType: 'leaderboard' }) %>
-    <div class="container container--flex container-no-pad">
-        <main>
+    <%- partial('./components/ad-leaderboard.ejs') %>
+    <div class="container container-no-pad">
+        <main class="u-float-left">
             <div class="search-results__header">
-                <span class="search-results__label"><%= posts.length %> Results for:</span>
+                <span class="search-results__label"><%= pagination.total %> Results for:</span>
                 <h2 class="search-results__title">"<%= term %>"</h2>
             </div>
-            <% posts.forEach(function(post) { %>
-                <%- partial('./post/excerpt.ejs', { post: post }) %>
-            <% }) %>
+
+            <div id="is-postsContent">
+              <% posts.forEach(function(post) { %>
+              <%- partial('./post/excerpt.ejs', { post: post }) %>
+              <% }) %>
+
+              <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+              <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+              <%- partial('./partials/pagination.ejs') %>
+            </div>
         </main>
         <%- partial('./partials/sidebar.ejs') %>
     </div>

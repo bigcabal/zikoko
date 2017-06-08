@@ -1,0 +1,30 @@
+.post-modal {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    z-index: 3;
+    margin-left: -200px;
+    padding: 32px;
+    min-height: 200px;
+    width: 400px;
+    background-color: white;
+    border-radius: 3px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms;
+    &--is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    &__title {
+        font-size: 2.1rem;
+        margin-bottom: 16px;
+        font-weight: bold;
+    }
+    @include screen(tiny) {
+        width: 98%;
+        margin-left: 1%;
+        left: 0;
+        padding: 32px 24px;
+    }
+}

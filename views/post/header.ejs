@@ -7,7 +7,7 @@
     <a href="/user/<%= post.author.username %>" class="post__author-name">@<%= post.author.username %></a>
     <span class="post__dot"></span>
     <span class="post__author-role"><%= post.author.role %></span>
-    <div class="post__time-stamp"><%= DateTimeService.display(post.publishedAt) %></div>
+    <div class="post__time-stamp"><%= UtilsService.displayDate(post.publishedAt) %></div>
   </div>
 </div>
 <% } %>

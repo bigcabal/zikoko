@@ -1,0 +1,53 @@
+<%- partial('./partials/header.ejs', { includeFeedFilter: false }) %>
+
+<div class="content">
+  <%- partial('./components/ad-leaderboard.ejs') %>
+  <div class="container container--no-pad">
+    <main class="u-float-left">
+      <div class="card profile">
+        <div class="u-flex u-space-between">
+          <div>
+            <div class="profile__role"><%= user.role %></div>
+            <h2 class="profile__name">@<%= user.username %></h2>
+
+            <% if (currentUser) { if ( currentUser.username === user.username ) { %>
+            <a href="/me/profile" class="profile__edit">Edit</a>
+            <% } } %>
+          </div>
+
+          <% if (user.imageUrl) { %>
+          <%- ImageService.getDisplayImage(user.imageUrl, 'profile') %>
+          <% } else { %>
+          <img src="<%= user.gravatarUrl %>" alt="" class="profile__img">
+          <% } %>
+
+        </div>
+
+        <div class="profile__tabs">
+          <a href="/user/<%= user.username %>" class="profile__tab">
+            <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.posts_count) %></div> Posts
+          </a>
+          <a href="/user/<%= user.username %>/likes" class="profile__tab profile__tab--active">
+            <div class="profile__stat-number"><%= UtilsService.truncatedCount(user.likes_count) %></div> Likes
+          </a>
+        </div>
+      </div>
+
+      <div class="profile-posts">
+        <h3 class="profile-posts__title">Posts</h3>
+
+        <div id="is-postsContent">
+          <% likes.forEach(function(like) { %>
+          <%- partial('./post/excerpt.ejs', { post: like.post }) %>
+          <% }) %>
+
+          <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+          <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+          <%- partial('./partials/pagination.ejs') %>
+        </div>
+      </div>
+    </main>
+    <%- partial('./partials/sidebar.ejs') %>
+  </div>
+</div>

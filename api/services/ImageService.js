@@ -13,10 +13,10 @@ module.exports = {
       return `<img class="${imageClass}" src="${ url }" alt="">`;
     } else {
       const base = url.split('.gif')[0];
-      return `<video class="${imageClass}" width="600" style="width: 100%;" poster="${base}.jpg" autoplay loop muted playsinline>
-              <source type="video/mp4" src="${base}.mp4">
-              <source type="video/webm" src="${base}.webm">
-              <img src="${base}.jpg" alt="" />
+      return `<video class="${imageClass}" width="600" style="width: 100%;" poster="${url}" autoplay loop muted playsinline>
+              <source type="video/mp4" src="${url}">
+              <source type="video/webm" src="${url}">
+              <img src="${url}" alt="" />
             </video>`;
     }
 
@@ -44,27 +44,33 @@ function getOptimizedUrl(url, placement) {
   let transformation;
   switch (placement) {
     case 'post':
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
     case 'excerpt':
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
     case 'profile':
-      transformation = 'w_100,f_auto,fl_lossy,q_auto/';
+      transformation = '100/';
       break;
     case 'profile-excerpt':
-      transformation = 'w_50,f_auto,fl_lossy,q_auto/';
+      transformation = '50/';
       break;
     default:
-      transformation = 'w_600,f_auto,fl_lossy,q_auto/';
+      transformation = '600/';
       break;
   }
 
-  const string = 'upload/';
-  const index = url.indexOf(string) + string.length;
-  const optimizedUrl = url.slice(0, index) + transformation + url.slice(index);
+  const filenameIndex = url.lastIndexOf('/') + 1;
+  var optimizedUrl = "";
+
+  if (url.slice(0, filenameIndex) === "https://bc-image-test.s3.amazonaws.com/") {
+    var ves = url.lastIndexOf('?');
+    url = url.slice(0, ves);
+    newIndex = url.lastIndexOf('/') + 1;
+    optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
+  } else {
+    optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+  }
 
   return optimizedUrl;
 }
-
-

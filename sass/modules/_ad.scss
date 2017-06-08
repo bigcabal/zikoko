@@ -1,7 +1,7 @@
 /* @todo Styles for adverts*/
 
 .ad {
-    background-color: orange;
+    /*background-color: orange;*/
     border-radius: 3px;
 }
 
@@ -16,4 +16,12 @@
     height: $ad-sidebar-height;
     width: $ad-sidebar-width;
     margin: auto;
+}
+
+.ad--instream {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

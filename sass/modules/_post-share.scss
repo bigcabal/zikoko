@@ -1,0 +1,67 @@
+.post {
+    &-share {
+        @include screen(small) {
+            display: flex;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .post & {
+            @include screen(small) {
+                position: fixed;
+                z-index: 4;
+            }
+        }
+    }
+    &-share-item {
+        display: inline-flex;
+        margin-left: -5px;
+        height: 36px;
+        width: 48px;
+        font-size: 1.6rem;
+        justify-content: center;
+        align-items: center;
+        background-color: lighten($black, 24%);
+        color: white;
+        .icon {
+            height: 18px;
+            width: 18px;
+            fill: white;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &:first-child {
+            border-radius: 3px 0 0 3px;
+        }
+        &:last-child {
+            border-radius: 0 3px 3px 0;
+        }
+        @include screen(small) {
+            margin-left: 0;
+            width: 25%;
+            flex-grow: 1;
+            border-radius: 0;
+            height: 48px;
+            margin: 0;
+            &:first-child,
+            &:last-child {
+                border-radius: 0;
+            }
+        }
+        &--twitter {
+            background-color: $twitterBlue;
+            border-color: $twitterBlue;
+        }
+        &--facebook {
+            background-color: $facebookBlue;
+            border-color: $facebookBlue;
+        }
+        &--pinterest {
+            background-color: $googleRed;
+            border-color: $googleRed;
+        }
+    }
+}
