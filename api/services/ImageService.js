@@ -61,7 +61,16 @@ function getOptimizedUrl(url, placement) {
   }
 
   const filenameIndex = url.lastIndexOf('/') + 1;
-  const optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+  var optimizedUrl = "";
+
+  if (url.slice(0, filenameIndex) === "https://bc-image-test.s3.amazonaws.com/") {
+    var ves = url.lastIndexOf('?');
+    url = url.slice(0, ves);
+    newIndex = url.lastIndexOf('/') + 1;
+    optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
+  } else {
+    optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+  }
 
   return optimizedUrl;
 }
