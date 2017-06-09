@@ -13,7 +13,6 @@ module.exports = {
   // Generic request
   req: function(options) {
     return new Promise(function(resolve, reject) {
-
       const user = options.user || null;
       const path = options.path;
       const method = options.method ? options.method.toUpperCase() : 'GET';
@@ -170,4 +169,3 @@ function httpRequest(method, requestOptions, data, session) {
     newRequest.end();
   })
 }
-
