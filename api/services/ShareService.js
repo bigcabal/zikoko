@@ -7,7 +7,7 @@ module.exports = {
 
   getShareUrl: function(post, type) {
 
-    const url = encodeURIComponent( `https://zikoko.com/post/${post.slug}` );
+    const url = encodeURIComponent( `http://zikoko.com/post/${post.slug}` );
     const title = encodeURIComponent( post.sharing.title );
     const subtitle = encodeURIComponent( post.sharing.subtitle );
     const image = encodeURIComponent( post.sharing.imageUrl );
