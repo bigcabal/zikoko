@@ -20,7 +20,6 @@ module.exports = {
     APIService.req({ path: `/posts?slug=${postSlug}` })
       .then((APIResponse) => {
         const post = APIResponse.data;
-        console.log(post);
         data.title = MetaDataService.pageTitle(post.title);
         data.metaData = MetaDataService.pageMeta('post', post);
         return data.post = post;
@@ -55,10 +54,13 @@ module.exports = {
 
     const archivedPostCategory = req.params.archived_category;
     const archivedPostSlug = req.params.archived_slug;
-    const archivedPostUrl = `zikoko.com/${archivedPostCategory}/${archivedPostSlug}`;
+    const archivedPostUrl = `http://zikoko.com/${archivedPostCategory}/${archivedPostSlug}/`;
 
     APIService.req({ path: `/posts?where={"old_url":{"contains":"${archivedPostUrl}"}}` })
-      .then((APIResponse) => res.redirect(`/post/${APIResponse.data[0].slug}`))
+      .then((APIResponse) => {
+        res.status(301);
+        res.redirect(`/post/${APIResponse.data["slug"]}`);
+      })
       .catch(() => res.redirect('/?error=archived'))
 
   },
