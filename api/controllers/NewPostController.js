@@ -25,14 +25,14 @@ module.exports = {
     }
 
     function handleSuccess(newPost) {
-      console.log("Success");
+      //console.log("Success");
       res.redirect(`/post/${newPost.slug}`)
     }
 
     let post;
     CloudinaryService.upload( req.file('postImage') )
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         return result.secure_url;
       })
       .then((imageUrl) => setupPost(req.body, imageUrl))
@@ -41,7 +41,7 @@ module.exports = {
       .then((tags) => {
         "use strict";
         post.tags = tags;
-        console.log(post);
+        //console.log(post);
         return;
       })
       .then(() => APIService.req({ path: '/posts', user: req.session.user, method: 'POST', data: post }))
@@ -55,7 +55,7 @@ module.exports = {
 
 function createTags(tagList) {
 
-  console.log("createTags()");
+  //console.log("createTags()");
 
   if (!tagList || tagList == '') return Promise.resolve([]);
 
@@ -112,8 +112,7 @@ function setupPost(postDetails, imageUrl) {
 
   newPost.status = 'published';
 
-  console.log("new post setup")
+  //console.log("new post setup")
 
   return Promise.resolve(newPost);
 }
-

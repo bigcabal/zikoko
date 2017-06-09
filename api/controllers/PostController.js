@@ -9,7 +9,7 @@ module.exports = {
 
   single: function (req, res) {
 
-    console.log("SINGLE POST ===================");
+    //console.log("SINGLE POST ===================");
 
     const postSlug = req.params.slug;
 
@@ -39,7 +39,7 @@ module.exports = {
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";
-        console.log("ERR", err);
+        //console.log("ERR", err);
         res.redirect('/?error=single')
       })
 
