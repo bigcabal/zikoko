@@ -91,7 +91,7 @@ module.exports = {
         return APIResponse.data;
       })
       .then((likes) => {
-        console.log(likes[0]);
+        //console.log(likes[0]);
         return data.likes = Array.isArray(likes) ? likes : [likes];
       })
       .then(() => APIService.getSidebarPosts(req.session))
@@ -120,15 +120,15 @@ module.exports = {
       .then(() => APIService.req({ path: path, user: req.session.user, method: 'PUT', data: profile }))
       .then((APIResponse) => {
         const updatedUser = APIResponse.data;
-        console.log(updatedUser);
+        //console.log(updatedUser);
         const authorization = req.session.user.authorization;
         req.session.user = updatedUser;
         req.session.user.authorization = authorization;
-        console.log(updatedUser);
+        //console.log(updatedUser);
         res.redirect('/me/profile')
       })
       .catch(() => {
-        console.log("error");
+        //console.log("error");
         res.redirect('/me/profile?error=true')
       })
 
@@ -180,5 +180,3 @@ function checkIfFileUploaded( file ) {
     });
   })
 }
-
-
