@@ -39,7 +39,7 @@ module.exports = {
         options.session.temporaryStorage = options.session.temporaryStorage || {};
 
         if ( options.session.temporaryStorage[path] ) {
-          console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE`);
+          //console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE`);
           resolve(options.session.temporaryStorage[path])
         } else {
           httpRequest(method, requestOptions, data, options.session)
@@ -80,7 +80,7 @@ module.exports = {
       }
 
       if (session.temporaryStorage[path]) {
-        console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE (sidebarPosts)`);
+        //console.log(`FOUND RESULT TO "${path}" IN TEMPORARYSTORAGE (sidebarPosts)`);
         resolve(session.temporaryStorage[path])
       } else {
         httpRequest('GET', requestOptions, null, session)
@@ -150,15 +150,15 @@ function httpRequest(method, requestOptions, data, session) {
           RESPONSE.data = [];
           resolve(RESPONSE);
         } else {
-          console.log("IS NOT JSON =====")
-          console.log(body);
+          //console.log("IS NOT JSON =====")
+          //console.log(body);
           reject(body);
         }
       });
     });
 
     newRequest.on('error', (e) => {
-      console.error(e);
+      //console.error(e);
       reject(e);
     });
 

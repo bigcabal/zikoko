@@ -11,7 +11,7 @@ module.exports = {
 
   list: function (req, res) {
 
-    console.log("POSTS ============")
+    //console.log("POSTS ============")
 
     // Request parameters
     const categorySlug = req.params.category_slug || null;
@@ -41,7 +41,7 @@ module.exports = {
           data.title = MetaDataService.pageTitle(category.name);
           data.metaData = MetaDataService.pageMeta('category', category);
 
-          console.log(query);
+          //console.log(query);
           return data.feed = category.name;
         })
     }
@@ -59,7 +59,7 @@ module.exports = {
           total: APIResponse.headers.total,
           pageBase: data.feed === 'Everything' ? '' : `/category/${categorySlug}`
         }
-        console.log(data.pagination);
+        //console.log(data.pagination);
         return APIResponse.data;
       })
       .then((posts) => data.posts = posts)
@@ -135,7 +135,7 @@ module.exports = {
 
     APIService.req({ path: query })
       .then((APIResponse) => {
-        console.log(APIResponse.data);
+        //console.log(APIResponse.data);
         res.set('Content-Type', 'application/rss+xml');
         res.type('application/rss+xml');
         res.view('feed-ia', {
