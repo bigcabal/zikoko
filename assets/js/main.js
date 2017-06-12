@@ -11,7 +11,7 @@ if ( document.cookie.indexOf('zikokoUserAuth') > -1 ) {
     id: zikokoUserId,
     auth: zikokoUserAuth
   };
-  console.log(currentUser);
+  //console.log(currentUser);
 }
 
 
