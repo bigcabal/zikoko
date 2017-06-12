@@ -112,6 +112,9 @@ module.exports.sockets = {
   //
   //   // (`false` would reject the connection)
   // },
+  beforeConnect: function(handshake, cb) {
+    return cb('socket connections not allowed!', false);
+  },
 
 
   /***************************************************************************
