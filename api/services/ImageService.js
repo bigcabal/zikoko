@@ -56,17 +56,13 @@ function getOptimizedUrl(url, placement) {
     var ves = url.lastIndexOf('?');
     url = url.slice(0, ves);
     newIndex = url.lastIndexOf('/') + 1;
-    if (url.indexOf('.gif') === -1) {
-        optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
-    } else if (url.indexOf('.webp') === -1) {
+    if ((url.indexOf('.gif') === -1) && (url.indexOf('.webp') === -1)) {
         optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
     } else {
         optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + url.slice(newIndex);
     }
   } else {
-      if (url.indexOf('.gif') === -1) {
-          optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
-      } else if (url.indexOf('.webp') === -1) {
+      if ((url.indexOf('.gif') === -1) && (url.indexOf('.webp') === -1)) {
           optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
       } else {
           optimizedUrl = url.slice(0, filenameIndex) + url.slice(filenameIndex);
