@@ -8,19 +8,7 @@ module.exports = {
 
     url = getOptimizedUrl(url, placement);
     const imageClass = getImageClass(placement);
-
-    if (url.indexOf('.gif') === -1) {
-      return `<img class="${imageClass}" src="${ url }" alt="">`;
-    } else {
-      const base = url.split('.gif')[0];
-      return `<img class="${imageClass}" src="${ url }" alt="">`;
-      //`<video class="${imageClass}" width="600" style="width: 100%;" poster="${url}" autoplay loop muted playsinline>
-      //   <source type="video/mp4" src="${url}">
-      //   <source type="video/webm" src="${url}">
-      //   <img src="${url}" alt="" />
-      // </video>`;
-    }
-
+    return `<img class="${imageClass}" src="${ url }" alt="">`;
   }
 };
 
@@ -68,9 +56,21 @@ function getOptimizedUrl(url, placement) {
     var ves = url.lastIndexOf('?');
     url = url.slice(0, ves);
     newIndex = url.lastIndexOf('/') + 1;
-    optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
+    if (url.indexOf('.gif') === -1) {
+        optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
+    } else if (url.indexOf('.webp') === -1) {
+        optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + transformation + url.slice(newIndex);
+    } else {
+        optimizedUrl = "http://bc-image-test.s3-website-us-east-1.amazonaws.com/" + url.slice(newIndex);
+    }
   } else {
-    optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+      if (url.indexOf('.gif') === -1) {
+          optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+      } else if (url.indexOf('.webp') === -1) {
+          optimizedUrl = url.slice(0, filenameIndex) + transformation + url.slice(filenameIndex);
+      } else {
+          optimizedUrl = url.slice(0, filenameIndex) + url.slice(filenameIndex);
+      }
   }
 
   return optimizedUrl;
