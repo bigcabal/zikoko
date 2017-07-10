@@ -10,7 +10,6 @@ const postsPerPage = sails.config.globals.settings.postsPerPage;
 module.exports = {
 
   list: function (req, res) {
-
     //console.log("POSTS ============")
 
     // Request parameters
@@ -89,7 +88,8 @@ module.exports = {
     let queryPagination = `&skip=${ (page - 1) * postsPerPage}`;
 
     // Default query
-    let query = `/posts/search?query=${ encodeURI(term) }${queryLimit}${queryPagination}`;
+    let sortOrder = `&sort=publishedAt%20DESC`
+    let query = `/posts/search?query=${ encodeURI(term) }${sortOrder}${queryLimit}${queryPagination}`;
 
 
     function cleanPost(post) {
