@@ -92,6 +92,27 @@ module.exports = {
 
   },
 
+  getRelatedPosts: function(slug, session) {
+    return new Promise((resolve, reject) => {
+      const path = `/posts/related?slug=${slug}&limit=${sails.config.globals.settings.postsPerPage}`;
+      if (session.temporaryStorage[path])
+        return resolve(session.temporaryStorage[path]);
+
+      const defaultAuth = new Buffer(`${sails.config.globals.defaultAuth.email}:${sails.config.globals.defaultAuth.password}`).toString('base64');
+      const requestOptions = {
+        host: sails.config.API.host,
+        port: 443,
+        path: `${sails.config.API.path}${path}`,
+        method: 'GET',
+        headers: {'Authorization': `Basic ${defaultAuth}`}
+      }
+
+      httpRequest('GET', requestOptions, null, session)
+        .then((response) => resolve(response))
+        .catch((err) => reject(err));
+    });
+  },
+
   getPostsNavigation: function(options) {
 
     const defaultNavigation = [
