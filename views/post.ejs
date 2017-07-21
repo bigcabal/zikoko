@@ -34,12 +34,17 @@
         </div>
         <!-- @todo Comments -->
         <%- partial('./post/comments.ejs') %>
-        <div class="u-flex u-space-between">
+        <!--div class="u-flex u-space-between">
           <a href="/post/<%= post.next_post_slug %>" class="button button--md button--full-width">
             <span class="button__text">Next Post</span>
           </a>
-        </div>
+        </div-->
       </article>
+      <div class="related-posts">
+        <% relatedPosts.forEach(function(post) { %>
+          <%- partial('./post/excerpt.ejs', { post: post }) %>
+        <% }) %>
+      </div>
     </main>
     <%- partial('./partials/sidebar.ejs') %>
   </div>

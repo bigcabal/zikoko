@@ -36,6 +36,8 @@ module.exports = {
       })
       .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
+      .then(() => APIService.getRelatedPosts(data.post.slug, req.session))
+      .then((APIResponse) => data.relatedPosts = APIResponse.data)
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";
@@ -64,7 +66,6 @@ module.exports = {
       .catch(() => res.redirect('/?error=archived'))
 
   },
-
 
 
   like: function(req, res) {
