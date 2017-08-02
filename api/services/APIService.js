@@ -92,9 +92,8 @@ module.exports = {
 
   },
 
-  getRelatedPosts: function(slug, session) {
+  getRelatedPosts: function(path, session) {
     return new Promise((resolve, reject) => {
-      const path = `/posts/related?slug=${slug}&limit=${sails.config.globals.settings.postsPerPage}`;
       if (session.temporaryStorage[path])
         return resolve(session.temporaryStorage[path]);
 

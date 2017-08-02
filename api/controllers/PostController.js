@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+const postsPerPage = sails.config.globals.settings.postsPerPage;
+
 module.exports = {
 
   single: function (req, res) {
@@ -12,10 +14,12 @@ module.exports = {
     //console.log("SINGLE POST ===================");
 
     const postSlug = req.params.slug;
+    const page = req.params.page_number || 1;
+
+    let path = `/posts/related?slug=${postSlug}&limit=${postsPerPage}&skip=${(page - 1) * postsPerPage}`;
 
     let data = {};
     data.currentUser = req.session.user;
-
 
     APIService.req({ path: `/posts?slug=${postSlug}` })
       .then((APIResponse) => {
@@ -26,7 +30,7 @@ module.exports = {
       })
       .then(() => {
         if ( data.post.show_post_author ) {
-          return APIService.req({ path: `/users?username=${data.post.author.username}`, user: req.session.user })
+          return APIService.req({ path: `/users?username=${encodeURIComponent(data.post.author.username)}`, user: req.session.user })
             .then((APIResponse) => {
             return data.post.author.role = RolesService.getHighestRole(APIResponse.data[0].roles)
           })
@@ -36,8 +40,15 @@ module.exports = {
       })
       .then(() => APIService.getSidebarPosts(req.session))
       .then((APIResponse) => data.sidebarPosts = APIResponse.data)
-      .then(() => APIService.getRelatedPosts(data.post.slug, req.session))
-      .then((APIResponse) => data.relatedPosts = APIResponse.data)
+      .then(() => APIService.getRelatedPosts(path, req.session))
+      .then((APIResponse) => {
+        data.relatedPosts = APIResponse.data;
+        data.pagination = {
+          page: page,
+          total: APIResponse.headers.total,
+          pageBase: `/post/${postSlug}`
+        }
+      })
       .then(() => res.view('post', data))
       .catch((err) => {
         "use strict";
