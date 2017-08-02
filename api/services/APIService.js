@@ -135,6 +135,10 @@ module.exports = {
       {
         url: '/category/news',
         label: 'News'
+      },
+      {
+        url: '/category/videos',
+        label: 'Videos'
       }
     ];
 
