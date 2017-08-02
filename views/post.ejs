@@ -40,11 +40,18 @@
           </a>
         </div-->
       </article>
-      <div class="related-posts">
-        <% relatedPosts.forEach(function(post) { %>
-          <%- partial('./post/excerpt.ejs', { post: post }) %>
-        <% }) %>
-      </div>
+      <% if (relatedPosts.length > 0) { %>
+        <div class="related-posts" id="is-postsContent">
+          <% relatedPosts.forEach(function(post) { %>
+            <%- partial('./post/excerpt.ejs', { post: post }) %>
+          <% }) %>
+
+          <% const adZone = parseInt(pagination.page) % 2 ? 1 : 2 %>
+          <%- partial('./components/ad-instream-'+adZone+'.ejs') %>
+
+          <%- partial('./partials/pagination.ejs') %>
+        </div>
+      <% } %>
     </main>
     <%- partial('./partials/sidebar.ejs') %>
   </div>
