@@ -58,6 +58,7 @@ module.exports.routes = {
   'post /new': 'NewPostController.create',
 
   'get /post/:slug': 'PostController.single',
+  'get /post/:slug/page/:page_number': 'PostController.single',
   'get /post/:slug/amp': 'PostController.amp',
   'post /post/like': 'PostController.like',
   'post /post/delete': 'PostController.delete',
