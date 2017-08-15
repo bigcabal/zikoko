@@ -1,7 +1,7 @@
 <article class="post-excerpt post-excerpt--sm">
   <a href="/post/<%= post.slug %>">
     <figure>
-      <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
+      <%- partial('./excerpt-' + post.featured_media_type + '.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
     </figure>
     <h3 class="post-excerpt__title"><%= post.title %></h3>
   </a>
