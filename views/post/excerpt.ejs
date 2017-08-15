@@ -1,7 +1,7 @@
 <article class="post-excerpt">
     <a href="/post/<%= post.slug %>">
         <h3 class="post-excerpt__title"><%= post.title %></h3>
-        <%- partial('./image.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
+        <%- partial('./excerpt-' + post.featured_media_type + '.ejs', { url: post.featured_image_url, placement: 'excerpt' }) %>
     </a>
     <div class="post-excerpt__footer u-space-between">
         <% if (post.show_post_author === true && post.author && typeof post.author == 'object') { %>
@@ -19,4 +19,3 @@
         <%- partial('./share.ejs') %>
     </div>
 </article>
-
