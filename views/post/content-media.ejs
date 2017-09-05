@@ -1,6 +1,8 @@
 <div class="post__item">
   <%- partial('./mediaembed-'+ post.media.media_type +'.ejs', { mediaembed: post.media }) %>
   <% if (post.media.description) { %>
-  <p class="post__item-subtitle"><%- post.media.description %></p>
+  <p class="post__item-subtitle">
+    <%- UtilsService.parseMarkdown(post.media.description) %>
+  </p>
   <% } %>
 </div>
