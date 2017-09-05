@@ -7,7 +7,7 @@
   <div class="post__item">
     <h3 class="post__item-title">
       <% if (block.show_number) { %><%= block.number %>. <% } %>
-      <% if (block.heading) { %><%= block.heading %><% } %>
+      <% if (block.heading) { %><%- block.heading %><% } %>
     </h3>
 
     <% if (block.embed) { %>
@@ -15,10 +15,8 @@
     <% } %>
 
     <% if (block.additional_text) { %>
-    <p class="post__item-subtitle"><%= block.additional_text %></p>
+    <p class="post__item-subtitle"><%- block.additional_text %></p>
     <% } %>
   </div>
 
 <% } %>
-
-
