@@ -24,6 +24,7 @@
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
     "is-json": "^2.0.1",
+    "markdown-it": "^8.4.0",
     "moment": "^2.17.1",
     "rc": "1.0.1",
     "sails": "~0.12.7",
@@ -32,11 +33,9 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-
     "dev": "NODE_ENV=development node app.js",
     "staging": "NODE_ENV=staging node app.js",
     "live": "NODE_ENV=production node app.js",
-
     "logs:dev": "heroku logs --app zikoko-dev -t",
     "logs:staging": "heroku logs --app zikoko-staging -t",
     "logs:live": "heroku logs --app zikoko-live -t"
